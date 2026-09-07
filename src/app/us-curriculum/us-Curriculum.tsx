@@ -237,7 +237,7 @@ const toggleFaq = (idx: number) => {
               { name: 'Georgia : Georgia Standards of Excellence; Georgia Milestones', slug: 'georgia' },
               { name: 'Massachusetts : Massachusetts Curriculum Frameworks; MCAS', slug: 'massachusetts' }
             ].map((state) => (
-              <div key={state.name} onClick={() => router.push(`/${state.slug}`)} className="flex flex-col items-center gap-4 group cursor-pointer">
+              <div key={state.name} onClick={() => router.push(`/us-curriculum/${state.slug}`)} className="flex flex-col items-center gap-4 group cursor-pointer">
                 <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center border border-surface-container group-hover:bg-royal-purple group-hover:border-royal-purple group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-lg group-hover:-translate-y-1">
                   <MapPin className="w-6 h-6 text-royal-purple group-hover:text-white transition-colors" />
                 </div>
