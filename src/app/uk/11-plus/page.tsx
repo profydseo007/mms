@@ -1,13 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ActivePage } from '@/lib/types';
+import { useAppNavigate } from '@/lib/useAppNavigate';
 
-interface TestPrepProps {
-  onNavigate: (page: ActivePage, subjectTitle?: string) => void;
-}
-
-export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
+export default function UKElevenPlusPage() {
+  const { navigateTo } = useAppNavigate();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -38,17 +35,17 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
                 11+ Test preparation by <span className="text-royal-purple">expert tutors</span> in the UK
               </h1>
               <p className="text-on-surface-variant font-body-lg text-body-lg max-w-xl">
-                Navigate the significant shift in your child's learning process. Expert-led guidance for entry into grammar schools and elite selective institutions.
+                Navigate the significant shift in your child&apos;s learning process. Expert-led guidance for entry into grammar schools and elite selective institutions.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
-                  onClick={() => onNavigate('trial')}
+                  onClick={() => navigateTo('trial')}
                   className="bg-royal-purple text-on-primary px-8 py-4 rounded-xl font-headline-md text-headline-md hover:shadow-xl transition-all cursor-pointer font-medium"
                 >
                   Book a Free Trial Lesson
                 </button>
                 <button
-                  onClick={() => onNavigate('curriculum')}
+                  onClick={() => navigateTo('curriculum')}
                   className="border-2 border-royal-purple text-royal-purple px-8 py-4 rounded-xl font-headline-md text-headline-md hover:bg-royal-purple/5 transition-all cursor-pointer font-medium"
                 >
                   View Curriculum
@@ -84,7 +81,7 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
             <div className="lg:w-1/2 space-y-6">
               <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">Why is the 11+ exam important?</h2>
               <p className="text-on-surface-variant font-body-md leading-relaxed">
-                Sat by students in Year 6 (aged 10-11), the 11+ exam is the gateway to the UK's grammar and independent school system. It evaluates numerical ability, English, and reasoning faculties during a pivotal academic transition.
+                Sat by students in Year 6 (aged 10-11), the 11+ exam is the gateway to the UK&apos;s grammar and independent school system. It evaluates numerical ability, English, and reasoning faculties during a pivotal academic transition.
               </p>
             </div>
             <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -100,7 +97,7 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
           </div>
           <div className="mt-12 p-8 bg-white/70 backdrop-blur-md border border-outline-variant/20 rounded-2xl text-center">
             <p className="text-on-surface-variant italic">
-              "While about 80% of students pass, scoring the required grades doesn't guarantee admission. Interview performance and household location play critical roles."
+              &quot;While about 80% of students pass, scoring the required grades doesn&apos;t guarantee admission. Interview performance and household location play critical roles.&quot;
             </p>
           </div>
         </div>
@@ -111,7 +108,7 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
         <div className="container mx-auto px-margin-mobile md:px-margin-desktop max-w-max-width">
           <div className="text-center mb-16 space-y-4">
             <h2 className="font-display-lg text-headline-lg md:text-display-lg text-charcoal font-bold">Who conducts the 11+ test?</h2>
-            <p className="text-on-surface-variant max-w-2xl mx-auto">Different boards have distinct methodologies. Understanding your target school's board is essential for effective preparation.</p>
+            <p className="text-on-surface-variant max-w-2xl mx-auto">Different boards have distinct methodologies. Understanding your target school&apos;s board is essential for effective preparation.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* GL Assessment */}
@@ -138,7 +135,7 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
                 <span className="material-symbols-outlined text-secondary text-3xl">psychology</span>
               </div>
               <h3 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">CEM (Cambridge)</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Aptitude-based assessments designed to be "tutor-proof." Focuses on adaptive thinking, reasoning, and real-world problem solving with unpredictable formats.</p>
+              <p className="text-on-surface-variant mb-6 flex-grow">Aptitude-based assessments designed to be &quot;tutor-proof.&quot; Focuses on adaptive thinking, reasoning, and real-world problem solving with unpredictable formats.</p>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-label-md text-secondary font-medium">
                   <span className="material-symbols-outlined text-sm">check</span>
@@ -178,9 +175,8 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <h2 className="font-display-lg text-headline-lg md:text-display-lg text-charcoal font-bold">Comprehensive Subject Coverage</h2>
-              <p className="text-on-surface-variant font-body-lg">We provide deep-dive tutoring into the four core pillars of the 11+ examination, ensuring no gaps in your child's knowledge.</p>
+              <p className="text-on-surface-variant font-body-lg">We provide deep-dive tutoring into the four core pillars of the 11+ examination, ensuring no gaps in your child&apos;s knowledge.</p>
               <div className="space-y-4">
-                {/* Subject 1 */}
                 <div className="flex gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300 cursor-default">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-royal-purple/10 flex items-center justify-center text-royal-purple">
                     <span className="material-symbols-outlined">description</span>
@@ -190,7 +186,6 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
                     <p className="text-on-surface-variant text-label-md">Reading comprehension, grammar, spelling, and creative writing tasks.</p>
                   </div>
                 </div>
-                {/* Subject 2 */}
                 <div className="flex gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300 cursor-default">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-royal-purple/10 flex items-center justify-center text-royal-purple">
                     <span className="material-symbols-outlined">forum</span>
@@ -200,7 +195,6 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
                     <p className="text-on-surface-variant text-label-md">Vocabulary, word affiliations, analogies, and logical thought-processing.</p>
                   </div>
                 </div>
-                {/* Subject 3 */}
                 <div className="flex gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300 cursor-default">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-royal-purple/10 flex items-center justify-center text-royal-purple">
                     <span className="material-symbols-outlined">category</span>
@@ -210,7 +204,6 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
                     <p className="text-on-surface-variant text-label-md">Visual patterns, shape sequencing, and spatial awareness exercises.</p>
                   </div>
                 </div>
-                {/* Subject 4 */}
                 <div className="flex gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300 cursor-default">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-royal-purple/10 flex items-center justify-center text-royal-purple">
                     <span className="material-symbols-outlined">calculate</span>
@@ -261,15 +254,13 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
             <h2 className="font-display-lg text-headline-lg md:text-display-lg text-charcoal font-bold">Why Choose Math Make Smart?</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-            {/* Benefit 1 */}
             <div className="text-center space-y-4 px-6">
               <div className="mx-auto w-16 h-16 bg-soft-gray rounded-full flex items-center justify-center text-royal-purple mb-4">
                 <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>person</span>
               </div>
               <h4 className="font-headline-lg text-headline-lg text-charcoal font-bold">One-on-One Attention</h4>
-              <p className="text-on-surface-variant font-body-md">Personalized tutoring tailored to your child’s specific learning style and pace.</p>
+              <p className="text-on-surface-variant font-body-md">Personalized tutoring tailored to your child&apos;s specific learning style and pace.</p>
             </div>
-            {/* Benefit 2 */}
             <div className="text-center space-y-4 px-6">
               <div className="mx-auto w-16 h-16 bg-soft-gray rounded-full flex items-center justify-center text-lime-green mb-4">
                 <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>analytics</span>
@@ -277,7 +268,6 @@ export default function ElevenPlusPrep({ onNavigate }: TestPrepProps) {
               <h4 className="font-headline-lg text-headline-lg text-charcoal font-bold">Mock Test Mastery</h4>
               <p className="text-on-surface-variant font-body-md">Regular exam-condition practice to develop speed, accuracy, and board familiarity.</p>
             </div>
-            {/* Benefit 3 */}
             <div className="text-center space-y-4 px-6">
               <div className="mx-auto w-16 h-16 bg-soft-gray rounded-full flex items-center justify-center text-royal-purple mb-4">
                 <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>sentiment_satisfied</span>

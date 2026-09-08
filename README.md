@@ -37,7 +37,7 @@ The original app was a single-page app that rendered every "page" inside
 | `#privacy`                    | `/privacy`                            |
 | `#refund`                     | `/refund`                             |
 | `#subject-Maths`, etc.         | `/subject/Maths`, etc.                |
-| `#test-prep-GCSE`, etc.        | `/test-prep/gcse`, etc.               |
+| `#test-prep-GCSE`, etc.        | `/test-preparation/gcse`, etc.        |
 
 Every route is now a real, bookmarkable, crawlable URL rather than a hash
 fragment, and the back/forward browser buttons work natively via Next.js

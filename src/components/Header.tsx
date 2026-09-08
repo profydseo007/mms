@@ -31,7 +31,7 @@ export default function Header({ currentPage, currentSubject, onNavigate }: Head
   const [testPrepOpen, setTestPrepOpen] = useState(false);
 
   const subjects = ['Maths', 'English', 'Science', 'Physics', 'Chemistry', 'Biology'];
-  const testPreps = ['11 Plus', '13 Plus', 'GCSE', 'IGCSE', 'A Levels'];
+  const testPreps = ['SAT', 'ACT', 'AP'];
 
   const handleSubjectClick = (sub: string) => {
     onNavigate('subject', sub);
@@ -41,11 +41,7 @@ export default function Header({ currentPage, currentSubject, onNavigate }: Head
   };
 
   const handleTestPrepClick = (prep: string) => {
-    if (prep === 'A Levels') {
-      onNavigate('a-levels');
-    } else {
-      onNavigate('test-prep', prep);
-    }
+    onNavigate('test-prep', prep);
     setFindTutorOpen(false);
     setTestPrepOpen(false);
     setMobileMenuOpen(false);

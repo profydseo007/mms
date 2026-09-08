@@ -44,10 +44,29 @@ const PREDICTED_SLUG_TO_PAGE: Record<string, ActivePage> = Object.fromEntries(
 );
 
 const TEST_PREP_SLUGS: Record<string, string> = {
+  // UK
   '11 Plus': '11-plus',
   '13 Plus': '13-plus',
   GCSE: 'gcse',
   IGCSE: 'igcse',
+  'A Levels': 'a-levels',
+  'A-Levels': 'a-levels',
+  // CA
+  'Provincial Curricula': 'provincial-curricula',
+  EQAO: 'eqao',
+  // US (default)
+  SAT: 'sat',
+  ACT: 'act',
+  AP: 'ap',
+  // AU
+  NAPLAN: 'naplan',
+  'Selective School Test': 'selective-school-test',
+  HSC: 'hsc',
+  VCE: 'vce',
+  QCE: 'qce',
+  // IE
+  'Junior Cycle': 'junior-cycle',
+  'Leaving Certificate': 'leaving-certificate',
 };
 const TEST_PREP_SLUG_TO_TITLE: Record<string, string> = Object.fromEntries(
   Object.entries(TEST_PREP_SLUGS).map(([title, slug]) => [slug, title])
@@ -85,7 +104,7 @@ export function pageToPath(page: ActivePage, subjectTitle?: string, country?: st
     case 'login':
       return `${prefix}/login`;
     case 'a-levels':
-      return `${prefix}/a-levels`;
+      return prefix ? `${prefix}/test-preparation/a-levels` : '/a-levels';
     case 'curriculum':
       return `${prefix}/us-curriculum`;
     case 'resources-hub':
@@ -114,7 +133,7 @@ export function pageToPath(page: ActivePage, subjectTitle?: string, country?: st
     }
     case 'test-prep': {
       const slug = subjectTitle ? TEST_PREP_SLUGS[subjectTitle] ?? encodeURIComponent(subjectTitle) : 'gcse';
-      return `${prefix}/test-prep/${slug}`;
+      return `${prefix}/test-preparation/${slug}`;
     }
     default:
       return prefix ? prefix : '/';
@@ -171,9 +190,16 @@ export function pathToPage(pathname: string): ResolvedRoute {
     };
   }
 
-  if (first === 'test-prep') {
+  if (first === 'test-preparation') {
+    if (!second) {
+      return { currentPage: 'test-prep' };
+    }
     const title = second ? TEST_PREP_SLUG_TO_TITLE[second] ?? decodeURIComponent(second) : undefined;
     return { currentPage: 'test-prep', currentSubject: title };
+  }
+
+  if (first === 'a-levels') {
+    return { currentPage: 'test-prep', currentSubject: 'A Levels' };
   }
 
   if (first === 'blog') {
@@ -184,7 +210,6 @@ export function pathToPage(pathname: string): ResolvedRoute {
     about: 'about',
     'free-trial': 'trial',
     login: 'login',
-    'a-levels': 'a-levels',
     curriculum: 'curriculum',
     'resources-hub': 'resources-hub',
     pricing: 'pricing',

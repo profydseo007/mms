@@ -1,13 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ActivePage } from '@/lib/types';
+import { useAppNavigate } from '@/lib/useAppNavigate';
 
-interface TestPrepProps {
-  onNavigate: (page: ActivePage, subjectTitle?: string) => void;
-}
-
-export default function ThirteenPlusPrep({ onNavigate }: TestPrepProps) {
+export default function UKThirteenPlusPage() {
+  const { navigateTo } = useAppNavigate();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -42,13 +39,13 @@ export default function ThirteenPlusPrep({ onNavigate }: TestPrepProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <button
-                onClick={() => onNavigate('trial')}
+                onClick={() => navigateTo('trial')}
                 className="bg-royal-purple text-on-primary px-8 py-4 rounded-xl font-headline-md text-headline-md hover:bg-primary transition-colors shadow-ambient cursor-pointer font-medium"
               >
                 Book a Free Trial Lesson
               </button>
               <button
-                onClick={() => onNavigate('curriculum')}
+                onClick={() => navigateTo('curriculum')}
                 className="border-2 border-royal-purple text-royal-purple px-8 py-4 rounded-xl font-headline-md text-headline-md hover:bg-soft-gray transition-colors cursor-pointer font-medium"
               >
                 View Curriculum
@@ -77,20 +74,18 @@ export default function ThirteenPlusPrep({ onNavigate }: TestPrepProps) {
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-dropdown border border-outline-variant z-20 max-w-[240px]">
               <div className="flex items-center gap-1 mb-2">
-                <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>star</span>
-                <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>star</span>
-                <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>star</span>
-                <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>star</span>
-                <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>star</span>
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>star</span>
+                ))}
               </div>
-              <p className="italic text-on-surface-variant text-body-md">"The 13+ preparation was a game-changer for my daughter's senior school entry."</p>
+              <p className="italic text-on-surface-variant text-body-md">&quot;The 13+ preparation was a game-changer for my daughter&apos;s senior school entry.&quot;</p>
               <p className="mt-3 font-bold text-charcoal text-label-md">— James W., Parent</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Intro: What is the 13+? */}
+      {/* What is the 13+? */}
       <section className="py-24 bg-soft-gray">
         <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -146,7 +141,6 @@ export default function ThirteenPlusPrep({ onNavigate }: TestPrepProps) {
           <p className="text-body-lg text-on-surface-variant max-w-2xl mx-auto">Focused mastery across the fundamental disciplines required for senior school success.</p>
         </div>
         <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop grid md:grid-cols-3 gap-8">
-          {/* English */}
           <div className="p-8 rounded-[24px] border border-outline-variant hover:shadow-dropdown transition-all group">
             <div className="w-16 h-16 bg-surface-container-low rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-fixed transition-colors">
               <span className="material-symbols-outlined text-primary text-3xl">menu_book</span>
@@ -168,7 +162,6 @@ export default function ThirteenPlusPrep({ onNavigate }: TestPrepProps) {
               <p className="text-body-md text-charcoal font-medium">2 Papers | Essay &amp; Analysis</p>
             </div>
           </div>
-          {/* Maths */}
           <div className="p-8 rounded-[24px] border border-outline-variant hover:shadow-dropdown transition-all group">
             <div className="w-16 h-16 bg-surface-container-low rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-fixed transition-colors">
               <span className="material-symbols-outlined text-primary text-3xl">functions</span>
@@ -190,7 +183,6 @@ export default function ThirteenPlusPrep({ onNavigate }: TestPrepProps) {
               <p className="text-body-md text-charcoal font-medium">1-2 Papers | Calculation-heavy</p>
             </div>
           </div>
-          {/* Science */}
           <div className="p-8 rounded-[24px] border border-outline-variant hover:shadow-dropdown transition-all group">
             <div className="w-16 h-16 bg-surface-container-low rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-fixed transition-colors">
               <span className="material-symbols-outlined text-primary text-3xl">science</span>
@@ -260,49 +252,31 @@ export default function ThirteenPlusPrep({ onNavigate }: TestPrepProps) {
             <div className="w-20 h-1.5 bg-lime-green mx-auto rounded-full"></div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Value Prop 1 */}
-            <div className="text-center p-6 bg-surface-container-low rounded-[24px] hover:bg-primary-fixed transition-colors">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-ambient">
-                <span className="material-symbols-outlined text-primary text-3xl">person_search</span>
+            {[
+              { icon: 'person_search', title: 'Personalized Focus', desc: 'Lessons adapted to individual strengths and unique learning styles.' },
+              { icon: 'query_stats', title: 'Exam Strategy', desc: 'Techniques to manage time and tackle complex paper structures effectively.' },
+              { icon: 'sentiment_satisfied', title: 'Confidence Building', desc: 'Emotional support to keep anxiety at bay during high-stakes exams.' },
+              { icon: 'history_edu', title: 'Past Paper Mastery', desc: 'Deep familiarity with actual exam formats and school-specific expectations.' },
+            ].map((item) => (
+              <div key={item.title} className="text-center p-6 bg-surface-container-low rounded-[24px] hover:bg-primary-fixed transition-colors">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-ambient">
+                  <span className="material-symbols-outlined text-primary text-3xl">{item.icon}</span>
+                </div>
+                <h3 className="text-headline-md font-bold text-charcoal mb-3">{item.title}</h3>
+                <p className="text-body-md text-on-surface-variant">{item.desc}</p>
               </div>
-              <h3 className="text-headline-md font-bold text-charcoal mb-3">Personalized Focus</h3>
-              <p className="text-body-md text-on-surface-variant">Lessons adapted to individual strengths and unique learning styles.</p>
-            </div>
-            {/* Value Prop 2 */}
-            <div className="text-center p-6 bg-surface-container-low rounded-[24px] hover:bg-primary-fixed transition-colors">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-ambient">
-                <span className="material-symbols-outlined text-primary text-3xl">query_stats</span>
-              </div>
-              <h3 className="text-headline-md font-bold text-charcoal mb-3">Exam Strategy</h3>
-              <p className="text-body-md text-on-surface-variant">Techniques to manage time and tackle complex paper structures effectively.</p>
-            </div>
-            {/* Value Prop 3 */}
-            <div className="text-center p-6 bg-surface-container-low rounded-[24px] hover:bg-primary-fixed transition-colors">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-ambient">
-                <span className="material-symbols-outlined text-primary text-3xl">sentiment_satisfied</span>
-              </div>
-              <h3 className="text-headline-md font-bold text-charcoal mb-3">Confidence Building</h3>
-              <p className="text-body-md text-on-surface-variant">Emotional support to keep anxiety at bay during high-stakes exams.</p>
-            </div>
-            {/* Value Prop 4 */}
-            <div className="text-center p-6 bg-surface-container-low rounded-[24px] hover:bg-primary-fixed transition-colors">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-ambient">
-                <span className="material-symbols-outlined text-primary text-3xl">history_edu</span>
-              </div>
-              <h3 className="text-headline-md font-bold text-charcoal mb-3">Past Paper Mastery</h3>
-              <p className="text-body-md text-on-surface-variant">Deep familiarity with actual exam formats and school-specific expectations.</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Lead Gen: Free Trial Form */}
+      {/* Free Trial Form */}
       <section className="py-24 bg-white">
         <div className="learning-lane px-margin-mobile max-w-max-width mx-auto md:px-margin-desktop">
           <div className="bg-surface-container-low rounded-[40px] p-8 md:p-16 flex flex-col md:flex-row gap-12 items-center">
             <div className="md:w-1/2">
               <h2 className="text-display-lg font-display-lg text-charcoal mb-6 font-bold">Ready to see the difference?</h2>
-              <p className="text-body-lg text-on-surface-variant mb-8">Join thousands of families who have transformed their student's grades and confidence. Your first 30-minute session is on us.</p>
+              <p className="text-body-lg text-on-surface-variant mb-8">Join thousands of families who have transformed their student&apos;s grades and confidence. Your first 30-minute session is on us.</p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>
