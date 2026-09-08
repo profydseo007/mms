@@ -2,6 +2,11 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  CheckCircle2, Building2, Trees, Mountain, Landmark, Leaf, Waves,
+  Map, ClipboardCheck, FileCheck, FunctionSquare, BookOpen, FlaskConical, Globe,
+  User, LineChart, Smile
+} from 'lucide-react';
 
 export default function CAProvincialCurriculaPage() {
   const { navigateTo } = useAppNavigate();
@@ -22,42 +27,42 @@ export default function CAProvincialCurriculaPage() {
   const provinces = [
     {
       name: 'Ontario',
-      icon: 'location_city',
+      Icon: Building2,
       grades: 'Grades 1–12',
       board: 'Ontario Curriculum',
       highlights: ['Math & Language Arts', 'Science & Technology', 'OSSLT preparation'],
     },
     {
       name: 'British Columbia',
-      icon: 'forest',
+      Icon: Trees,
       grades: 'Grades K–12',
       board: 'BC Curriculum',
       highlights: ['Core Competencies focus', 'Concept-based learning', 'Provincial assessments'],
     },
     {
       name: 'Alberta',
-      icon: 'landscape',
+      Icon: Mountain,
       grades: 'Grades 1–12',
       board: 'Alberta Education',
       highlights: ['Programme of Studies', 'Diploma Exams (Grade 12)', 'PAT preparation'],
     },
     {
       name: 'Quebec',
-      icon: 'account_balance',
+      Icon: Landmark,
       grades: 'Grades 1–11 (Sec. 1–5)',
       board: 'Ministère de l\'Éducation',
       highlights: ['French & English streams', 'Subject-specific exams', 'CÉGEP preparation'],
     },
     {
       name: 'Saskatchewan',
-      icon: 'grain',
+      Icon: Leaf,
       grades: 'Grades 1–12',
       board: 'Saskatchewan Curriculum',
       highlights: ['Outcomes-based learning', 'Provincial assessments', 'LGBTQ+ inclusive'],
     },
     {
       name: 'Manitoba',
-      icon: 'water',
+      Icon: Waves,
       grades: 'Grades K–12',
       board: 'Manitoba Curriculum',
       highlights: ['Standards Tests (Gr 3, 7)', 'Grade 12 provincials', 'Indigenous perspectives'],
@@ -106,7 +111,7 @@ export default function CAProvincialCurriculaPage() {
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-outline-variant/30">
                 <div className="flex items-center gap-4 mb-2">
                   <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center text-on-secondary">
-                    <span className="material-symbols-outlined">check_circle</span>
+                    <CheckCircle2 size={24} className="text-charcoal" />
                   </div>
                   <span className="font-headline-md text-charcoal font-bold">10 Provinces Covered</span>
                 </div>
@@ -128,13 +133,13 @@ export default function CAProvincialCurriculaPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: 'map', color: 'bg-primary-fixed text-royal-purple', title: 'Province-Matched', desc: 'Every tutor is assigned based on the province your child attends school in — not just "Canadian curriculum."' },
-              { icon: 'fact_check', color: 'bg-lime-green/20 text-secondary', title: 'Outcome-Aligned', desc: 'Sessions follow the specific learning outcomes and course expectations set by your provincial ministry.' },
-              { icon: 'assignment_turned_in', color: 'bg-primary-fixed text-royal-purple', title: 'Assessment-Ready', desc: 'From Ontario EQAO to Alberta PATs and BC provincial assessments — we prepare for the right test.' },
+              { Icon: Map, color: 'bg-primary-fixed text-royal-purple', title: 'Province-Matched', desc: 'Every tutor is assigned based on the province your child attends school in — not just "Canadian curriculum."' },
+              { Icon: ClipboardCheck, color: 'bg-lime-green/20 text-secondary', title: 'Outcome-Aligned', desc: 'Sessions follow the specific learning outcomes and course expectations set by your provincial ministry.' },
+              { Icon: FileCheck, color: 'bg-primary-fixed text-royal-purple', title: 'Assessment-Ready', desc: 'From Ontario EQAO to Alberta PATs and BC provincial assessments — we prepare for the right test.' },
             ].map((item) => (
               <div key={item.title} className="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] text-center">
                 <div className={`w-14 h-14 ${item.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                  <span className="material-symbols-outlined text-2xl">{item.icon}</span>
+                  <item.Icon size={24} />
                 </div>
                 <h3 className="font-headline-md text-charcoal font-bold mb-3">{item.title}</h3>
                 <p className="text-on-surface-variant font-body-md">{item.desc}</p>
@@ -158,7 +163,7 @@ export default function CAProvincialCurriculaPage() {
                 className="group p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/30 hover:shadow-xl transition-all"
               >
                 <div className="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-royal-purple text-2xl">{prov.icon}</span>
+                  <prov.Icon size={24} className="text-royal-purple" />
                 </div>
                 <h3 className="font-headline-md text-charcoal font-bold mb-1">{prov.name}</h3>
                 <p className="text-label-md text-royal-purple font-semibold mb-1">{prov.grades}</p>
@@ -166,7 +171,7 @@ export default function CAProvincialCurriculaPage() {
                 <ul className="space-y-2">
                   {prov.highlights.map((h) => (
                     <li key={h} className="flex items-center gap-2 text-label-md text-on-surface-variant">
-                      <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>
+                      <CheckCircle2 size={16} className="text-lime-green shrink-0" />
                       {h}
                     </li>
                   ))}
@@ -186,14 +191,14 @@ export default function CAProvincialCurriculaPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: 'functions', title: 'Mathematics', desc: 'Number sense, algebra, data management and financial literacy from Grades 1–12.' },
-              { icon: 'auto_stories', title: 'English / Language Arts', desc: 'Reading comprehension, writing, oral communication and media literacy.' },
-              { icon: 'science', title: 'Science', desc: 'Biology, Chemistry, Physics and Earth Sciences aligned to provincial grade bands.' },
-              { icon: 'public', title: 'Social Studies', desc: 'History, geography, civics and economics matched to provincial scope and sequence.' },
+              { Icon: FunctionSquare, title: 'Mathematics', desc: 'Number sense, algebra, data management and financial literacy from Grades 1–12.' },
+              { Icon: BookOpen, title: 'English / Language Arts', desc: 'Reading comprehension, writing, oral communication and media literacy.' },
+              { Icon: FlaskConical, title: 'Science', desc: 'Biology, Chemistry, Physics and Earth Sciences aligned to provincial grade bands.' },
+              { Icon: Globe, title: 'Social Studies', desc: 'History, geography, civics and economics matched to provincial scope and sequence.' },
             ].map((subject) => (
               <div key={subject.title} className="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] text-center group hover:border-royal-purple/20 border border-transparent transition-all">
                 <div className="w-14 h-14 bg-royal-purple text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-6 transition-transform">
-                  <span className="material-symbols-outlined text-2xl">{subject.icon}</span>
+                  <subject.Icon size={24} />
                 </div>
                 <h3 className="font-headline-md text-charcoal font-bold mb-3">{subject.title}</h3>
                 <p className="text-on-surface-variant font-body-md">{subject.desc}</p>
@@ -211,13 +216,13 @@ export default function CAProvincialCurriculaPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
             {[
-              { icon: 'person', color: 'text-royal-purple', title: 'One-on-One Attention', desc: 'Personalized tutoring matched to your province, grade, and learning style.' },
-              { icon: 'analytics', color: 'text-lime-green', title: 'Provincial Assessment Prep', desc: 'Targeted practice for EQAO, PATs, BC provincials and other standardized tests.' },
-              { icon: 'sentiment_satisfied', color: 'text-royal-purple', title: 'Confidence Building', desc: 'Supportive sessions that reduce anxiety and build lasting academic habits.' },
+              { Icon: User, color: 'text-royal-purple', title: 'One-on-One Attention', desc: 'Personalized tutoring matched to your province, grade, and learning style.' },
+              { Icon: LineChart, color: 'text-lime-green', title: 'Provincial Assessment Prep', desc: 'Targeted practice for EQAO, PATs, BC provincials and other standardized tests.' },
+              { Icon: Smile, color: 'text-royal-purple', title: 'Confidence Building', desc: 'Supportive sessions that reduce anxiety and build lasting academic habits.' },
             ].map((item) => (
               <div key={item.title} className="text-center space-y-4 px-6">
                 <div className={`mx-auto w-16 h-16 bg-soft-gray rounded-full flex items-center justify-center ${item.color} mb-4`}>
-                  <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>{item.icon}</span>
+                  <item.Icon size={32} />
                 </div>
                 <h4 className="font-headline-lg text-charcoal font-bold">{item.title}</h4>
                 <p className="text-on-surface-variant font-body-md">{item.desc}</p>
@@ -237,7 +242,7 @@ export default function CAProvincialCurriculaPage() {
               <div className="space-y-4">
                 {['Matched to your provincial curriculum', 'Flexible online timings', 'No commitment required'].map((pt) => (
                   <div key={pt} className="flex items-center gap-4">
-                    <span className="material-symbols-outlined text-royal-purple">check_circle</span>
+                    <CheckCircle2 size={20} className="text-royal-purple" />
                     <span className="text-charcoal font-headline-md font-bold">{pt}</span>
                   </div>
                 ))}
@@ -246,7 +251,7 @@ export default function CAProvincialCurriculaPage() {
             <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
               {formSubmitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                  <CheckCircle2 size={56} className="text-lime-green mx-auto" />
                   <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
                   <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We will be in touch shortly to arrange your free trial.</p>
                   <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">

@@ -2,6 +2,12 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  TrendingUp, CalendarDays, School, Monitor, BarChart2,
+  BookOpen, PenLine, SpellCheck2, FunctionSquare,
+  User, Cpu, LineChart, Smile,
+  CheckCircle2, ChevronDown,
+} from 'lucide-react';
 
 export default function AUNaplanPage() {
   const { navigateTo } = useAppNavigate();
@@ -85,7 +91,7 @@ export default function AUNaplanPage() {
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-outline-variant/30">
                 <div className="flex items-center gap-4 mb-2">
                   <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center">
-                    <span className="material-symbols-outlined text-charcoal">trending_up</span>
+                    <TrendingUp size={20} className="text-charcoal" />
                   </div>
                   <span className="font-headline-md text-charcoal font-bold">Proven Results</span>
                 </div>
@@ -112,14 +118,14 @@ export default function AUNaplanPage() {
             <div className="bg-white p-10 rounded-[32px] shadow-ambient space-y-6">
               <h3 className="font-headline-md text-charcoal font-bold">Key Facts</h3>
               {[
-                { icon: 'calendar_today', label: 'When', value: 'March each year — two-week testing window' },
-                { icon: 'school', label: 'Year levels', value: 'Years 3, 5, 7, and 9' },
-                { icon: 'devices', label: 'Format', value: 'Online adaptive test (tailored question difficulty)' },
-                { icon: 'bar_chart', label: 'Reporting', value: 'Exceeding / Strong / Developing / Needs Additional Support' },
+                { Icon: CalendarDays, label: 'When', value: 'March each year — two-week testing window' },
+                { Icon: School, label: 'Year levels', value: 'Years 3, 5, 7, and 9' },
+                { Icon: Monitor, label: 'Format', value: 'Online adaptive test (tailored question difficulty)' },
+                { Icon: BarChart2, label: 'Reporting', value: 'Exceeding / Strong / Developing / Needs Additional Support' },
               ].map((fact) => (
                 <div key={fact.label} className="flex gap-4">
                   <div className="w-10 h-10 bg-primary-fixed rounded-xl flex items-center justify-center flex-shrink-0 text-royal-purple">
-                    <span className="material-symbols-outlined text-sm">{fact.icon}</span>
+                    <fact.Icon size={18} />
                   </div>
                   <div>
                     <p className="text-label-sm text-on-surface-variant font-semibold uppercase tracking-wider">{fact.label}</p>
@@ -141,14 +147,14 @@ export default function AUNaplanPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: 'menu_book', color: 'bg-primary-fixed', iconColor: 'text-royal-purple', title: 'Reading', desc: 'Comprehension of narrative, persuasive, and informative texts. Inference, vocabulary, and text structure.' },
-              { icon: 'edit_note', color: 'bg-secondary-container', iconColor: 'text-secondary', title: 'Writing', desc: 'Persuasive or narrative writing assessed on audience, text structure, vocabulary, and sentence fluency.' },
-              { icon: 'spellcheck', color: 'bg-lime-green/20', iconColor: 'text-secondary', title: 'Language Conventions', desc: 'Spelling, grammar, and punctuation — adaptive multiple-choice and short answer questions.' },
-              { icon: 'functions', color: 'bg-royal-purple/10', iconColor: 'text-royal-purple', title: 'Numeracy', desc: 'Number, algebra, measurement, geometry, and statistics. Calculator and non-calculator sections.' },
+              { Icon: BookOpen, color: 'bg-primary-fixed', iconColor: 'text-royal-purple', title: 'Reading', desc: 'Comprehension of narrative, persuasive, and informative texts. Inference, vocabulary, and text structure.' },
+              { Icon: PenLine, color: 'bg-secondary-container', iconColor: 'text-secondary', title: 'Writing', desc: 'Persuasive or narrative writing assessed on audience, text structure, vocabulary, and sentence fluency.' },
+              { Icon: SpellCheck2, color: 'bg-lime-green/20', iconColor: 'text-secondary', title: 'Language Conventions', desc: 'Spelling, grammar, and punctuation — adaptive multiple-choice and short answer questions.' },
+              { Icon: FunctionSquare, color: 'bg-royal-purple/10', iconColor: 'text-royal-purple', title: 'Numeracy', desc: 'Number, algebra, measurement, geometry, and statistics. Calculator and non-calculator sections.' },
             ].map((item) => (
               <div key={item.title} className="group p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all">
                 <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <span className={`material-symbols-outlined text-2xl ${item.iconColor}`}>{item.icon}</span>
+                  <item.Icon size={24} className={item.iconColor} />
                 </div>
                 <h3 className="font-headline-md text-charcoal font-bold mb-3">{item.title}</h3>
                 <p className="text-on-surface-variant font-body-md">{item.desc}</p>
@@ -184,14 +190,14 @@ export default function AUNaplanPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
-                { icon: 'person', color: 'text-royal-purple', bg: 'bg-primary-fixed', title: 'One-on-One', desc: 'Every session tailored to your child\'s year level and specific gaps.' },
-                { icon: 'devices', color: 'text-secondary', bg: 'bg-lime-green/20', title: 'Adaptive Practice', desc: 'Online practice tools that mirror the real NAPLAN adaptive engine.' },
-                { icon: 'analytics', color: 'text-royal-purple', bg: 'bg-primary-fixed', title: 'Progress Tracking', desc: 'Clear reporting showing movement across proficiency levels.' },
-                { icon: 'sentiment_satisfied', color: 'text-secondary', bg: 'bg-secondary-container', title: 'Confidence First', desc: 'Reducing test anxiety so students perform at their true level.' },
+                { Icon: User, color: 'text-royal-purple', bg: 'bg-primary-fixed', title: 'One-on-One', desc: 'Every session tailored to your child\'s year level and specific gaps.' },
+                { Icon: Cpu, color: 'text-secondary', bg: 'bg-lime-green/20', title: 'Adaptive Practice', desc: 'Online practice tools that mirror the real NAPLAN adaptive engine.' },
+                { Icon: LineChart, color: 'text-royal-purple', bg: 'bg-primary-fixed', title: 'Progress Tracking', desc: 'Clear reporting showing movement across proficiency levels.' },
+                { Icon: Smile, color: 'text-secondary', bg: 'bg-secondary-container', title: 'Confidence First', desc: 'Reducing test anxiety so students perform at their true level.' },
               ].map((item) => (
                 <div key={item.title} className="bg-white p-6 rounded-2xl shadow-ambient text-center">
                   <div className={`w-12 h-12 ${item.bg} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                    <span className={`material-symbols-outlined ${item.color}`} style={{ fontVariationSettings: '"FILL" 1' }}>{item.icon}</span>
+                    <item.Icon size={22} className={item.color} />
                   </div>
                   <h4 className="font-headline-md text-charcoal font-bold mb-2">{item.title}</h4>
                   <p className="text-on-surface-variant font-body-md text-sm">{item.desc}</p>
@@ -211,9 +217,9 @@ export default function AUNaplanPage() {
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, i) => (
               <div key={i} className="border border-surface-container-highest rounded-2xl overflow-hidden">
-                <button className="w-full flex items-center justify-between p-6 text-left hover:bg-soft-gray transition-colors font-headline-md text-[18px] font-bold cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                <button className="w-full flex items-center justify-between p-6 text-left hover:bg-soft-gray transition-colors font-headline-md text-[18px] font-bold cursor-pointer gap-4" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
                   <span>{faq.q}</span>
-                  <span className={`material-symbols-outlined transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}>expand_more</span>
+                  <ChevronDown size={22} className={`shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180 text-royal-purple' : ''}`} />
                 </button>
                 {openFaq === i && <div className="bg-soft-gray p-6 text-on-surface-variant font-body-md border-t border-surface-container-highest">{faq.a}</div>}
               </div>
@@ -232,7 +238,7 @@ export default function AUNaplanPage() {
               <div className="space-y-4">
                 {['Australian curriculum specialists', 'Adaptive practice tools', 'All four NAPLAN domains covered'].map((pt) => (
                   <div key={pt} className="flex items-center gap-4">
-                    <span className="material-symbols-outlined text-royal-purple">check_circle</span>
+                    <CheckCircle2 size={20} className="text-royal-purple" />
                     <span className="text-charcoal font-headline-md font-bold">{pt}</span>
                   </div>
                 ))}
@@ -241,7 +247,7 @@ export default function AUNaplanPage() {
             <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
               {formSubmitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                  <CheckCircle2 size={56} className="text-lime-green mx-auto" />
                   <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
                   <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We&apos;ll be in touch shortly to arrange your NAPLAN trial lesson.</p>
                   <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">Submit Another Request</button>

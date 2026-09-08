@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  TrendingUp, School, CalendarDays, BarChart2, BadgeCheck,
+  GraduationCap, BookOpen, FunctionSquare, ChevronDown, CheckCircle2
+} from 'lucide-react';
 
 export default function CAEQAOPage() {
   const { navigateTo } = useAppNavigate();
@@ -88,7 +92,7 @@ export default function CAEQAOPage() {
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-outline-variant/30">
                 <div className="flex items-center gap-4 mb-2">
                   <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center">
-                    <span className="material-symbols-outlined text-charcoal">trending_up</span>
+                    <TrendingUp size={24} className="text-charcoal" />
                   </div>
                   <span className="font-headline-md text-charcoal font-bold">Proven Results</span>
                 </div>
@@ -115,14 +119,14 @@ export default function CAEQAOPage() {
             <div className="bg-white p-10 rounded-[32px] shadow-ambient space-y-6">
               <h3 className="font-headline-md text-charcoal font-bold">Key Facts</h3>
               {[
-                { icon: 'school', label: 'Administered by', value: 'EQAO — independent provincial agency' },
-                { icon: 'calendar_today', label: 'Assessment windows', value: 'Spring (primary, junior, OSSLT) & Fall (Gr. 9 math)' },
-                { icon: 'bar_chart', label: 'Reporting scale', value: 'Levels 1–4 (Level 3 = grade-level standard)' },
-                { icon: 'verified', label: 'OSSLT requirement', value: 'Compulsory for Ontario Secondary School Diploma' },
+                { Icon: School, label: 'Administered by', value: 'EQAO — independent provincial agency' },
+                { Icon: CalendarDays, label: 'Assessment windows', value: 'Spring (primary, junior, OSSLT) & Fall (Gr. 9 math)' },
+                { Icon: BarChart2, label: 'Reporting scale', value: 'Levels 1–4 (Level 3 = grade-level standard)' },
+                { Icon: BadgeCheck, label: 'OSSLT requirement', value: 'Compulsory for Ontario Secondary School Diploma' },
               ].map((fact) => (
                 <div key={fact.label} className="flex gap-4">
                   <div className="w-10 h-10 bg-primary-fixed rounded-xl flex items-center justify-center flex-shrink-0 text-royal-purple">
-                    <span className="material-symbols-outlined text-sm">{fact.icon}</span>
+                    <fact.Icon size={18} />
                   </div>
                   <div>
                     <p className="text-label-sm text-on-surface-variant font-semibold uppercase tracking-wider">{fact.label}</p>
@@ -149,7 +153,7 @@ export default function CAEQAOPage() {
                 name: 'Primary Assessment',
                 color: 'bg-primary-fixed',
                 iconColor: 'text-royal-purple',
-                icon: 'child_care',
+                Icon: GraduationCap,
                 subjects: ['Reading', 'Writing', 'Mathematics'],
                 detail: 'Measures achievement of Grade 1–3 Ontario Curriculum expectations.',
               },
@@ -158,7 +162,7 @@ export default function CAEQAOPage() {
                 name: 'Junior Assessment',
                 color: 'bg-secondary-container',
                 iconColor: 'text-secondary',
-                icon: 'menu_book',
+                Icon: BookOpen,
                 subjects: ['Reading', 'Writing', 'Mathematics'],
                 detail: 'Measures achievement of Grade 4–6 Ontario Curriculum expectations.',
               },
@@ -167,7 +171,7 @@ export default function CAEQAOPage() {
                 name: 'Math Assessment',
                 color: 'bg-lime-green/20',
                 iconColor: 'text-secondary',
-                icon: 'functions',
+                Icon: FunctionSquare,
                 subjects: ['Number', 'Algebra', 'Data & Financial Literacy'],
                 detail: 'Online adaptive test aligned to the new Grade 9 destreamed math course.',
               },
@@ -176,14 +180,14 @@ export default function CAEQAOPage() {
                 name: 'OSSLT',
                 color: 'bg-royal-purple/10',
                 iconColor: 'text-royal-purple',
-                icon: 'auto_stories',
+                Icon: BookOpen,
                 subjects: ['Reading', 'Writing'],
                 detail: 'Ontario Secondary School Literacy Test. Required for OSSD graduation.',
               },
             ].map((item) => (
               <div key={item.grade} className="group p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all">
                 <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <span className={`material-symbols-outlined text-2xl ${item.iconColor}`}>{item.icon}</span>
+                  <item.Icon size={24} className={item.iconColor} />
                 </div>
                 <p className="text-label-sm font-bold text-royal-purple uppercase tracking-wider mb-1">{item.grade}</p>
                 <h3 className="font-headline-md text-charcoal font-bold mb-3">{item.name}</h3>
@@ -191,7 +195,7 @@ export default function CAEQAOPage() {
                 <ul className="space-y-1">
                   {item.subjects.map((s) => (
                     <li key={s} className="flex items-center gap-2 text-label-md text-on-surface-variant">
-                      <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>
+                      <CheckCircle2 size={16} className="text-lime-green shrink-0" />
                       {s}
                     </li>
                   ))}
@@ -261,7 +265,7 @@ export default function CAEQAOPage() {
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
                   <span>{faq.q}</span>
-                  <span className={`material-symbols-outlined transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}>expand_more</span>
+                  <ChevronDown size={24} className={`transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
                 </button>
                 {openFaq === i && (
                   <div className="bg-soft-gray p-6 text-on-surface-variant font-body-md border-t border-surface-container-highest">
@@ -284,7 +288,7 @@ export default function CAEQAOPage() {
               <div className="space-y-4">
                 {['Ontario curriculum specialists', 'Released EQAO question practice', 'Flexible online scheduling'].map((pt) => (
                   <div key={pt} className="flex items-center gap-4">
-                    <span className="material-symbols-outlined text-royal-purple">check_circle</span>
+                    <CheckCircle2 size={24} className="text-royal-purple" />
                     <span className="text-charcoal font-headline-md font-bold">{pt}</span>
                   </div>
                 ))}
@@ -293,7 +297,7 @@ export default function CAEQAOPage() {
             <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
               {formSubmitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                  <CheckCircle2 size={64} className="text-lime-green mx-auto" />
                   <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
                   <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We will be in touch shortly to set up your EQAO trial lesson.</p>
                   <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">

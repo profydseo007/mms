@@ -2,6 +2,11 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  TrendingUp, ClipboardList, HelpCircle, BarChart2, GraduationCap,
+  FunctionSquare, BookOpen, FlaskConical, BookMarked, Briefcase, Languages,
+  CheckCircle2,
+} from 'lucide-react';
 
 export default function AUVcePage() {
   const { navigateTo } = useAppNavigate();
@@ -38,7 +43,7 @@ export default function AUVcePage() {
               </div>
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-outline-variant/30">
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center"><span className="material-symbols-outlined text-charcoal">trending_up</span></div>
+                  <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center"><TrendingUp size={20} className="text-charcoal" /></div>
                   <span className="font-headline-md text-charcoal font-bold">ATAR Results</span>
                 </div>
                 <p className="text-on-surface-variant text-label-md">94% of our VCE students improve their study score within 6 weeks.</p>
@@ -57,13 +62,13 @@ export default function AUVcePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
-              { icon: 'assignment', color: 'bg-primary-fixed text-royal-purple', title: 'School-Assessed Coursework (SAC)', desc: 'Completed during the school year — tests, essays, investigations, and oral presentations depending on the subject. Our tutors prepare students for every SAC format.' },
-              { icon: 'quiz', color: 'bg-secondary-container text-secondary', title: 'VCAA External Examination', desc: 'Sat in October–November. We use VCAA study designs and past exam papers with detailed marking guidance to maximise external exam scores.' },
-              { icon: 'bar_chart', color: 'bg-lime-green/20 text-secondary', title: 'Study Score & Scaling', desc: 'Raw marks are scaled to a study score out of 50. Some subjects scale up (e.g. Specialist Maths) — we advise on subject selection strategy.' },
-              { icon: 'school', color: 'bg-royal-purple/10 text-royal-purple', title: 'ATAR Calculation', desc: 'Your ATAR is calculated from your best four study scores (plus a 10% bonus). We focus preparation where it has the highest ATAR impact.' },
+              { Icon: ClipboardList, color: 'bg-primary-fixed text-royal-purple', title: 'School-Assessed Coursework (SAC)', desc: 'Completed during the school year — tests, essays, investigations, and oral presentations depending on the subject. Our tutors prepare students for every SAC format.' },
+              { Icon: HelpCircle, color: 'bg-secondary-container text-secondary', title: 'VCAA External Examination', desc: 'Sat in October–November. We use VCAA study designs and past exam papers with detailed marking guidance to maximise external exam scores.' },
+              { Icon: BarChart2, color: 'bg-lime-green/20 text-secondary', title: 'Study Score & Scaling', desc: 'Raw marks are scaled to a study score out of 50. Some subjects scale up (e.g. Specialist Maths) — we advise on subject selection strategy.' },
+              { Icon: GraduationCap, color: 'bg-royal-purple/10 text-royal-purple', title: 'ATAR Calculation', desc: 'Your ATAR is calculated from your best four study scores (plus a 10% bonus). We focus preparation where it has the highest ATAR impact.' },
             ].map((item) => (
               <div key={item.title} className="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)]">
-                <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center mb-6`}><span className="material-symbols-outlined text-2xl">{item.icon}</span></div>
+                <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center mb-6`}><item.Icon size={24} /></div>
                 <h3 className="font-headline-md text-charcoal font-bold mb-3">{item.title}</h3>
                 <p className="text-on-surface-variant font-body-md">{item.desc}</p>
               </div>
@@ -81,17 +86,17 @@ export default function AUVcePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: 'functions', title: 'Maths (All Levels)', subs: ['Foundation', 'General', 'Methods', 'Specialist Maths'] },
-              { icon: 'auto_stories', title: 'English', subs: ['English', 'English Language', 'Literature', 'EAL/D'] },
-              { icon: 'science', title: 'Sciences', subs: ['Biology', 'Chemistry', 'Physics', 'Psychology'] },
-              { icon: 'history_edu', title: 'Humanities', subs: ['History', 'Geography', 'Legal Studies', 'Politics'] },
-              { icon: 'business_center', title: 'Business', subs: ['Accounting', 'Business Management', 'Economics'] },
-              { icon: 'language', title: 'Languages', subs: ['French', 'Japanese', 'Indonesian', 'Chinese'] },
+              { Icon: FunctionSquare, title: 'Maths (All Levels)', subs: ['Foundation', 'General', 'Methods', 'Specialist Maths'] },
+              { Icon: BookOpen, title: 'English', subs: ['English', 'English Language', 'Literature', 'EAL/D'] },
+              { Icon: FlaskConical, title: 'Sciences', subs: ['Biology', 'Chemistry', 'Physics', 'Psychology'] },
+              { Icon: BookMarked, title: 'Humanities', subs: ['History', 'Geography', 'Legal Studies', 'Politics'] },
+              { Icon: Briefcase, title: 'Business', subs: ['Accounting', 'Business Management', 'Economics'] },
+              { Icon: Languages, title: 'Languages', subs: ['French', 'Japanese', 'Indonesian', 'Chinese'] },
             ].map((subject) => (
               <div key={subject.title} className="group bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all">
-                <div className="w-14 h-14 bg-royal-purple text-white rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-6 transition-transform"><span className="material-symbols-outlined text-2xl">{subject.icon}</span></div>
+                <div className="w-14 h-14 bg-royal-purple text-white rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-6 transition-transform"><subject.Icon size={24} /></div>
                 <h3 className="font-headline-md text-charcoal font-bold mb-4">{subject.title}</h3>
-                <ul className="space-y-2">{subject.subs.map((s) => <li key={s} className="flex items-center gap-2 text-label-md text-on-surface-variant"><span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>{s}</li>)}</ul>
+                <ul className="space-y-2">{subject.subs.map((s) => <li key={s} className="flex items-center gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={14} className="text-lime-green shrink-0" />{s}</li>)}</ul>
               </div>
             ))}
           </div>
@@ -105,12 +110,12 @@ export default function AUVcePage() {
             <div className="lg:w-1/2 p-12 lg:p-20 space-y-8 bg-surface">
               <h2 className="font-display-lg text-headline-lg md:text-display-lg text-charcoal font-bold">Book a Free Trial Lesson</h2>
               <p className="text-on-surface-variant font-body-lg">Tell us your subject and units and we&apos;ll match you with a VCAA specialist tutor.</p>
-              <div className="space-y-4">{['VCAA study design matched', 'SAC and exam preparation', 'Units 1–4 all subjects'].map((pt) => <div key={pt} className="flex items-center gap-4"><span className="material-symbols-outlined text-royal-purple">check_circle</span><span className="text-charcoal font-headline-md font-bold">{pt}</span></div>)}</div>
+              <div className="space-y-4">{['VCAA study design matched', 'SAC and exam preparation', 'Units 1–4 all subjects'].map((pt) => <div key={pt} className="flex items-center gap-4"><CheckCircle2 size={20} className="text-royal-purple" /><span className="text-charcoal font-headline-md font-bold">{pt}</span></div>)}</div>
             </div>
             <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
               {formSubmitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                  <CheckCircle2 size={56} className="text-lime-green mx-auto" />
                   <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
                   <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We&apos;ll be in touch to arrange your VCE trial lesson.</p>
                   <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">Submit Another</button>

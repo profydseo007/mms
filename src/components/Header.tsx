@@ -31,7 +31,7 @@ export default function Header({ currentPage, currentSubject, onNavigate }: Head
   const [testPrepOpen, setTestPrepOpen] = useState(false);
 
   const subjects = ['Maths', 'English', 'Science', 'Physics', 'Chemistry', 'Biology'];
-  const testPreps = ['SAT', 'ACT', 'AP'];
+  const testPreps = ['PSAT','SAT', 'ACT', 'AP'];
 
   const handleSubjectClick = (sub: string) => {
     onNavigate('subject', sub);

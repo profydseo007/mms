@@ -1,13 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { ClipboardCheck, MapPinned } from 'lucide-react';
 
 const TEST_TYPES = [
   {
     slug: 'provincial-curricula',
     title: 'Provincial Curricula',
     subtitle: 'Grades K–12 across all 10 provinces',
-    icon: 'map',
+    icon: MapPinned,
     description: 'Tutoring matched to your province\'s exact curriculum, learning outcomes, and assessment style — Ontario, BC, Alberta, Quebec and more.',
     color: 'bg-primary-fixed',
     iconColor: 'text-royal-purple',
@@ -16,7 +17,7 @@ const TEST_TYPES = [
     slug: 'eqao',
     title: 'EQAO',
     subtitle: 'Grades 3, 6, 9 & OSSLT (Grade 10)',
-    icon: 'assignment_turned_in',
+    icon: ClipboardCheck,
     description: 'Ontario\'s province-wide standardised assessments in literacy and numeracy. We target the exact open-response format and four-level marking scale.',
     color: 'bg-secondary-container',
     iconColor: 'text-secondary',
@@ -48,14 +49,17 @@ export default function CATestPreparationPage() {
       <section className="py-24 bg-soft-gray">
         <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            {TEST_TYPES.map((item) => (
+            {TEST_TYPES.map((item) => {
+              const Icon = item.icon;
+
+              return (
               <button
                 key={item.slug}
                 onClick={() => router.push(`/ca/test-preparation/${item.slug}`)}
                 className="group bg-white p-10 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/30 hover:shadow-xl transition-all text-left"
               >
                 <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <span className={`material-symbols-outlined text-3xl ${item.iconColor}`}>{item.icon}</span>
+                  <Icon size={32} strokeWidth={2} className={item.iconColor} aria-hidden="true" />
                 </div>
                 <div className="mb-4">
                   <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">{item.title}</h2>
@@ -67,7 +71,8 @@ export default function CATestPreparationPage() {
                   <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </span>
               </button>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
