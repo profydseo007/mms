@@ -1,251 +1,201 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useAppNavigate } from '@/lib/useAppNavigate';
-import {
-  TrendingUp, School, CalendarDays, BarChart2, BadgeCheck,
-  GraduationCap, BookOpen, FunctionSquare, ChevronDown, CheckCircle2
-} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ClipboardCheck, CheckCircle2, ChevronDown, ChevronRight, CalendarClock, Scale, PenLine, BookOpen, GraduationCap, AlertCircle } from 'lucide-react';
 
-export default function CAEQAOPage() {
-  const { navigateTo } = useAppNavigate();
+const FAQS = [
+  { q: "Can my child fail EQAO?", a: "Not at Grades 3, 6 or 9. Those assessments report achievement against provincial standards and are used for school and board planning. There is no pass mark for the individual student and no consequence for progressing to the next grade. The Grade 10 literacy test is different: meeting the literacy requirement is a condition of graduating in Ontario." },
+  { q: "What happens if my child does not meet the OSSLT requirement?", a: "There are two routes. They can sit the test again at a later administration, or complete the Ontario Secondary School Literacy Course, which satisfies the requirement through coursework instead. Neither route is unusual and neither prevents graduation on its own. What matters is addressing the underlying reading or writing difficulty rather than simply resitting with the same preparation." },
+  { q: "How should we prepare for the Grade 3 assessment?", a: "Lightly, and mostly by removing surprise. A nine-year-old sitting an unfamiliar formal assessment often underperforms because of the format rather than the content. A few practice questions so the layout and instructions look familiar is genuinely useful. Intensive drilling is not, and can make an anxious child more anxious about something that carries no consequence for them." },
+  { q: "Why does the Grade 9 assessment matter if it is diagnostic?", a: "Because of what it reveals rather than what it counts for. Grade 9 is where algebraic thinking is consolidated, and a weak result is an early, reliable signal that senior mathematics will be difficult. Acting on it in Grade 9 or 10 is straightforward. Discovering the same gap in Grade 11 functions, with university prerequisites at stake, is considerably harder." },
+  { q: "What does the OSSLT actually test?", a: "Reading comprehension and writing across a range of everyday and informational texts, rather than knowledge from any particular subject. That is why studying course content does not help much, and why students who read confidently tend to pass without preparation while students who avoid reading struggle regardless of their grades. The useful work is on comprehension strategy and structured written response." },
+  { q: "Are EQAO questions different from classroom tests?", a: "In format, yes. Open-response questions ask students to explain reasoning and justify an answer rather than simply produce one, and the mathematics assessments are delivered digitally. Students who know the material but are unused to explaining their thinking in writing lose marks they should not, and that is a quick, teachable fix." },
+  { q: "Does EQAO affect university admission?", a: "No. Ontario universities admit on Grade 12 course marks, not on EQAO results, which do not appear on a transcript. The exception is the literacy requirement, which must be met to receive the diploma, and the diploma is required. So the OSSLT matters to admission only in the sense that graduating does." },
+  { q: "When should preparation start?", a: "For the OSSLT, the autumn of Grade 10 is comfortable, and earlier if reading has been a persistent difficulty. For the diagnostic assessments, a couple of weeks of format familiarity is proportionate. If a report card already flags reading or mathematics concerns, the assessment is not the reason to act, but it is a reasonable prompt." }
+];
+
+export default function CAEqaoOssltPage() {
+  const router = useRouter();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    phone: '',
-    email: '',
-    grade: 'Grade 3',
-    message: '',
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.fullName && formData.email) setFormSubmitted(true);
-  };
-
-  const faqs = [
-    {
-      q: 'What grades sit the EQAO assessments?',
-      a: 'EQAO assessments are administered in Grade 3 and Grade 6 (Primary and Junior literacy and numeracy), and Grade 9 (math). The OSSLT is taken in Grade 10.',
-    },
-    {
-      q: 'Do EQAO results affect report card marks?',
-      a: 'EQAO results do not directly affect a student\'s report card grade, but they are used by schools and the province to track progress and identify students who may need additional support.',
-    },
-    {
-      q: 'What subjects does EQAO test?',
-      a: 'EQAO tests Reading, Writing, and Mathematics in Grades 3 and 6. The Grade 9 assessment covers Mathematics only. The OSSLT tests reading and writing skills at the Grade 10 level.',
-    },
-    {
-      q: 'Is the OSSLT compulsory for graduation?',
-      a: 'Yes. Ontario students must successfully complete the OSSLT as one of the requirements for the Ontario Secondary School Diploma (OSSD). Students who are unsuccessful can re-take it or complete an alternative course.',
-    },
-    {
-      q: 'How can tutoring help with EQAO preparation?',
-      a: 'Our tutors work through released EQAO questions, identify gaps in understanding, and develop the specific skills tested — open-response writing, multi-step math problems, and reading comprehension strategies — well before the assessment date.',
-    },
-  ];
 
   return (
     <div className="bg-background text-on-surface font-body-md overflow-x-hidden">
       {/* Hero */}
-      <section className="relative min-h-[80vh] flex items-center py-16 overflow-hidden bg-white">
-        <div className="container mx-auto px-margin-mobile md:px-margin-desktop max-w-max-width relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+      <section className="relative py-24 bg-white overflow-hidden">
+        <div className="absolute top-0 right-0 w-[520px] h-[520px] bg-royal-purple/5 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3"></div>
+        <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-label-md text-label-md uppercase tracking-wider font-semibold">
-                Ontario Province-Wide Assessment
-              </span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-royal-purple/10 text-royal-purple rounded-full font-label-sm">
+                <ClipboardCheck size={16} strokeWidth={2.25} aria-hidden="true" />
+                Ontario · Grades 3, 6, 9 and 10
+              </div>
               <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg text-charcoal leading-tight font-bold">
-                EQAO Preparation by <span className="text-royal-purple">expert tutors</span>
+                EQAO & OSSLT <span className="text-royal-purple">Preparation Online</span>
               </h1>
-              <p className="text-on-surface-variant font-body-lg text-body-lg max-w-xl">
-                The Education Quality and Accountability Office (EQAO) assessments benchmark every Ontario student in literacy and numeracy. We turn those benchmarks into stepping stones — not stumbling blocks.
+              <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                Online tutors for EQAO and OSSLT preparation across Ontario. The Grade 3, 6 and 9 assessments report on progress; the Grade 10 literacy test sits behind a graduation requirement. Preparation should reflect that difference, and ours does.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => navigateTo('trial')}
-                  className="bg-royal-purple text-on-primary px-8 py-4 rounded-xl font-headline-md text-headline-md hover:shadow-xl transition-all cursor-pointer font-medium"
-                >
-                  Book a Free Trial Lesson
-                </button>
-                <button
-                  onClick={() => {
-                    const el = document.getElementById('eqao-assessments');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="border-2 border-royal-purple text-royal-purple px-8 py-4 rounded-xl font-headline-md text-headline-md hover:bg-royal-purple/5 transition-all cursor-pointer font-medium"
-                >
-                  View Assessments
-                </button>
+                <button onClick={() => router.push('/free-trial')} className="bg-royal-purple text-white px-8 py-4 rounded-xl font-headline-md font-bold hover:shadow-xl transition-all cursor-pointer">Book a Free Assessment</button>
+                <button onClick={() => { const el = document.getElementById('structure'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="border-2 border-royal-purple text-royal-purple px-8 py-4 rounded-xl font-headline-md font-bold hover:bg-royal-purple/5 transition-all cursor-pointer">See What Each Assessment Does</button>
               </div>
             </div>
-            <div className="relative hidden lg:block">
+            <div className="hidden lg:block">
               <div className="rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  className="w-full h-[480px] object-cover"
-                  alt="Ontario student working on an assessment"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIC2148RcAcfRXxnZOcCNJC2Yr32DtyHa7d1TOD82ZBuHm5-qZ-Hfyjuic-1MLI6po5tOU8XT7FUpGqvgdHGzRwEInHX72mGWsxX-9nVAlOqT4sbH-gqYAG5YfaLbivq9Je_ZI7ity8vsit3aPnhFxzYCZ7Vd3uaU5jtItj5k130NViqjkJsMWfhwBn54qZk6DOAoC1XqgTsCbUlAYR6O8_Q9eb3Xz1j99Ujc64cOxRy0f-IOnZz3fvw"
-                />
-              </div>
-              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-outline-variant/30">
-                <div className="flex items-center gap-4 mb-2">
-                  <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center">
-                    <TrendingUp size={24} className="text-charcoal" />
-                  </div>
-                  <span className="font-headline-md text-charcoal font-bold">Proven Results</span>
-                </div>
-                <p className="text-on-surface-variant text-label-md">Students improve by an average of one performance level within 8 weeks.</p>
+                <img className="w-full h-[440px] object-cover" alt="An Ontario student preparing for EQAO assessments online" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIC2148RcAcfRXxnZOcCNJC2Yr32DtyHa7d1TOD82ZBuHm5-qZ-Hfyjuic-1MLI6po5tOU8XT7FUpGqvgdHGzRwEInHX72mGWsxX-9nVAlOqT4sbH-gqYAG5YfaLbivq9Je_ZI7ity8vsit3aPnhFxzYCZ7Vd3uaU5jtItj5k130NViqjkJsMWfhwBn54qZk6DOAoC1XqgTsCbUlAYR6O8_Q9eb3Xz1j99Ujc64cOxRy0f-IOnZz3fvw" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What is EQAO */}
-      <section className="py-24 bg-soft-gray">
-        <div className="container mx-auto px-margin-mobile md:px-margin-desktop max-w-max-width">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">What is EQAO?</h2>
-              <p className="text-on-surface-variant font-body-lg leading-relaxed">
-                EQAO is an independent provincial agency that develops and administers standardized assessments across Ontario. Results are reported on a four-level scale and provide families, schools, and the province with an objective picture of student achievement against the Ontario Curriculum.
-              </p>
-              <p className="text-on-surface-variant font-body-md leading-relaxed">
-                Unlike classroom tests, EQAO uses open-response questions that demand extended written explanations — a format many students encounter for the first time. Our tutors build that specific skill set before the assessment window opens.
-              </p>
-            </div>
-            <div className="bg-white p-10 rounded-[32px] shadow-ambient space-y-6">
-              <h3 className="font-headline-md text-charcoal font-bold">Key Facts</h3>
-              {[
-                { Icon: School, label: 'Administered by', value: 'EQAO — independent provincial agency' },
-                { Icon: CalendarDays, label: 'Assessment windows', value: 'Spring (primary, junior, OSSLT) & Fall (Gr. 9 math)' },
-                { Icon: BarChart2, label: 'Reporting scale', value: 'Levels 1–4 (Level 3 = grade-level standard)' },
-                { Icon: BadgeCheck, label: 'OSSLT requirement', value: 'Compulsory for Ontario Secondary School Diploma' },
-              ].map((fact) => (
-                <div key={fact.label} className="flex gap-4">
-                  <div className="w-10 h-10 bg-primary-fixed rounded-xl flex items-center justify-center flex-shrink-0 text-royal-purple">
-                    <fact.Icon size={18} />
-                  </div>
-                  <div>
-                    <p className="text-label-sm text-on-surface-variant font-semibold uppercase tracking-wider">{fact.label}</p>
-                    <p className="text-body-md text-charcoal font-medium">{fact.value}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Assessments Breakdown */}
-      <section className="py-24 bg-white" id="eqao-assessments">
-        <div className="container mx-auto px-margin-mobile md:px-margin-desktop max-w-max-width">
+      {/* Structure */}
+      <section className="py-24 bg-soft-gray" id="structure">
+        <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="text-center mb-16">
-            <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold mb-4">EQAO Assessments We Prepare For</h2>
-            <p className="text-on-surface-variant font-body-md max-w-2xl mx-auto">Each assessment tests different skills. Our tutors tailor preparation to the exact format and question types your child will face.</p>
+            <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold mb-4">The Four Ontario Assessments</h2>
+            <p className="text-on-surface-variant font-body-md max-w-2xl mx-auto">Administered by the Education Quality and Accountability Office, an agency of the province, at four points in a student’s schooling.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                grade: 'Grade 3',
-                name: 'Primary Assessment',
-                color: 'bg-primary-fixed',
-                iconColor: 'text-royal-purple',
-                Icon: GraduationCap,
-                subjects: ['Reading', 'Writing', 'Mathematics'],
-                detail: 'Measures achievement of Grade 1–3 Ontario Curriculum expectations.',
-              },
-              {
-                grade: 'Grade 6',
-                name: 'Junior Assessment',
-                color: 'bg-secondary-container',
-                iconColor: 'text-secondary',
-                Icon: BookOpen,
-                subjects: ['Reading', 'Writing', 'Mathematics'],
-                detail: 'Measures achievement of Grade 4–6 Ontario Curriculum expectations.',
-              },
-              {
-                grade: 'Grade 9',
-                name: 'Math Assessment',
-                color: 'bg-lime-green/20',
-                iconColor: 'text-secondary',
-                Icon: FunctionSquare,
-                subjects: ['Number', 'Algebra', 'Data & Financial Literacy'],
-                detail: 'Online adaptive test aligned to the new Grade 9 destreamed math course.',
-              },
-              {
-                grade: 'Grade 10',
-                name: 'OSSLT',
-                color: 'bg-royal-purple/10',
-                iconColor: 'text-royal-purple',
-                Icon: BookOpen,
-                subjects: ['Reading', 'Writing'],
-                detail: 'Ontario Secondary School Literacy Test. Required for OSSD graduation.',
-              },
-            ].map((item) => (
-              <div key={item.grade} className="group p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all">
-                <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <item.Icon size={24} className={item.iconColor} />
-                </div>
-                <p className="text-label-sm font-bold text-royal-purple uppercase tracking-wider mb-1">{item.grade}</p>
-                <h3 className="font-headline-md text-charcoal font-bold mb-3">{item.name}</h3>
-                <p className="text-body-md text-on-surface-variant mb-4">{item.detail}</p>
-                <ul className="space-y-1">
-                  {item.subjects.map((s) => (
-                    <li key={s} className="flex items-center gap-2 text-label-md text-on-surface-variant">
-                      <CheckCircle2 size={16} className="text-lime-green shrink-0" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all group">
+              <div className="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <BookOpen size={26} strokeWidth={2} className="text-royal-purple" aria-hidden="true" />
               </div>
-            ))}
+              <h3 className="font-headline-md text-charcoal font-bold mb-1">Grade 3</h3>
+              <p className="text-label-sm text-royal-purple font-semibold mb-4">Primary Division</p>
+              <ul className="space-y-2"><li key="Reading and writing" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Reading and writing</li><li key="Mathematics" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Mathematics</li><li key="Four-level achievement scale" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Four-level achievement scale</li></ul>
+            </div>
+            <div className="p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all group">
+              <div className="w-14 h-14 bg-secondary-container rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <PenLine size={26} strokeWidth={2} className="text-secondary" aria-hidden="true" />
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-1">Grade 6</h3>
+              <p className="text-label-sm text-royal-purple font-semibold mb-4">Junior Division</p>
+              <ul className="space-y-2"><li key="Reading and writing" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Reading and writing</li><li key="Mathematics" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Mathematics</li><li key="Open-response questions" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Open-response questions</li></ul>
+            </div>
+            <div className="p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all group">
+              <div className="w-14 h-14 bg-lime-green/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <ClipboardCheck size={26} strokeWidth={2} className="text-secondary" aria-hidden="true" />
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-1">Grade 9</h3>
+              <p className="text-label-sm text-royal-purple font-semibold mb-4">Mathematics</p>
+              <ul className="space-y-2"><li key="Grade 9 math assessment" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Grade 9 math assessment</li><li key="Taken within the course" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Taken within the course</li><li key="Digital, adaptive format" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Digital, adaptive format</li></ul>
+            </div>
+            <div className="p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all group">
+              <div className="w-14 h-14 bg-royal-purple/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <GraduationCap size={26} strokeWidth={2} className="text-royal-purple" aria-hidden="true" />
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-1">Grade 10 OSSLT</h3>
+              <p className="text-label-sm text-royal-purple font-semibold mb-4">Graduation requirement</p>
+              <ul className="space-y-2"><li key="Reading and writing tasks" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Reading and writing tasks</li><li key="Minimum score required to pass" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Minimum score required to pass</li><li key="Retake or OSSLC alternative" className="flex items-start gap-2 text-label-md text-on-surface-variant"><CheckCircle2 size={15} className="text-lime-green shrink-0 mt-1" aria-hidden="true" />Retake or OSSLC alternative</li></ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How We Prepare */}
-      <section className="py-24 bg-soft-gray">
-        <div className="container mx-auto px-margin-mobile md:px-margin-desktop max-w-max-width">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">How we prepare your child</h2>
-              <p className="text-on-surface-variant font-body-lg">Our EQAO preparation is structured, not generic. Each programme starts with a diagnostic assessment using released EQAO questions to pinpoint exactly where your child sits on the four-level scale — and what it takes to reach Level 3 or 4.</p>
-              <div className="space-y-4">
-                {[
-                  { step: '01', title: 'Diagnostic assessment', desc: 'Released EQAO questions to establish current level and identify specific gaps.' },
-                  { step: '02', title: 'Targeted skill building', desc: 'Focused sessions on open-response writing, multi-step problem solving, and reading strategies.' },
-                  { step: '03', title: 'Full practice assessments', desc: 'Timed mock assessments under real EQAO conditions to build familiarity and reduce anxiety.' },
-                  { step: '04', title: 'Review & consolidate', desc: 'Detailed feedback on practice responses with model answers and marking guidance.' },
-                ].map((s) => (
-                  <div key={s.step} className="flex gap-4">
-                    <div className="w-10 h-10 bg-royal-purple text-white rounded-xl flex items-center justify-center flex-shrink-0 font-bold font-label-md">
-                      {s.step}
-                    </div>
-                    <div>
-                      <h4 className="font-headline-md text-charcoal font-bold">{s.title}</h4>
-                      <p className="text-on-surface-variant font-body-md">{s.desc}</p>
-                    </div>
-                  </div>
-                ))}
+      {/* Key points */}
+      <section className="py-24 bg-white">
+        <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+          <div className="text-center mb-16">
+            <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold mb-4">The Distinction That Changes Everything</h2>
+            <p className="text-on-surface-variant font-body-md max-w-2xl mx-auto">EQAO and OSSLT are usually spoken about together, but they do fundamentally different jobs.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-8 bg-soft-gray rounded-2xl border border-outline-variant/30">
+              <div className="w-12 h-12 rounded-xl bg-royal-purple/10 flex items-center justify-center mb-6">
+                <ClipboardCheck size={22} className="text-royal-purple" aria-hidden="true" />
               </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-3">Grades 3, 6 and 9 Are Diagnostic</h3>
+              <p className="text-on-surface-variant font-body-md">They report achievement against provincial standards and inform school planning. A student does not pass or fail, and a weak result carries no consequence for moving up a grade.</p>
             </div>
-            <div className="bg-white p-10 rounded-[32px] shadow-ambient space-y-6">
-              <h3 className="font-headline-md text-charcoal font-bold text-center">Performance Levels</h3>
-              {[
-                { level: 'Level 4', desc: 'Exceeds the provincial standard', color: 'bg-lime-green text-charcoal' },
-                { level: 'Level 3', desc: 'Meets the provincial standard', color: 'bg-primary-fixed text-royal-purple' },
-                { level: 'Level 2', desc: 'Approaching the provincial standard', color: 'bg-secondary-container text-secondary' },
-                { level: 'Level 1', desc: 'Below the provincial standard', color: 'bg-soft-gray text-on-surface-variant' },
-              ].map((lv) => (
-                <div key={lv.level} className="flex items-center gap-4">
-                  <span className={`px-3 py-1 rounded-full text-label-sm font-bold ${lv.color}`}>{lv.level}</span>
-                  <span className="font-body-md text-on-surface-variant">{lv.desc}</span>
-                </div>
-              ))}
-              <p className="text-label-sm text-on-surface-variant italic pt-2">Level 3 represents the grade-level standard expected of all Ontario students.</p>
+            <div className="p-8 bg-soft-gray rounded-2xl border border-outline-variant/30">
+              <div className="w-12 h-12 rounded-xl bg-royal-purple/10 flex items-center justify-center mb-6">
+                <GraduationCap size={22} className="text-royal-purple" aria-hidden="true" />
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-3">The OSSLT Is a Requirement</h3>
+              <p className="text-on-surface-variant font-body-md">Meeting the Ontario literacy requirement is a condition of receiving the diploma. Students who do not meet it can retake the test or complete the Ontario Secondary School Literacy Course instead.</p>
+            </div>
+            <div className="p-8 bg-soft-gray rounded-2xl border border-outline-variant/30">
+              <div className="w-12 h-12 rounded-xl bg-royal-purple/10 flex items-center justify-center mb-6">
+                <AlertCircle size={22} className="text-royal-purple" aria-hidden="true" />
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-3">Prepare Proportionately</h3>
+              <p className="text-on-surface-variant font-body-md">Families routinely over-prepare for Grade 3 and under-prepare for Grade 10. Familiarity with the format is enough for the early assessments; the OSSLT deserves genuine, structured work.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Scoring + timeline */}
+      <section className="py-24 bg-soft-gray">
+        <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-royal-purple/10 text-royal-purple font-label-md text-sm font-semibold mb-6">
+                <Scale size={16} aria-hidden="true" />
+                <span>How Results Are Reported</span>
+              </div>
+              <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold mb-6">Reading an EQAO Result</h2>
+              <p className="text-on-surface-variant font-body-md mb-8">The reporting language differs between the diagnostic assessments and the literacy test, which is part of why the two are so often confused.</p>
+              <div className="bg-white rounded-2xl p-8 border border-outline-variant/30">
+              <div className="pb-4 border-b border-outline-variant/60 last:border-0 last:pb-0">
+                <p className="font-label-md text-charcoal font-semibold mb-1">Grades 3 and 6</p>
+                <p className="text-on-surface-variant font-body-md">Four achievement levels, with Level 3 representing the provincial standard</p>
+              </div>
+              <div className="pb-4 border-b border-outline-variant/60 last:border-0 last:pb-0">
+                <p className="font-label-md text-charcoal font-semibold mb-1">Grade 9 mathematics</p>
+                <p className="text-on-surface-variant font-body-md">Reported against the same four-level scale, taken during the course</p>
+              </div>
+              <div className="pb-4 border-b border-outline-variant/60 last:border-0 last:pb-0">
+                <p className="font-label-md text-charcoal font-semibold mb-1">OSSLT</p>
+                <p className="text-on-surface-variant font-body-md">A minimum score is required to meet the literacy requirement</p>
+              </div>
+              <div className="pb-4 border-b border-outline-variant/60 last:border-0 last:pb-0">
+                <p className="font-label-md text-charcoal font-semibold mb-1">If the OSSLT is not met</p>
+                <p className="text-on-surface-variant font-body-md">Retake in a later administration, or complete the OSSLC</p>
+              </div>
+              </div>
+              <p className="text-on-surface-variant font-label-md italic mt-6">EQAO administration, formats and the literacy requirement are set by EQAO and the Ontario Ministry of Education, and are revised periodically. Confirm current details with your school.</p>
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-royal-purple/10 text-royal-purple font-label-md text-sm font-semibold mb-6">
+                <CalendarClock size={16} aria-hidden="true" />
+                <span>Planning Ahead</span>
+              </div>
+              <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold mb-6">When Each Assessment Falls</h2>
+              <p className="text-on-surface-variant font-body-md mb-8">Spread across seven years, with only the last carrying a consequence attached to the individual student.</p>
+              <div className="mt-4">
+            <div className="relative pl-12 pb-10 border-l-2 border-outline-variant last:border-l-0 last:pb-0">
+              <div className="absolute -left-[13px] top-0 w-6 h-6 rounded-full bg-royal-purple flex items-center justify-center">
+                <span className="text-white text-[11px] font-bold">1</span>
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-2">Grade 3</h3>
+              <p className="text-on-surface-variant font-body-md">First province-wide assessment, in reading, writing and mathematics. Useful as an early signal, not as a verdict on a nine-year-old.</p>
+            </div>
+            <div className="relative pl-12 pb-10 border-l-2 border-outline-variant last:border-l-0 last:pb-0">
+              <div className="absolute -left-[13px] top-0 w-6 h-6 rounded-full bg-royal-purple flex items-center justify-center">
+                <span className="text-white text-[11px] font-bold">2</span>
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-2">Grade 6</h3>
+              <p className="text-on-surface-variant font-body-md">The same three areas, at the end of the junior division. A drop between Grade 3 and Grade 6 is worth investigating properly.</p>
+            </div>
+            <div className="relative pl-12 pb-10 border-l-2 border-outline-variant last:border-l-0 last:pb-0">
+              <div className="absolute -left-[13px] top-0 w-6 h-6 rounded-full bg-royal-purple flex items-center justify-center">
+                <span className="text-white text-[11px] font-bold">3</span>
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-2">Grade 9</h3>
+              <p className="text-on-surface-variant font-body-md">Mathematics only, taken during the course. Also the year Ontario students begin building credits toward the diploma.</p>
+            </div>
+            <div className="relative pl-12 pb-10 border-l-2 border-outline-variant last:border-l-0 last:pb-0">
+              <div className="absolute -left-[13px] top-0 w-6 h-6 rounded-full bg-royal-purple flex items-center justify-center">
+                <span className="text-white text-[11px] font-bold">4</span>
+              </div>
+              <h3 className="font-headline-md text-charcoal font-bold mb-2">Grade 10</h3>
+              <p className="text-on-surface-variant font-body-md">The OSSLT. This is the one with a graduation requirement behind it, and the one worth preparing for deliberately.</p>
+            </div>
+              </div>
             </div>
           </div>
         </div>
@@ -253,93 +203,35 @@ export default function CAEQAOPage() {
 
       {/* FAQ */}
       <section className="py-24 bg-white">
-        <div className="container mx-auto px-margin-mobile md:px-margin-desktop max-w-max-width">
+        <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="text-center mb-16">
             <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold mb-4">Frequently Asked Questions</h2>
+            <p className="text-on-surface-variant font-body-md max-w-2xl mx-auto">What Ontario parents ask us most often about EQAO results and the literacy test.</p>
           </div>
           <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, i) => (
+            {FAQS.map((faq, i) => (
               <div key={i} className="border border-surface-container-highest rounded-2xl overflow-hidden">
-                <button
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-soft-gray transition-colors font-headline-md text-[18px] font-bold cursor-pointer"
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                >
+                <button className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-soft-gray transition-colors font-headline-md text-[18px] font-bold cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
                   <span>{faq.q}</span>
-                  <ChevronDown size={24} className={`transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
+                  <ChevronDown size={22} className={`shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180 text-royal-purple' : ''}`} aria-hidden="true" />
                 </button>
-                {openFaq === i && (
-                  <div className="bg-soft-gray p-6 text-on-surface-variant font-body-md border-t border-surface-container-highest">
-                    {faq.a}
-                  </div>
-                )}
+                {openFaq === i && <div className="bg-soft-gray p-6 text-on-surface-variant font-body-md border-t border-surface-container-highest">{faq.a}</div>}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA & Form */}
-      <section className="py-24 bg-royal-purple overflow-hidden">
-        <div className="container mx-auto px-margin-mobile md:px-margin-desktop max-w-max-width relative z-10">
-          <div className="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row">
-            <div className="lg:w-1/2 p-12 lg:p-20 space-y-8 bg-surface">
-              <h2 className="font-display-lg text-headline-lg md:text-display-lg text-charcoal font-bold">Start EQAO Preparation Today</h2>
-              <p className="text-on-surface-variant font-body-lg">No commitment — just an honest assessment of where your child stands and a clear plan to move them forward.</p>
-              <div className="space-y-4">
-                {['Ontario curriculum specialists', 'Released EQAO question practice', 'Flexible online scheduling'].map((pt) => (
-                  <div key={pt} className="flex items-center gap-4">
-                    <CheckCircle2 size={24} className="text-royal-purple" />
-                    <span className="text-charcoal font-headline-md font-bold">{pt}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
-              {formSubmitted ? (
-                <div className="text-center py-12 space-y-4">
-                  <CheckCircle2 size={64} className="text-lime-green mx-auto" />
-                  <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
-                  <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We will be in touch shortly to set up your EQAO trial lesson.</p>
-                  <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">
-                    Submit Another Request
-                  </button>
-                </div>
-              ) : (
-                <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
-                  <div className="space-y-2">
-                    <label className="font-label-md text-charcoal font-medium">Full Name</label>
-                    <input required value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple focus:border-royal-purple outline-none transition-all" placeholder="Student's full name" type="text" />
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="font-label-md text-charcoal font-medium">Phone Number</label>
-                      <input required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple focus:border-royal-purple outline-none transition-all" placeholder="+1" type="tel" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="font-label-md text-charcoal font-medium">Email Address</label>
-                      <input required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple focus:border-royal-purple outline-none transition-all" placeholder="email@example.com" type="email" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="font-label-md text-charcoal font-medium">Assessment Grade</label>
-                    <select value={formData.grade} onChange={(e) => setFormData({ ...formData, grade: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple focus:border-royal-purple outline-none transition-all bg-white">
-                      <option>Grade 3 — Primary Assessment</option>
-                      <option>Grade 6 — Junior Assessment</option>
-                      <option>Grade 9 — Math Assessment</option>
-                      <option>Grade 10 — OSSLT</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="font-label-md text-charcoal font-medium">Additional Message</label>
-                    <textarea value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple focus:border-royal-purple outline-none transition-all" placeholder="Tell us about your child's goals..." rows={3} />
-                  </div>
-                  <button className="w-full bg-royal-purple text-on-primary font-headline-md py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all cursor-pointer font-bold" type="submit">
-                    Send Request
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
+      {/* CTA */}
+      <section className="py-24 bg-royal-purple text-white">
+        <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop text-center space-y-6">
+          <h2 className="font-headline-lg text-headline-lg font-bold">Know which assessment actually matters</h2>
+          <p className="font-body-lg text-body-lg opacity-90 max-w-xl mx-auto">Book a free assessment lesson and we will tell you honestly how much preparation your child’s upcoming EQAO or OSSLT deserves, and where the effort is better spent.</p>
+          <button onClick={() => router.push('/free-trial')} className="inline-flex items-center gap-2 bg-white text-royal-purple px-8 py-4 rounded-xl font-headline-md font-bold hover:bg-soft-gray transition-all shadow-lg active:scale-95 cursor-pointer">
+            Book a Free Assessment
+            <ChevronRight size={20} strokeWidth={2.25} aria-hidden="true" />
+          </button>
+          <p className="text-white/60 font-label-md">No credit card required</p>
         </div>
       </section>
     </div>

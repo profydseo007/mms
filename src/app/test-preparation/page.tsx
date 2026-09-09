@@ -15,6 +15,7 @@ import {
   Timer,
   Compass,
 } from 'lucide-react';
+import TrustpilotWidget from '@/components/TrustpilotWidget';
 
 const TESTS = [
   {
@@ -147,6 +148,13 @@ export default function USTestPrepHub() {
                   Compare the Tests
                 </button>
               </div>
+{/* Trustpilot widget */}
+          <div>
+            <h4 className="justify-center">We are recommended by parents &amp; students</h4>
+            <p><TrustpilotWidget /></p>
+          </div>
+
+
             </div>
             <div className="relative hidden lg:block">
               <div className="rounded-3xl overflow-hidden shadow-2xl">
