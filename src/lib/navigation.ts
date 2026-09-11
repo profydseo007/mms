@@ -60,13 +60,15 @@ const TEST_PREP_SLUGS: Record<string, string> = {
   AP: 'ap',
   // AU
   NAPLAN: 'naplan',
-  'Selective School Test': 'selective-school-test',
+  'Selective School Test': 'selective-school-tests',
   HSC: 'hsc',
   VCE: 'vce',
   QCE: 'qce',
   // IE
   'Junior Cycle': 'junior-cycle',
   'Leaving Certificate': 'leaving-certificate',
+  // NZ
+  NCEA: 'ncea',
 };
 const TEST_PREP_SLUG_TO_TITLE: Record<string, string> = Object.fromEntries(
   Object.entries(TEST_PREP_SLUGS).map(([title, slug]) => [slug, title])

@@ -31,7 +31,7 @@ export default function HeaderNZ({ currentPage, currentSubject, onNavigate }: He
   const [testPrepOpen, setTestPrepOpen] = useState(false);
 
   const subjects = ['Maths', 'English', 'Science', 'Physics', 'Chemistry', 'Biology'];
-  const testPreps = ['11 Plus', '13 Plus', 'GCSE', 'IGCSE', 'A Levels'];
+  const testPreps = ['NCEA'];
 
   const handleSubjectClick = (sub: string) => {
     onNavigate('subject', sub);

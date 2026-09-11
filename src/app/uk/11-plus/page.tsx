@@ -2,6 +2,26 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  BarChart3,
+  BookOpen,
+  Calculator,
+  CalendarDays,
+  Check,
+  CheckCircle2,
+  CreditCard,
+  FileText,
+  History,
+  MessageCircle,
+  Shapes,
+  School,
+  Smile,
+  Sparkles,
+  Star,
+  TrendingUp,
+  UserRound,
+  Clock3,
+} from 'lucide-react';
 
 export default function UKElevenPlusPage() {
   const { navigateTo } = useAppNavigate();
@@ -63,7 +83,7 @@ export default function UKElevenPlusPage() {
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-outline-variant/30">
                 <div className="flex items-center gap-4 mb-2">
                   <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center text-on-secondary">
-                    <span className="material-symbols-outlined">check_circle</span>
+                    <CheckCircle2 size={20} aria-hidden="true" />
                   </div>
                   <span className="font-headline-md text-charcoal font-bold">Proven Results</span>
                 </div>
@@ -114,17 +134,17 @@ export default function UKElevenPlusPage() {
             {/* GL Assessment */}
             <div className="group p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/30 transition-all flex flex-col">
               <div className="w-16 h-16 bg-primary-fixed rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined text-royal-purple text-3xl">menu_book</span>
+                <BookOpen size={30} className="text-royal-purple" aria-hidden="true" />
               </div>
               <h3 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">GL Assessments</h3>
               <p className="text-on-surface-variant mb-6 flex-grow">Content-based tests widely used in regions like Kent and Buckinghamshire. Multiple-choice formats focusing on curriculum-based knowledge and pattern recognition.</p>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-label-md text-royal-purple font-medium">
-                  <span className="material-symbols-outlined text-sm">check</span>
+                  <Check size={16} aria-hidden="true" />
                   <span>Verbal &amp; Non-Verbal</span>
                 </div>
                 <div className="flex items-center gap-2 text-label-md text-royal-purple font-medium">
-                  <span className="material-symbols-outlined text-sm">check</span>
+                  <Check size={16} aria-hidden="true" />
                   <span>Maths &amp; English</span>
                 </div>
               </div>
@@ -132,17 +152,17 @@ export default function UKElevenPlusPage() {
             {/* CEM */}
             <div className="group p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/30 transition-all flex flex-col">
               <div className="w-16 h-16 bg-secondary-container rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined text-secondary text-3xl">psychology</span>
+                <Sparkles size={30} className="text-secondary" aria-hidden="true" />
               </div>
               <h3 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">CEM (Cambridge)</h3>
               <p className="text-on-surface-variant mb-6 flex-grow">Aptitude-based assessments designed to be &quot;tutor-proof.&quot; Focuses on adaptive thinking, reasoning, and real-world problem solving with unpredictable formats.</p>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-label-md text-secondary font-medium">
-                  <span className="material-symbols-outlined text-sm">check</span>
+                  <Check size={16} aria-hidden="true" />
                   <span>Ability-based</span>
                 </div>
                 <div className="flex items-center gap-2 text-label-md text-secondary font-medium">
-                  <span className="material-symbols-outlined text-sm">check</span>
+                  <Check size={16} aria-hidden="true" />
                   <span>Mixed Formats</span>
                 </div>
               </div>
@@ -150,17 +170,17 @@ export default function UKElevenPlusPage() {
             {/* ISEB */}
             <div className="group p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/30 transition-all flex flex-col">
               <div className="w-16 h-16 bg-tertiary-fixed rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined text-tertiary text-3xl">school</span>
+                <School size={30} className="text-tertiary" aria-hidden="true" />
               </div>
               <h3 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">ISEB (Independent)</h3>
               <p className="text-on-surface-variant mb-6 flex-grow">Used for entrance into prestigious independent schools. A broader range of subjects often including Science, History, or Latin via Common Entrance Exams.</p>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-label-md text-tertiary font-medium">
-                  <span className="material-symbols-outlined text-sm">check</span>
+                  <Check size={16} aria-hidden="true" />
                   <span>Private Entry</span>
                 </div>
                 <div className="flex items-center gap-2 text-label-md text-tertiary font-medium">
-                  <span className="material-symbols-outlined text-sm">check</span>
+                  <Check size={16} aria-hidden="true" />
                   <span>Written Responses</span>
                 </div>
               </div>
@@ -179,7 +199,7 @@ export default function UKElevenPlusPage() {
               <div className="space-y-4">
                 <div className="flex gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300 cursor-default">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-royal-purple/10 flex items-center justify-center text-royal-purple">
-                    <span className="material-symbols-outlined">description</span>
+                    <FileText size={24} aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="font-headline-md text-charcoal font-bold">English</h4>
@@ -188,7 +208,7 @@ export default function UKElevenPlusPage() {
                 </div>
                 <div className="flex gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300 cursor-default">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-royal-purple/10 flex items-center justify-center text-royal-purple">
-                    <span className="material-symbols-outlined">forum</span>
+                    <MessageCircle size={24} aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="font-headline-md text-charcoal font-bold">Verbal Reasoning</h4>
@@ -197,7 +217,7 @@ export default function UKElevenPlusPage() {
                 </div>
                 <div className="flex gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300 cursor-default">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-royal-purple/10 flex items-center justify-center text-royal-purple">
-                    <span className="material-symbols-outlined">category</span>
+                    <Shapes size={24} aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="font-headline-md text-charcoal font-bold">Non-Verbal Reasoning</h4>
@@ -206,7 +226,7 @@ export default function UKElevenPlusPage() {
                 </div>
                 <div className="flex gap-6 p-4 rounded-xl hover:bg-white transition-colors duration-300 cursor-default">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-royal-purple/10 flex items-center justify-center text-royal-purple">
-                    <span className="material-symbols-outlined">calculate</span>
+                    <Calculator size={24} aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="font-headline-md text-charcoal font-bold">Mathematics</h4>
@@ -256,21 +276,21 @@ export default function UKElevenPlusPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
             <div className="text-center space-y-4 px-6">
               <div className="mx-auto w-16 h-16 bg-soft-gray rounded-full flex items-center justify-center text-royal-purple mb-4">
-                <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>person</span>
+                <UserRound size={30} aria-hidden="true" />
               </div>
               <h4 className="font-headline-lg text-headline-lg text-charcoal font-bold">One-on-One Attention</h4>
               <p className="text-on-surface-variant font-body-md">Personalized tutoring tailored to your child&apos;s specific learning style and pace.</p>
             </div>
             <div className="text-center space-y-4 px-6">
               <div className="mx-auto w-16 h-16 bg-soft-gray rounded-full flex items-center justify-center text-lime-green mb-4">
-                <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>analytics</span>
+                <BarChart3 size={30} aria-hidden="true" />
               </div>
               <h4 className="font-headline-lg text-headline-lg text-charcoal font-bold">Mock Test Mastery</h4>
               <p className="text-on-surface-variant font-body-md">Regular exam-condition practice to develop speed, accuracy, and board familiarity.</p>
             </div>
             <div className="text-center space-y-4 px-6">
               <div className="mx-auto w-16 h-16 bg-soft-gray rounded-full flex items-center justify-center text-royal-purple mb-4">
-                <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>sentiment_satisfied</span>
+                <Smile size={30} aria-hidden="true" />
               </div>
               <h4 className="font-headline-lg text-headline-lg text-charcoal font-bold">Confidence Building</h4>
               <p className="text-on-surface-variant font-body-md">Reducing exam anxiety through positive reinforcement and strategy coaching.</p>
@@ -288,15 +308,15 @@ export default function UKElevenPlusPage() {
               <p className="text-on-surface-variant font-body-lg">Start your 11+ journey with an expert evaluation. No commitment required, just expert feedback for your child.</p>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <span className="material-symbols-outlined text-royal-purple">schedule</span>
+                  <Clock3 size={20} className="text-royal-purple" aria-hidden="true" />
                   <span className="text-charcoal font-headline-md font-bold">Flexible Online Timings</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="material-symbols-outlined text-royal-purple">payments</span>
+                  <CreditCard size={20} className="text-royal-purple" aria-hidden="true" />
                   <span className="text-charcoal font-headline-md font-bold">Affordable &amp; Discount Packages</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="material-symbols-outlined text-royal-purple">stars</span>
+                  <Star size={20} className="text-royal-purple" aria-hidden="true" />
                   <span className="text-charcoal font-headline-md font-bold">Superior Quality Guarantee</span>
                 </div>
               </div>
@@ -304,7 +324,7 @@ export default function UKElevenPlusPage() {
             <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
               {formSubmitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                  <CheckCircle2 size={60} className="text-lime-green mx-auto" aria-hidden="true" />
                   <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
                   <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We will get in touch shortly regarding your 11+ free trial lesson.</p>
                   <button

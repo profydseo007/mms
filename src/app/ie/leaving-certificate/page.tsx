@@ -1,8 +1,20 @@
 'use client';
 
 import React, { useState } from 'react';
-import LigatureIcon from '@/components/LigatureIcon';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  BookOpen,
+  BriefcaseBusiness,
+  Calculator,
+  CalendarDays,
+  CheckCircle2,
+  ChevronDown,
+  CreditCard,
+  FlaskConical,
+  Languages,
+  School,
+  TrendingUp,
+} from 'lucide-react';
 
 export default function IELeavingCertPage() {
   const { navigateTo } = useAppNavigate();
@@ -24,7 +36,7 @@ export default function IELeavingCertPage() {
   const accordionSubjects = [
     {
       title: 'Mathematics',
-      icon: 'functions',
+      icon: Calculator,
       content: (
         <div className="py-4">
           <p className="text-on-surface-variant mb-4">Available at Higher, Ordinary, and Foundation level. Higher Level Maths carries bonus CAO points. Usually 2 papers of 2.5 hours each.</p>
@@ -38,7 +50,7 @@ export default function IELeavingCertPage() {
     },
     {
       title: 'English',
-      icon: 'auto_stories',
+      icon: BookOpen,
       content: (
         <div className="grid md:grid-cols-2 gap-8 py-4">
           <div>
@@ -62,7 +74,7 @@ export default function IELeavingCertPage() {
     },
     {
       title: 'Science Subjects',
-      icon: 'science',
+      icon: FlaskConical,
       content: (
         <div className="py-4">
           <p className="text-on-surface-variant mb-4">Biology, Chemistry, and Physics — each with Higher and Ordinary levels and mandatory coursework (practical notebooks).</p>
@@ -76,7 +88,7 @@ export default function IELeavingCertPage() {
     },
     {
       title: 'Irish',
-      icon: 'translate',
+      icon: Languages,
       content: (
         <div className="py-4">
           <p className="text-on-surface-variant mb-4">Compulsory for most students. Oral (Scrúdú Béil) worth 40% — a major focus of our preparation.</p>
@@ -95,7 +107,7 @@ export default function IELeavingCertPage() {
     },
     {
       title: 'Business & Economics',
-      icon: 'business_center',
+      icon: BriefcaseBusiness,
       content: (
         <div className="py-4">
           <p className="text-on-surface-variant mb-4">Accounting, Business, and Economics — highly popular LC subjects with structured marking schemes.</p>
@@ -147,7 +159,7 @@ export default function IELeavingCertPage() {
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-dropdown border border-outline-variant z-20 max-w-[200px]">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-lime-green rounded-lg flex items-center justify-center text-charcoal">
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: '"FILL" 1' }}>trending_up</span>
+                  <TrendingUp size={20} aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">CAO Points</p>
@@ -168,19 +180,19 @@ export default function IELeavingCertPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: 'calendar_today', color: 'bg-primary-container', iconColor: 'text-white', title: 'Flexible Timings', items: ['Evening & weekend sessions', 'Easy rescheduling', 'Intensive exam-season blocks'] },
-              { icon: 'payments', color: 'bg-lime-green', iconColor: 'text-charcoal', title: 'Affordable Rates', items: ['Free trial session', 'Discount packages', 'Standard refund policy'] },
-              { icon: 'school', color: 'bg-royal-purple', iconColor: 'text-white', title: 'Subject Specialists', items: ['Matched to your subject & level', 'Higher & Ordinary level', 'Oral exam coaching (Irish & MFL)'] },
+              { icon: CalendarDays, color: 'bg-primary-container', iconColor: 'text-white', title: 'Flexible Timings', items: ['Evening & weekend sessions', 'Easy rescheduling', 'Intensive exam-season blocks'] },
+              { icon: CreditCard, color: 'bg-lime-green', iconColor: 'text-charcoal', title: 'Affordable Rates', items: ['Free trial session', 'Discount packages', 'Standard refund policy'] },
+              { icon: School, color: 'bg-royal-purple', iconColor: 'text-white', title: 'Subject Specialists', items: ['Matched to your subject & level', 'Higher & Ordinary level', 'Oral exam coaching (Irish & MFL)'] },
             ].map((card) => (
               <div key={card.title} className="bg-white p-8 rounded-[24px] shadow-ambient border border-outline-variant hover:-translate-y-1 transition-transform">
                 <div className={`w-14 h-14 ${card.color} rounded-2xl flex items-center justify-center ${card.iconColor} mb-6`}>
-                  <span className="material-symbols-outlined text-3xl">{card.icon}</span>
+                  <card.icon size={30} aria-hidden="true" />
                 </div>
                 <h3 className="text-headline-md font-bold mb-4 text-charcoal">{card.title}</h3>
                 <ul className="space-y-3">
                   {card.items.map((item) => (
                     <li key={item} className="flex items-center gap-2 text-on-surface-variant">
-                      <span className="material-symbols-outlined text-primary text-xl">check_circle</span>
+                      <CheckCircle2 size={20} className="text-primary" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -216,10 +228,10 @@ export default function IELeavingCertPage() {
               <div key={idx} className={`bg-white rounded-2xl border transition-all ${activeAccordion === idx ? 'border-royal-purple shadow-md' : 'border-outline-variant'}`}>
                 <div className="flex justify-between items-center p-6 cursor-pointer" onClick={() => setActiveAccordion(activeAccordion === idx ? null : idx)}>
                   <div className="flex items-center gap-4">
-                    <span className="material-symbols-outlined text-royal-purple text-2xl">{sub.icon}</span>
+                    <sub.icon size={24} className="text-royal-purple" aria-hidden="true" />
                     <h4 className="text-headline-md font-bold text-charcoal">{sub.title}</h4>
                   </div>
-                  <LigatureIcon name="expand_more" className={`transition-transform duration-200 ${activeAccordion === idx ? 'rotate-180 text-primary' : ''}`} />
+                  <ChevronDown size={20} className={`transition-transform duration-200 ${activeAccordion === idx ? 'rotate-180 text-primary' : ''}`} aria-hidden="true" />
                 </div>
                 {activeAccordion === idx && (
                   <div className="px-6 pb-6 text-on-surface-variant border-t border-surface-container pt-4">
@@ -242,7 +254,7 @@ export default function IELeavingCertPage() {
               <div className="space-y-4">
                 {['Irish curriculum specialists', 'Higher & Ordinary level', 'Oral exam coaching available'].map((point) => (
                   <div key={point} className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>
+                    <CheckCircle2 size={20} className="text-lime-green" aria-hidden="true" />
                     <span className="font-medium text-charcoal">{point}</span>
                   </div>
                 ))}
@@ -252,7 +264,7 @@ export default function IELeavingCertPage() {
               <div className="bg-white p-8 md:p-10 rounded-[32px] shadow-dropdown border border-outline-variant">
                 {formSubmitted ? (
                   <div className="text-center py-12 space-y-4">
-                    <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                    <CheckCircle2 size={60} className="text-lime-green mx-auto" aria-hidden="true" />
                     <h3 className="font-headline-md text-charcoal font-bold">Trial Session Requested!</h3>
                     <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We&apos;ll reach out shortly to arrange your Leaving Cert {formData.subject} session.</p>
                     <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">

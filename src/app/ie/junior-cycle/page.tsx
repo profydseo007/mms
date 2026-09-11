@@ -2,6 +2,23 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  BarChart3,
+  BookOpen,
+  Calculator,
+  CalendarDays,
+  CheckCircle2,
+  ChevronDown,
+  ClipboardList,
+  FlaskConical,
+  Globe2,
+  GraduationCap,
+  History,
+  Languages,
+  Smile,
+  TrendingUp,
+  UserRound,
+} from 'lucide-react';
 
 export default function IEJuniorCyclePage() {
   const { navigateTo } = useAppNavigate();
@@ -85,7 +102,7 @@ export default function IEJuniorCyclePage() {
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-outline-variant/30">
                 <div className="flex items-center gap-4 mb-2">
                   <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center">
-                    <span className="material-symbols-outlined text-charcoal">trending_up</span>
+                    <TrendingUp size={20} aria-hidden="true" />
                   </div>
                   <span className="font-headline-md text-charcoal font-bold">Proven Results</span>
                 </div>
@@ -112,14 +129,14 @@ export default function IEJuniorCyclePage() {
             <div className="bg-white p-10 rounded-[32px] shadow-ambient space-y-6">
               <h3 className="font-headline-md text-charcoal font-bold">Key Facts</h3>
               {[
-                { icon: 'calendar_today', label: 'Duration', value: '3 years — First, Second, Third Year' },
-                { icon: 'school', label: 'Final exams', value: 'Junior Cycle Final Examinations (JCFE) — State Examinations Commission' },
-                { icon: 'bar_chart', label: 'Grade scale', value: 'Distinction / Merit / Achievement / Below Achievement' },
-                { icon: 'assignment', label: 'CBAs', value: 'Two Classroom-Based Assessments per subject — school assessed' },
+                { icon: CalendarDays, label: 'Duration', value: '3 years — First, Second, Third Year' },
+                { icon: GraduationCap, label: 'Final exams', value: 'Junior Cycle Final Examinations (JCFE) — State Examinations Commission' },
+                { icon: BarChart3, label: 'Grade scale', value: 'Distinction / Merit / Achievement / Below Achievement' },
+                { icon: ClipboardList, label: 'CBAs', value: 'Two Classroom-Based Assessments per subject — school assessed' },
               ].map((fact) => (
                 <div key={fact.label} className="flex gap-4">
                   <div className="w-10 h-10 bg-primary-fixed rounded-xl flex items-center justify-center flex-shrink-0 text-royal-purple">
-                    <span className="material-symbols-outlined text-sm">{fact.icon}</span>
+                    <fact.icon size={18} aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-label-sm text-on-surface-variant font-semibold uppercase tracking-wider">{fact.label}</p>
@@ -141,23 +158,23 @@ export default function IEJuniorCyclePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: 'functions', title: 'Mathematics', level: 'Higher & Ordinary', points: ['Number, algebra & geometry', 'Statistics & probability', 'Problem-solving & proofs'] },
-              { icon: 'auto_stories', title: 'English', level: 'Higher & Ordinary', points: ['Reading & comprehension', 'Personal writing & poetry', 'Oral communication'] },
-              { icon: 'science', title: 'Science', level: 'Higher & Ordinary', points: ['Biology, Chemistry, Physics', 'Laboratory investigations', 'CBAs & written exam'] },
-              { icon: 'translate', title: 'Irish', level: 'Higher & Ordinary', points: ['Oral Irish (Scrúdú Béil)', 'Reading comprehension', 'Written expression'] },
-              { icon: 'language', title: 'Modern Languages', level: 'French & Spanish', points: ['Listening & reading', 'Written production', 'Oral assessment'] },
-              { icon: 'history_edu', title: 'History & Geography', level: 'Higher & Ordinary', points: ['Source-based questions', 'Case studies & essays', 'Map & data skills'] },
+              { icon: Calculator, title: 'Mathematics', level: 'Higher & Ordinary', points: ['Number, algebra & geometry', 'Statistics & probability', 'Problem-solving & proofs'] },
+              { icon: BookOpen, title: 'English', level: 'Higher & Ordinary', points: ['Reading & comprehension', 'Personal writing & poetry', 'Oral communication'] },
+              { icon: FlaskConical, title: 'Science', level: 'Higher & Ordinary', points: ['Biology, Chemistry, Physics', 'Laboratory investigations', 'CBAs & written exam'] },
+              { icon: Languages, title: 'Irish', level: 'Higher & Ordinary', points: ['Oral Irish (Scrúdú Béil)', 'Reading comprehension', 'Written expression'] },
+              { icon: Globe2, title: 'Modern Languages', level: 'French & Spanish', points: ['Listening & reading', 'Written production', 'Oral assessment'] },
+              { icon: History, title: 'History & Geography', level: 'Higher & Ordinary', points: ['Source-based questions', 'Case studies & essays', 'Map & data skills'] },
             ].map((subject) => (
               <div key={subject.title} className="group bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all">
                 <div className="w-14 h-14 bg-royal-purple text-white rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-6 transition-transform">
-                  <span className="material-symbols-outlined text-2xl">{subject.icon}</span>
+                  <subject.icon size={24} aria-hidden="true" />
                 </div>
                 <h3 className="font-headline-md text-charcoal font-bold mb-1">{subject.title}</h3>
                 <p className="text-label-sm text-royal-purple font-semibold mb-4">{subject.level}</p>
                 <ul className="space-y-2">
                   {subject.points.map((pt) => (
                     <li key={pt} className="flex items-center gap-2 text-label-md text-on-surface-variant">
-                      <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>
+                      <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" />
                       {pt}
                     </li>
                   ))}
@@ -176,13 +193,13 @@ export default function IEJuniorCyclePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
             {[
-              { icon: 'person', color: 'text-royal-purple', title: 'One-on-One Attention', desc: 'Every session is tailored to the student\'s subject, level, and specific gaps — not a generic class.' },
-              { icon: 'analytics', color: 'text-lime-green', title: 'CBA & Exam Prep', desc: 'We help students structure CBA projects and master the open-ended question formats the JCFE demands.' },
-              { icon: 'sentiment_satisfied', color: 'text-royal-purple', title: 'Confidence Building', desc: 'Junior Cycle is many students\' first experience of state exams. We make sure they arrive prepared, not anxious.' },
+              { icon: UserRound, color: 'text-royal-purple', title: 'One-on-One Attention', desc: 'Every session is tailored to the student\'s subject, level, and specific gaps — not a generic class.' },
+              { icon: BarChart3, color: 'text-lime-green', title: 'CBA & Exam Prep', desc: 'We help students structure CBA projects and master the open-ended question formats the JCFE demands.' },
+              { icon: Smile, color: 'text-royal-purple', title: 'Confidence Building', desc: 'Junior Cycle is many students\' first experience of state exams. We make sure they arrive prepared, not anxious.' },
             ].map((item) => (
               <div key={item.title} className="text-center space-y-4 px-6">
                 <div className={`mx-auto w-16 h-16 bg-soft-gray rounded-full flex items-center justify-center ${item.color} mb-4 border border-surface-container`}>
-                  <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>{item.icon}</span>
+                  <item.icon size={30} aria-hidden="true" />
                 </div>
                 <h4 className="font-headline-lg text-charcoal font-bold">{item.title}</h4>
                 <p className="text-on-surface-variant font-body-md">{item.desc}</p>
@@ -206,7 +223,7 @@ export default function IEJuniorCyclePage() {
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
                   <span>{faq.q}</span>
-                  <span className={`material-symbols-outlined transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}>expand_more</span>
+                  <ChevronDown size={20} className={`transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} aria-hidden="true" />
                 </button>
                 {openFaq === i && (
                   <div className="bg-soft-gray p-6 text-on-surface-variant font-body-md border-t border-surface-container-highest">
@@ -229,7 +246,7 @@ export default function IEJuniorCyclePage() {
               <div className="space-y-4">
                 {['Irish curriculum specialists', 'Higher & Ordinary level', 'CBA guidance included'].map((pt) => (
                   <div key={pt} className="flex items-center gap-4">
-                    <span className="material-symbols-outlined text-royal-purple">check_circle</span>
+                    <CheckCircle2 size={20} className="text-royal-purple" aria-hidden="true" />
                     <span className="text-charcoal font-headline-md font-bold">{pt}</span>
                   </div>
                 ))}
@@ -238,7 +255,7 @@ export default function IEJuniorCyclePage() {
             <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
               {formSubmitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                  <CheckCircle2 size={60} className="text-lime-green mx-auto" aria-hidden="true" />
                   <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
                   <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We&apos;ll be in touch shortly to arrange your Junior Cycle trial lesson.</p>
                   <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">

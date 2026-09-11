@@ -2,6 +2,19 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  BadgeCheck,
+  CheckCircle2,
+  Edit3,
+  Globe2,
+  Mail,
+  Rocket,
+  School,
+  Settings2,
+  Sparkles,
+  Phone,
+  TrendingUp,
+} from 'lucide-react';
 
 export default function UKIgcsePage() {
   const { navigateTo } = useAppNavigate();
@@ -57,7 +70,7 @@ export default function UKIgcsePage() {
             <div className="absolute -bottom-6 -left-6 bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/50 hidden lg:block">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-lime-green flex items-center justify-center">
-                  <span className="material-symbols-outlined text-charcoal font-bold">trending_up</span>
+                  <TrendingUp size={20} className="text-charcoal" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="font-headline-md text-headline-md text-charcoal font-bold">98%</p>
@@ -90,7 +103,7 @@ export default function UKIgcsePage() {
             <div className="md:col-span-2 bg-white p-10 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between hover:translate-y-[-8px] transition-transform duration-300">
               <div className="space-y-4">
                 <div className="w-14 h-14 bg-royal-purple/10 rounded-2xl flex items-center justify-center mb-6">
-                  <span className="material-symbols-outlined text-royal-purple text-3xl">public</span>
+                  <Globe2 size={30} className="text-royal-purple" aria-hidden="true" />
                 </div>
                 <h3 className="font-headline-md text-headline-md text-charcoal font-bold">Global Recognition</h3>
                 <p className="font-body-md text-body-md text-on-surface-variant">Your gateway to the world&apos;s most prestigious universities. Our program is designed to meet and exceed international benchmarks.</p>
@@ -100,21 +113,21 @@ export default function UKIgcsePage() {
             <div className="grid grid-rows-2 gap-gutter md:col-span-1">
               <div className="bg-white p-8 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:translate-y-[-8px] transition-transform duration-300">
                 <div className="w-12 h-12 bg-lime-green/20 rounded-xl flex items-center justify-center mb-4">
-                  <span className="material-symbols-outlined text-secondary">verified</span>
+                  <BadgeCheck size={22} className="text-secondary" aria-hidden="true" />
                 </div>
                 <h3 className="font-label-md text-label-md text-charcoal font-bold mb-2 uppercase">Rigorous Standards</h3>
                 <p className="font-label-sm text-label-sm text-on-surface-variant">High-stakes preparation for high-stakes results.</p>
               </div>
               <div className="bg-white p-8 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:translate-y-[-8px] transition-transform duration-300 border-2 border-transparent hover:border-royal-purple/20">
                 <div className="w-12 h-12 bg-royal-purple/10 rounded-xl flex items-center justify-center mb-4">
-                  <span className="material-symbols-outlined text-royal-purple">tune</span>
+                  <Settings2 size={22} className="text-royal-purple" aria-hidden="true" />
                 </div>
                 <h3 className="font-label-md text-label-md text-charcoal font-bold mb-2 uppercase">Flexible Choice</h3>
                 <p className="font-label-sm text-label-sm text-on-surface-variant">Choose the subjects that align with your future career path.</p>
               </div>
             </div>
             <div className="md:col-span-1 bg-royal-purple p-8 rounded-[2rem] shadow-xl flex flex-col justify-center items-center text-center text-on-primary">
-              <span className="material-symbols-outlined text-6xl mb-6 opacity-80" style={{ fontVariationSettings: '"FILL" 1' }}>psychology</span>
+              <Sparkles size={60} className="mb-6 opacity-80" aria-hidden="true" />
               <h3 className="font-headline-md text-headline-md mb-4 font-bold">Focused Academic Support</h3>
               <p className="font-body-md text-body-md opacity-90">1-on-1 sessions tailored to your unique learning style.</p>
             </div>
@@ -163,7 +176,7 @@ export default function UKIgcsePage() {
                   <ul className="space-y-2">
                     {subject.items.map((item) => (
                       <li key={item} className="flex items-center gap-3 text-label-md font-label-md text-charcoal">
-                        <span className="material-symbols-outlined text-lime-green text-lg">check_circle</span> {item}
+                        <CheckCircle2 size={18} className="text-lime-green" aria-hidden="true" /> {item}
                       </li>
                     ))}
                   </ul>
@@ -205,14 +218,14 @@ export default function UKIgcsePage() {
         </div>
         <div className="max-w-max-width mx-auto px-5 md:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
           {[
-            { icon: 'school', title: 'Expert Tutors', desc: 'Top 5% educators from elite global institutions.' },
-            { icon: 'edit_note', title: 'Tailored Plans', desc: 'Curriculums adapted to your specific strengths.' },
-            { icon: 'task_alt', title: 'Mock Mastery', desc: 'Intensive exam simulations for real-world readiness.' },
-            { icon: 'rocket_launch', title: 'Confidence Building', desc: 'Fostering a growth mindset for long-term success.' },
+            { icon: School, title: 'Expert Tutors', desc: 'Top 5% educators from elite global institutions.' },
+            { icon: Edit3, title: 'Tailored Plans', desc: 'Curriculums adapted to your specific strengths.' },
+            { icon: CheckCircle2, title: 'Mock Mastery', desc: 'Intensive exam simulations for real-world readiness.' },
+            { icon: Rocket, title: 'Confidence Building', desc: 'Fostering a growth mindset for long-term success.' },
           ].map((item) => (
             <div key={item.title} className="text-center group">
               <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-lime-green group-hover:text-charcoal transition-all">
-                <span className="material-symbols-outlined text-3xl">{item.icon}</span>
+                <item.icon size={30} aria-hidden="true" />
               </div>
               <h3 className="font-headline-md text-headline-md mb-2 font-bold">{item.title}</h3>
               <p className="font-body-md text-body-md opacity-70">{item.desc}</p>
@@ -231,11 +244,11 @@ export default function UKIgcsePage() {
             </div>
             <div className="mt-12 space-y-4">
               <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined">call</span>
+                <Phone size={20} aria-hidden="true" />
                 <span className="font-label-md text-label-md">+44 (0) 20 7946 0958</span>
               </div>
               <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined">mail</span>
+                <Mail size={20} aria-hidden="true" />
                 <span className="font-label-md text-label-md">admissions@mathmakesmart.com</span>
               </div>
             </div>
@@ -243,7 +256,7 @@ export default function UKIgcsePage() {
           <div className="lg:w-3/5 p-12 lg:p-20">
             {formSubmitted ? (
               <div className="text-center py-12 space-y-4">
-                <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                <CheckCircle2 size={60} className="text-lime-green mx-auto" aria-hidden="true" />
                 <h3 className="font-headline-md text-charcoal font-bold">Free Session Requested!</h3>
                 <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We have received your IGCSE trial request and will contact you within 2 business hours.</p>
                 <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">

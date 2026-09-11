@@ -2,6 +2,24 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  BadgeCheck,
+  BarChart3,
+  BookOpen,
+  Brain,
+  CalendarDays,
+  CheckCircle2,
+  ClipboardCheck,
+  Clock3,
+  FlaskConical,
+  History,
+  ListChecks,
+  School,
+  Smile,
+  Star,
+  UserSearch,
+  Calculator,
+} from 'lucide-react';
 
 export default function UKThirteenPlusPage() {
   const { navigateTo } = useAppNavigate();
@@ -54,7 +72,7 @@ export default function UKThirteenPlusPage() {
             <div className="flex flex-wrap gap-4">
               <div className="bg-white p-4 rounded-xl shadow-ambient flex items-center gap-3 border border-outline-variant">
                 <div className="w-10 h-10 bg-lime-green rounded-lg flex items-center justify-center text-charcoal">
-                  <span className="material-symbols-outlined">verified</span>
+                  <BadgeCheck size={20} aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Success Rate</p>
@@ -75,7 +93,7 @@ export default function UKThirteenPlusPage() {
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-dropdown border border-outline-variant z-20 max-w-[240px]">
               <div className="flex items-center gap-1 mb-2">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>star</span>
+                  <Star key={i} size={18} className="text-lime-green fill-current" aria-hidden="true" />
                 ))}
               </div>
               <p className="italic text-on-surface-variant text-body-md">&quot;The 13+ preparation was a game-changer for my daughter&apos;s senior school entry.&quot;</p>
@@ -103,7 +121,7 @@ export default function UKThirteenPlusPage() {
               <div className="space-y-6">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center flex-shrink-0 text-primary">
-                    <span className="material-symbols-outlined">school</span>
+                    <School size={24} aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="font-bold text-charcoal">School Admissions</h4>
@@ -112,7 +130,7 @@ export default function UKThirteenPlusPage() {
                 </div>
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center flex-shrink-0 text-primary">
-                    <span className="material-symbols-outlined">psychology</span>
+                    <Brain size={24} aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="font-bold text-charcoal">Subject Proficiency</h4>
@@ -121,7 +139,7 @@ export default function UKThirteenPlusPage() {
                 </div>
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center flex-shrink-0 text-primary">
-                    <span className="material-symbols-outlined">assignment_ind</span>
+                    <ClipboardCheck size={24} aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="font-bold text-charcoal">Placement</h4>
@@ -143,18 +161,18 @@ export default function UKThirteenPlusPage() {
         <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop grid md:grid-cols-3 gap-8">
           <div className="p-8 rounded-[24px] border border-outline-variant hover:shadow-dropdown transition-all group">
             <div className="w-16 h-16 bg-surface-container-low rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-fixed transition-colors">
-              <span className="material-symbols-outlined text-primary text-3xl">menu_book</span>
+              <BookOpen size={30} className="text-primary" aria-hidden="true" />
             </div>
             <h3 className="text-headline-md font-bold text-charcoal mb-4">English</h3>
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> Comprehension &amp; Grammar
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> Comprehension &amp; Grammar
               </li>
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> Creative Writing
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> Creative Writing
               </li>
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> 60 mins per paper
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> 60 mins per paper
               </li>
             </ul>
             <div className="pt-6 border-t border-outline-variant">
@@ -164,18 +182,18 @@ export default function UKThirteenPlusPage() {
           </div>
           <div className="p-8 rounded-[24px] border border-outline-variant hover:shadow-dropdown transition-all group">
             <div className="w-16 h-16 bg-surface-container-low rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-fixed transition-colors">
-              <span className="material-symbols-outlined text-primary text-3xl">functions</span>
+              <Calculator size={30} className="text-primary" aria-hidden="true" />
             </div>
             <h3 className="text-headline-md font-bold text-charcoal mb-4">Mathematics</h3>
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> Arithmetic &amp; Geometry
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> Arithmetic &amp; Geometry
               </li>
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> Algebra &amp; Problem Solving
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> Algebra &amp; Problem Solving
               </li>
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> 60–90 mins per paper
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> 60–90 mins per paper
               </li>
             </ul>
             <div className="pt-6 border-t border-outline-variant">
@@ -185,18 +203,18 @@ export default function UKThirteenPlusPage() {
           </div>
           <div className="p-8 rounded-[24px] border border-outline-variant hover:shadow-dropdown transition-all group">
             <div className="w-16 h-16 bg-surface-container-low rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-fixed transition-colors">
-              <span className="material-symbols-outlined text-primary text-3xl">science</span>
+              <FlaskConical size={30} className="text-primary" aria-hidden="true" />
             </div>
             <h3 className="text-headline-md font-bold text-charcoal mb-4">Science</h3>
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> Biology, Chemistry, Physics
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> Biology, Chemistry, Physics
               </li>
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> Combined or Separate Papers
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> Combined or Separate Papers
               </li>
               <li className="flex items-center gap-2 text-on-surface-variant">
-                <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span> 60–75 mins combined
+                <CheckCircle2 size={16} className="text-lime-green" aria-hidden="true" /> 60–75 mins combined
               </li>
             </ul>
             <div className="pt-6 border-t border-outline-variant">
@@ -228,17 +246,17 @@ export default function UKThirteenPlusPage() {
               </div>
               <div className="space-y-6">
                 <div className="bg-white/10 p-6 rounded-2xl border border-white/20 flex gap-4 items-center">
-                  <span className="material-symbols-outlined text-lime-green text-3xl">list_alt</span>
+                  <ListChecks size={30} className="text-lime-green" aria-hidden="true" />
                   <p className="text-body-md">Includes multiple-choice, short-answer, and extended essay responses.</p>
                 </div>
                 <div className="bg-white/10 p-6 rounded-2xl border border-white/20 flex gap-4 items-center">
-                  <span className="material-symbols-outlined text-lime-green text-3xl">schedule</span>
+                  <Clock3 size={30} className="text-lime-green" aria-hidden="true" />
                   <p className="text-body-md">Precise dates are determined by schools; we tailor prep to your specific target institution.</p>
                 </div>
               </div>
             </div>
             <div className="absolute bottom-0 right-0 opacity-10 scale-150 transform translate-x-10 translate-y-10">
-              <span className="material-symbols-outlined text-[160px]" style={{ fontVariationSettings: '"FILL" 1' }}>calendar_month</span>
+              <CalendarDays size={160} aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -253,14 +271,14 @@ export default function UKThirteenPlusPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: 'person_search', title: 'Personalized Focus', desc: 'Lessons adapted to individual strengths and unique learning styles.' },
-              { icon: 'query_stats', title: 'Exam Strategy', desc: 'Techniques to manage time and tackle complex paper structures effectively.' },
-              { icon: 'sentiment_satisfied', title: 'Confidence Building', desc: 'Emotional support to keep anxiety at bay during high-stakes exams.' },
-              { icon: 'history_edu', title: 'Past Paper Mastery', desc: 'Deep familiarity with actual exam formats and school-specific expectations.' },
+              { icon: UserSearch, title: 'Personalized Focus', desc: 'Lessons adapted to individual strengths and unique learning styles.' },
+              { icon: BarChart3, title: 'Exam Strategy', desc: 'Techniques to manage time and tackle complex paper structures effectively.' },
+              { icon: Smile, title: 'Confidence Building', desc: 'Emotional support to keep anxiety at bay during high-stakes exams.' },
+              { icon: History, title: 'Past Paper Mastery', desc: 'Deep familiarity with actual exam formats and school-specific expectations.' },
             ].map((item) => (
               <div key={item.title} className="text-center p-6 bg-surface-container-low rounded-[24px] hover:bg-primary-fixed transition-colors">
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-ambient">
-                  <span className="material-symbols-outlined text-primary text-3xl">{item.icon}</span>
+                  <item.icon size={30} className="text-primary" aria-hidden="true" />
                 </div>
                 <h3 className="text-headline-md font-bold text-charcoal mb-3">{item.title}</h3>
                 <p className="text-body-md text-on-surface-variant">{item.desc}</p>
@@ -279,11 +297,11 @@ export default function UKThirteenPlusPage() {
               <p className="text-body-lg text-on-surface-variant mb-8">Join thousands of families who have transformed their student&apos;s grades and confidence. Your first 30-minute session is on us.</p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>
+                  <CheckCircle2 size={20} className="text-lime-green" aria-hidden="true" />
                   <span className="font-medium text-charcoal">No credit card required</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-lime-green" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>
+                  <CheckCircle2 size={20} className="text-lime-green" aria-hidden="true" />
                   <span className="font-medium text-charcoal">Free assessment included</span>
                 </div>
               </div>
@@ -292,7 +310,7 @@ export default function UKThirteenPlusPage() {
               <div className="bg-white p-8 md:p-10 rounded-[32px] shadow-dropdown border border-outline-variant">
                 {formSubmitted ? (
                   <div className="text-center py-12 space-y-4">
-                    <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                    <CheckCircle2 size={60} className="text-lime-green mx-auto" aria-hidden="true" />
                     <h3 className="font-headline-md text-charcoal font-bold">Trial Requested!</h3>
                     <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We have received your request for a 13+ trial session.</p>
                     <button

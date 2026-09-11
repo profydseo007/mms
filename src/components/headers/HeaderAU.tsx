@@ -31,7 +31,7 @@ export default function HeaderAU({ currentPage, currentSubject, onNavigate }: He
   const [testPrepOpen, setTestPrepOpen] = useState(false);
 
   const subjects = ['Maths', 'English', 'Science', 'Physics', 'Chemistry', 'Biology'];
-  const testPreps = ['11 Plus', '13 Plus', 'GCSE', 'IGCSE', 'A Levels'];
+  const testPreps = ['NAPLAN', 'HSC', 'VCE', 'QCE','Selective School Test'];
 
   const handleSubjectClick = (sub: string) => {
     onNavigate('subject', sub);
