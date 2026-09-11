@@ -108,7 +108,7 @@ export default function Home({ onNavigate, country = 'US' }: HomeProps) {
            Online Tutoring Services That Actually Click
             </h1>
             <p className="text-body-lg font-sans text-on-surface-variant max-w-lg">
-               One-on-one online tutoring in math, English and science. We match your child with a specialist tutor who has the patience to turn "I don't get this" into "wait — I've got it."
+               One-on-one online tutoring in math, English and science. We match your child with a specialist tutor who has the patience to turn "I don't get this" into "wait, I've got it."
           </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button 

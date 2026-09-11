@@ -3,6 +3,7 @@
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { BookOpenCheck, Brain, GraduationCap, School, type LucideIcon } from 'lucide-react';
 import UKElevenPlusPage from '@/app/uk/11-plus/page';
 import UKThirteenPlusPage from '@/app/uk/13-plus/page';
 import UKGcsePage from '@/app/uk/gcse/page';
@@ -11,6 +12,14 @@ import UKALevelsPage from '@/app/uk/a-levels/page';
 import SubjectPage from '@/components/SubjectPage';
 import { useAppNavigate } from '@/lib/useAppNavigate';
 import { TEST_PREP_SLUG_TO_TITLE } from '@/lib/navigation';
+
+const UK_TEST_PREP_TYPES: Record<string, { title: string; icon: LucideIcon }> = {
+  '11-plus': { title: '11 Plus', icon: School },
+  '13-plus': { title: '13 Plus', icon: Brain },
+  gcse: { title: 'GCSE', icon: BookOpenCheck },
+  igcse: { title: 'IGCSE', icon: BookOpenCheck },
+  'a-levels': { title: 'A Levels', icon: GraduationCap },
+};
 
 export default function UKTestPreparationPage({ params }: { params: Promise<{ type: string }> }) {
   const { type } = use(params);
@@ -27,6 +36,6 @@ export default function UKTestPreparationPage({ params }: { params: Promise<{ ty
   if (type === 'igcse')   return <UKIgcsePage />;
   if (type === 'a-levels') return <UKALevelsPage />;
 
-  const title = TEST_PREP_SLUG_TO_TITLE[type] ?? decodeURIComponent(type);
+  const title = UK_TEST_PREP_TYPES[type]?.title ?? TEST_PREP_SLUG_TO_TITLE[type] ?? decodeURIComponent(type);
   return <SubjectPage title={title || 'GCSE'} type="test-prep" onNavigate={navigateTo} />;
 }

@@ -132,8 +132,17 @@ export function pageToPath(page: ActivePage, subjectTitle?: string, country?: st
       return `${prefix}/subject/${encodeURIComponent(subjectKey)}`;
     }
     case 'test-prep': {
-      const slug = subjectTitle ? TEST_PREP_SLUGS[subjectTitle] ?? encodeURIComponent(subjectTitle) : 'gcse';
-      return `${prefix}/test-preparation/${slug}`;
+      const defaultSlugs: Record<string, string> = {
+        AU: 'naplan',
+        CA: 'provincial-curricula',
+        IE: 'junior-cycle',
+        NZ: '',
+        UK: 'gcse',
+      };
+      const slug = subjectTitle
+        ? TEST_PREP_SLUGS[subjectTitle] ?? encodeURIComponent(subjectTitle)
+        : defaultSlugs[country?.toUpperCase() ?? ''] ?? 'sat';
+      return slug ? `${prefix}/test-preparation/${slug}` : `${prefix}/test-preparation`;
     }
     default:
       return prefix ? prefix : '/';

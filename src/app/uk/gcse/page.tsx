@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import LigatureIcon from '@/components/LigatureIcon';
+import { BookOpen, Brain, CalendarDays, Calculator, CheckCircle2, ClipboardCheck, FlaskConical, Map, School, SmilePlus } from 'lucide-react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
 
 export default function UKGcsePage() {
@@ -78,13 +79,13 @@ export default function UKGcsePage() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
               {[
-                { icon: 'calendar_today', color: 'bg-royal-purple/10 text-royal-purple', title: 'Year 10-11', desc: 'The critical two-year cycle of intensive study and preparation.' },
-                { icon: 'school', color: 'bg-lime-green/20 text-secondary', title: '9-1 Grading', desc: 'Mastering the numerical grading system introduced to differentiate excellence.' },
-                { icon: 'assignment_turned_in', color: 'bg-royal-purple/10 text-royal-purple', title: 'Final Exams', desc: 'Comprehensive assessments that test knowledge, application, and skill.' },
+                { icon: CalendarDays, color: 'bg-royal-purple/10 text-royal-purple', title: 'Year 10-11', desc: 'The critical two-year cycle of intensive study and preparation.' },
+                { icon: School, color: 'bg-lime-green/20 text-secondary', title: '9-1 Grading', desc: 'Mastering the numerical grading system introduced to differentiate excellence.' },
+                { icon: ClipboardCheck, color: 'bg-royal-purple/10 text-royal-purple', title: 'Final Exams', desc: 'Comprehensive assessments that test knowledge, application, and skill.' },
               ].map((item) => (
                 <div key={item.title} className="bg-white p-8 rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] text-center">
                   <div className={`w-12 h-12 ${item.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                    <span className="material-symbols-outlined">{item.icon}</span>
+                    <item.icon size={24} aria-hidden="true" />
                   </div>
                   <h3 className="font-headline-md text-headline-md mb-2 font-bold text-charcoal">{item.title}</h3>
                   <p className="text-on-surface-variant">{item.desc}</p>
@@ -105,30 +106,30 @@ export default function UKGcsePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                icon: 'calculate', title: 'Mathematics',
+                icon: Calculator, title: 'Mathematics',
                 items: ['Higher & Foundation Tier Mastery', 'Algebra, Geometry & Statistics', 'Non-Calculator Technique'],
                 nav: () => navigateTo('subject', 'Maths'),
               },
               {
-                icon: 'auto_stories', title: 'English',
+                icon: BookOpen, title: 'English',
                 items: ['Language & Literature Prep', 'Analytical Essay Writing', 'Creative Writing & Poetry'],
                 nav: () => navigateTo('subject', 'English'),
               },
               {
-                icon: 'biotech', title: 'Science',
+                icon: FlaskConical, title: 'Science',
                 items: ['Combined & Triple Science', 'Biology, Chemistry & Physics', 'Experimental Skills & Data'],
                 nav: () => navigateTo('subject', 'Science'),
               },
             ].map((subject) => (
               <div key={subject.title} className="group bg-white p-10 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all duration-300">
                 <div className="w-16 h-16 bg-royal-purple text-white rounded-2xl flex items-center justify-center mb-8 transform group-hover:rotate-6 transition-transform">
-                  <span className="material-symbols-outlined text-3xl">{subject.icon}</span>
+                  <subject.icon size={30} aria-hidden="true" />
                 </div>
                 <h3 className="font-headline-md text-headline-md mb-4 text-charcoal font-bold">{subject.title}</h3>
                 <ul className="space-y-4 mb-8">
                   {subject.items.map((item) => (
                     <li key={item} className="flex items-start gap-3">
-                      <span className="material-symbols-outlined text-lime-green text-[20px]" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>
+                      <CheckCircle2 size={20} className="text-lime-green" aria-hidden="true" />
                       <span className="text-on-surface-variant">{item}</span>
                     </li>
                   ))}
@@ -170,14 +171,14 @@ export default function UKGcsePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: 'psychology', color: 'bg-lime-green/20 text-secondary', title: 'Expert Tutors', desc: 'Hand-picked educators with proven track records in secondary education.' },
-              { icon: 'map', color: 'bg-royal-purple/10 text-royal-purple', title: 'Tailored Plans', desc: 'Personalized learning tracks focusing on specific knowledge gaps.' },
-              { icon: 'quiz', color: 'bg-lime-green/20 text-secondary', title: 'Mock Mastery', desc: 'Timed practice and intensive feedback to build exam resilience.' },
-              { icon: 'sentiment_very_satisfied', color: 'bg-royal-purple/10 text-royal-purple', title: 'Confidence Building', desc: 'Empowering students with techniques to handle high-pressure moments.' },
+              { icon: Brain, color: 'bg-lime-green/20 text-secondary', title: 'Expert Tutors', desc: 'Hand-picked educators with proven track records in secondary education.' },
+              { icon: Map, color: 'bg-royal-purple/10 text-royal-purple', title: 'Tailored Plans', desc: 'Personalized learning tracks focusing on specific knowledge gaps.' },
+              { icon: ClipboardCheck, color: 'bg-lime-green/20 text-secondary', title: 'Mock Mastery', desc: 'Timed practice and intensive feedback to build exam resilience.' },
+              { icon: SmilePlus, color: 'bg-royal-purple/10 text-royal-purple', title: 'Confidence Building', desc: 'Empowering students with techniques to handle high-pressure moments.' },
             ].map((item) => (
               <div key={item.title} className="text-center p-6 space-y-4">
                 <div className={`w-20 h-20 ${item.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                  <span className="material-symbols-outlined text-3xl">{item.icon}</span>
+                  <item.icon size={30} aria-hidden="true" />
                 </div>
                 <h4 className="font-headline-md text-headline-md text-charcoal font-bold">{item.title}</h4>
                 <p className="text-on-surface-variant font-body-md">{item.desc}</p>

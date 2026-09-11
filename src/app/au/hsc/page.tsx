@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import LigatureIcon from '@/components/LigatureIcon';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import { TrendingUp, FunctionSquare, BookOpen, FlaskConical, BookMarked, ChevronDown, CheckCircle2 } from 'lucide-react';
 
 export default function AUHscPage() {
   const { navigateTo } = useAppNavigate();
@@ -16,10 +16,10 @@ export default function AUHscPage() {
   };
 
   const subjects = [
-    { title: 'Mathematics', icon: 'functions', content: (<div className="py-4"><p className="text-on-surface-variant mb-4">Standard, Advanced, Extension 1, and Extension 2 — four levels catering from foundation skills to university-level content. HSC marks contribute directly to ATAR.</p><div className="grid md:grid-cols-4 gap-3">{['Standard', 'Advanced', 'Ext 1', 'Ext 2'].map((l) => <div key={l} className="bg-surface-container p-3 rounded-xl text-center"><p className="font-bold text-charcoal text-sm">{l}</p></div>)}</div></div>) },
-    { title: 'English', icon: 'auto_stories', content: (<div className="py-4"><p className="text-on-surface-variant mb-4">Standard, Advanced, Extension 1, and Extension 2. Paper 1 covers common module texts; Paper 2 covers elective modules. Creative and analytical writing both assessed.</p></div>) },
-    { title: 'Sciences', icon: 'science', content: (<div className="py-4"><p className="text-on-surface-variant mb-4">Biology, Chemistry, Physics, and Earth &amp; Environmental Science — each with a practical investigation component worth 20% of the final HSC mark.</p><div className="flex flex-wrap gap-2">{['Biology', 'Chemistry', 'Physics', 'Earth Science'].map((s) => <span key={s} className="bg-surface-container px-3 py-1 rounded-full text-label-sm font-semibold text-charcoal">{s}</span>)}</div></div>) },
-    { title: 'Humanities', icon: 'history_edu', content: (<div className="py-4"><p className="text-on-surface-variant mb-4">Modern History, Ancient History, Geography, Economics, Business Studies, and Legal Studies. Essay technique and source analysis are the critical skills we develop.</p></div>) },
+    { title: 'Mathematics', Icon: FunctionSquare, content: (<div className="py-4"><p className="text-on-surface-variant mb-4">Standard, Advanced, Extension 1, and Extension 2 — four levels catering from foundation skills to university-level content. HSC marks contribute directly to ATAR.</p><div className="grid md:grid-cols-4 gap-3">{['Standard', 'Advanced', 'Ext 1', 'Ext 2'].map((l) => <div key={l} className="bg-surface-container p-3 rounded-xl text-center"><p className="font-bold text-charcoal text-sm">{l}</p></div>)}</div></div>) },
+    { title: 'English', Icon: BookOpen, content: (<div className="py-4"><p className="text-on-surface-variant mb-4">Standard, Advanced, Extension 1, and Extension 2. Paper 1 covers common module texts; Paper 2 covers elective modules. Creative and analytical writing both assessed.</p></div>) },
+    { title: 'Sciences', Icon: FlaskConical, content: (<div className="py-4"><p className="text-on-surface-variant mb-4">Biology, Chemistry, Physics, and Earth &amp; Environmental Science — each with a practical investigation component worth 20% of the final HSC mark.</p><div className="flex flex-wrap gap-2">{['Biology', 'Chemistry', 'Physics', 'Earth Science'].map((s) => <span key={s} className="bg-surface-container px-3 py-1 rounded-full text-label-sm font-semibold text-charcoal">{s}</span>)}</div></div>) },
+    { title: 'Humanities', Icon: BookMarked, content: (<div className="py-4"><p className="text-on-surface-variant mb-4">Modern History, Ancient History, Geography, Economics, Business Studies, and Legal Studies. Essay technique and source analysis are the critical skills we develop.</p></div>) },
   ];
 
   return (
@@ -50,7 +50,7 @@ export default function AUHscPage() {
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-dropdown border border-outline-variant z-20 max-w-[200px]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-lime-green rounded-lg flex items-center justify-center text-charcoal"><span className="material-symbols-outlined" style={{ fontVariationSettings: '"FILL" 1' }}>trending_up</span></div>
+                <div className="w-10 h-10 bg-lime-green rounded-lg flex items-center justify-center text-charcoal"><TrendingUp size={20} /></div>
                 <div>
                   <p className="text-label-sm font-label-sm text-on-surface-variant uppercase font-semibold">ATAR Boost</p>
                   <p className="text-body-md font-bold text-charcoal">Avg. +5.2 points</p>
@@ -92,10 +92,10 @@ export default function AUHscPage() {
               <div key={idx} className={`bg-white rounded-2xl border transition-all ${activeAccordion === idx ? 'border-royal-purple shadow-md' : 'border-outline-variant'}`}>
                 <div className="flex justify-between items-center p-6 cursor-pointer" onClick={() => setActiveAccordion(activeAccordion === idx ? null : idx)}>
                   <div className="flex items-center gap-4">
-                    <span className="material-symbols-outlined text-royal-purple text-2xl">{sub.icon}</span>
+                    <sub.Icon size={24} className="text-royal-purple" />
                     <h4 className="text-headline-md font-bold text-charcoal">{sub.title}</h4>
                   </div>
-                  <LigatureIcon name="expand_more" className={`transition-transform duration-200 ${activeAccordion === idx ? 'rotate-180 text-primary' : ''}`} />
+                  <ChevronDown size={22} className={`transition-transform duration-200 text-on-surface-variant ${activeAccordion === idx ? 'rotate-180 text-primary' : ''}`} />
                 </div>
                 {activeAccordion === idx && <div className="px-6 pb-6 text-on-surface-variant border-t border-surface-container pt-4">{sub.content}</div>}
               </div>
@@ -113,14 +113,14 @@ export default function AUHscPage() {
               <p className="text-on-surface-variant font-body-lg">One session, no obligation. We&apos;ll establish exactly where you stand against the NESA marking guidelines.</p>
               <div className="space-y-4">
                 {['NESA syllabus-matched sessions', 'Marking guideline technique', 'All levels Standard → Ext 2'].map((pt) => (
-                  <div key={pt} className="flex items-center gap-4"><span className="material-symbols-outlined text-royal-purple">check_circle</span><span className="text-charcoal font-headline-md font-bold">{pt}</span></div>
+                  <div key={pt} className="flex items-center gap-4"><CheckCircle2 size={20} className="text-royal-purple" /><span className="text-charcoal font-headline-md font-bold">{pt}</span></div>
                 ))}
               </div>
             </div>
             <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
               {formSubmitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                  <CheckCircle2 size={56} className="text-lime-green mx-auto" />
                   <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
                   <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We&apos;ll be in touch to arrange your HSC trial lesson.</p>
                   <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">Submit Another</button>

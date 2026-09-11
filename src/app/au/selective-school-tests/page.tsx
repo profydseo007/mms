@@ -2,6 +2,11 @@
 
 import React, { useState } from 'react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
+import {
+  BadgeCheck, Timer, Brain, Trophy,
+  Building2, Building, Palmtree, Mountain,
+  CheckCircle2,
+} from 'lucide-react';
 
 export default function AUSelectiveSchoolTestPage() {
   const { navigateTo } = useAppNavigate();
@@ -40,7 +45,7 @@ export default function AUSelectiveSchoolTestPage() {
               </div>
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-outline-variant/30">
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center"><span className="material-symbols-outlined text-charcoal">verified</span></div>
+                  <div className="w-10 h-10 rounded-full bg-lime-green flex items-center justify-center"><BadgeCheck size={20} className="text-charcoal" /></div>
                   <span className="font-headline-md text-charcoal font-bold">Proven Results</span>
                 </div>
                 <p className="text-on-surface-variant text-label-md">Over 85% of our selective school students receive an offer.</p>
@@ -58,12 +63,12 @@ export default function AUSelectiveSchoolTestPage() {
         </div>
         <div className="container mx-auto px-margin-mobile md:px-margin-desktop max-w-max-width grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            { icon: 'timer', color: 'bg-primary-fixed text-royal-purple', title: 'Time Pressure', desc: 'Most selective tests allow under 60 seconds per question. We train speed alongside accuracy.' },
-            { icon: 'psychology', color: 'bg-lime-green/20 text-secondary', title: 'Reasoning Focus', desc: 'Mathematical, verbal, and abstract reasoning — skills that must be explicitly taught and practised.' },
-            { icon: 'military_tech', color: 'bg-primary-fixed text-royal-purple', title: 'High Competition', desc: 'Thousands of students compete for limited places. Marginal improvements in score make a real difference.' },
+            { Icon: Timer, color: 'bg-primary-fixed text-royal-purple', title: 'Time Pressure', desc: 'Most selective tests allow under 60 seconds per question. We train speed alongside accuracy.' },
+            { Icon: Brain, color: 'bg-lime-green/20 text-secondary', title: 'Reasoning Focus', desc: 'Mathematical, verbal, and abstract reasoning — skills that must be explicitly taught and practised.' },
+            { Icon: Trophy, color: 'bg-primary-fixed text-royal-purple', title: 'High Competition', desc: 'Thousands of students compete for limited places. Marginal improvements in score make a real difference.' },
           ].map((item) => (
             <div key={item.title} className="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] text-center">
-              <div className={`w-14 h-14 ${item.color} rounded-full flex items-center justify-center mx-auto mb-6`}><span className="material-symbols-outlined text-2xl">{item.icon}</span></div>
+              <div className={`w-14 h-14 ${item.color} rounded-full flex items-center justify-center mx-auto mb-6`}><item.Icon size={24} /></div>
               <h3 className="font-headline-md text-charcoal font-bold mb-3">{item.title}</h3>
               <p className="text-on-surface-variant font-body-md">{item.desc}</p>
             </div>
@@ -80,15 +85,15 @@ export default function AUSelectiveSchoolTestPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { state: 'NSW', name: 'Selective High School Placement Test', year: 'Year 7 entry', icon: 'location_city', components: ['Reading', 'Mathematical Reasoning', 'Thinking Skills', 'Writing'] },
-              { state: 'VIC', name: 'Selective Entry High School Examination', year: 'Year 9 entry', icon: 'apartment', components: ['Verbal Reasoning', 'Numerical Reasoning', 'Abstract Reasoning', 'Reading Comprehension'] },
-              { state: 'QLD', name: 'Queensland Academies Aptitude Test', year: 'Year 10 entry', icon: 'beach_access', components: ['Verbal Reasoning', 'Numerical Reasoning', 'Abstract Reasoning', 'Written Expression'] },
-              { state: 'SA', name: 'SASC Selective Entry Test', year: 'Year 8 entry', icon: 'landscape', components: ['General Ability', 'English', 'Mathematics'] },
+              { state: 'NSW', name: 'Selective High School Placement Test', year: 'Year 7 entry', Icon: Building2, components: ['Reading', 'Mathematical Reasoning', 'Thinking Skills', 'Writing'] },
+              { state: 'VIC', name: 'Selective Entry High School Examination', year: 'Year 9 entry', Icon: Building, components: ['Verbal Reasoning', 'Numerical Reasoning', 'Abstract Reasoning', 'Reading Comprehension'] },
+              { state: 'QLD', name: 'Queensland Academies Aptitude Test', year: 'Year 10 entry', Icon: Palmtree, components: ['Verbal Reasoning', 'Numerical Reasoning', 'Abstract Reasoning', 'Written Expression'] },
+              { state: 'SA', name: 'SASC Selective Entry Test', year: 'Year 8 entry', Icon: Mountain, components: ['General Ability', 'English', 'Mathematics'] },
             ].map((item) => (
               <div key={item.state} className="group p-8 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-royal-purple text-2xl">{item.icon}</span>
+                    <item.Icon size={24} className="text-royal-purple" />
                   </div>
                   <div>
                     <p className="text-label-sm font-bold text-royal-purple uppercase tracking-wider">{item.state} — {item.year}</p>
@@ -98,7 +103,7 @@ export default function AUSelectiveSchoolTestPage() {
                 <ul className="space-y-2 mt-4">
                   {item.components.map((c) => (
                     <li key={c} className="flex items-center gap-2 text-label-md text-on-surface-variant">
-                      <span className="material-symbols-outlined text-lime-green text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>check_circle</span>{c}
+                      <CheckCircle2 size={16} className="text-lime-green shrink-0" style={{ fill: 'currentColor', color: '#84cc16' }} />{c}
                     </li>
                   ))}
                 </ul>
@@ -118,7 +123,7 @@ export default function AUSelectiveSchoolTestPage() {
               <div className="space-y-4">
                 {['State-specific test formats', 'Reasoning & speed training', 'Mock tests under timed conditions'].map((pt) => (
                   <div key={pt} className="flex items-center gap-4">
-                    <span className="material-symbols-outlined text-royal-purple">check_circle</span>
+                    <CheckCircle2 size={20} className="text-royal-purple" />
                     <span className="text-charcoal font-headline-md font-bold">{pt}</span>
                   </div>
                 ))}
@@ -127,37 +132,20 @@ export default function AUSelectiveSchoolTestPage() {
             <div className="lg:w-1/2 p-12 lg:p-20 bg-white">
               {formSubmitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <span className="material-symbols-outlined text-lime-green text-6xl">check_circle</span>
+                  <CheckCircle2 size={56} className="text-lime-green mx-auto" />
                   <h3 className="font-headline-md text-charcoal font-bold">Request Submitted!</h3>
                   <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We&apos;ll be in touch to arrange your selective school prep trial.</p>
                   <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">Submit Another</button>
                 </div>
               ) : (
                 <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
-                  <div className="space-y-2">
-                    <label className="font-label-md text-charcoal font-medium">Full Name</label>
-                    <input required value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all" placeholder="Student's full name" type="text" />
-                  </div>
+                  <div className="space-y-2"><label className="font-label-md text-charcoal font-medium">Full Name</label><input required value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all" placeholder="Student's full name" type="text" /></div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="font-label-md text-charcoal font-medium">Phone</label>
-                      <input required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all" placeholder="+61" type="tel" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="font-label-md text-charcoal font-medium">Email</label>
-                      <input required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all" placeholder="email@example.com" type="email" />
-                    </div>
+                    <div className="space-y-2"><label className="font-label-md text-charcoal font-medium">Phone</label><input required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all" placeholder="+61" type="tel" /></div>
+                    <div className="space-y-2"><label className="font-label-md text-charcoal font-medium">Email</label><input required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all" placeholder="email@example.com" type="email" /></div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="font-label-md text-charcoal font-medium">State</label>
-                    <select value={formData.state} onChange={(e) => setFormData({ ...formData, state: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all bg-white">
-                      {['NSW', 'VIC', 'QLD', 'SA', 'WA', 'ACT'].map((s) => <option key={s}>{s}</option>)}
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="font-label-md text-charcoal font-medium">Additional Message</label>
-                    <textarea value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all" placeholder="Target school, current year level..." rows={3} />
-                  </div>
+                  <div className="space-y-2"><label className="font-label-md text-charcoal font-medium">State</label><select value={formData.state} onChange={(e) => setFormData({ ...formData, state: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all bg-white">{['NSW', 'VIC', 'QLD', 'SA', 'WA', 'ACT'].map((s) => <option key={s}>{s}</option>)}</select></div>
+                  <div className="space-y-2"><label className="font-label-md text-charcoal font-medium">Additional Message</label><textarea value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-royal-purple outline-none transition-all" placeholder="Target school, current year level..." rows={3} /></div>
                   <button className="w-full bg-royal-purple text-on-primary font-headline-md py-4 rounded-xl shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer font-bold" type="submit">Send Request</button>
                 </form>
               )}

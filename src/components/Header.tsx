@@ -31,7 +31,7 @@ export default function Header({ currentPage, currentSubject, onNavigate }: Head
   const [testPrepOpen, setTestPrepOpen] = useState(false);
 
   const subjects = ['Maths', 'English', 'Science', 'Physics', 'Chemistry', 'Biology'];
-  const testPreps = ['SAT', 'ACT', 'AP'];
+  const testPreps = ['PSAT','SAT', 'ACT', 'AP'];
 
   const handleSubjectClick = (sub: string) => {
     onNavigate('subject', sub);
@@ -42,6 +42,13 @@ export default function Header({ currentPage, currentSubject, onNavigate }: Head
 
   const handleTestPrepClick = (prep: string) => {
     onNavigate('test-prep', prep);
+    setFindTutorOpen(false);
+    setTestPrepOpen(false);
+    setMobileMenuOpen(false);
+  };
+
+  const handleTestPreparationClick = () => {
+    onNavigate('test-prep');
     setFindTutorOpen(false);
     setTestPrepOpen(false);
     setMobileMenuOpen(false);
@@ -108,7 +115,7 @@ export default function Header({ currentPage, currentSubject, onNavigate }: Head
   {/* Test Preparation with Submenu */}
   <div className="relative group/test">
     <div className="flex items-center justify-between w-full px-3.5 py-2.5 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer whitespace-nowrap">
-      <span>Test Preparation</span>
+      <span onClick={handleTestPreparationClick}>Test Preparation</span>
       <ChevronRight className="w-4 h-4 text-on-surface-variant group-hover/test:text-primary ml-3" />
     </div>
     <div className="absolute left-full top-0 ml-1 w-max min-w-[9rem] bg-white rounded-lg shadow-dropdown border border-surface-container opacity-0 invisible group-hover/test:opacity-100 group-hover/test:visible transition-all duration-200 z-50 py-2">
@@ -264,7 +271,7 @@ export default function Header({ currentPage, currentSubject, onNavigate }: Head
                 {/* Mobile Test Prep Nested Collapse */}
                 <div className="space-y-1">
                   <button 
-                    onClick={() => setTestPrepOpen(!testPrepOpen)}
+                    onClick={handleTestPreparationClick}
                     className="flex justify-between items-center w-full font-label-md text-charcoal hover:text-primary py-1 cursor-pointer text-sm"
                   >
                     <span>Test Preparation</span>
