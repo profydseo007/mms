@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 
@@ -13,7 +13,7 @@ interface CurriculumProps {
 }
 
 const SUBJECTS = [
-    { title: "Online Maths Grinds", icon: "functions", slug: "online-maths-tutor", cta: "View maths grinds", points: ["Junior Cycle number, algebra & geometry", "Leaving Cert Project Maths", "Higher Level and the 25-point bonus"] },
+    { title: "Online Maths Grinds", icon: "functions", slug: "online-math-tutor", cta: "View maths grinds", points: ["Junior Cycle number, algebra & geometry", "Leaving Cert Project Maths", "Higher Level and the 25-point bonus"] },
     { title: "Online English Grinds", icon: "menu_book", slug: "online-english-tutor", cta: "View English grinds", points: ["Comparative Study & studied texts", "Unseen and prescribed poetry", "Paper 1 comprehension & composition"] },
     { title: "Online Science Grinds", icon: "science", slug: "online-science-tutor", cta: "View science grinds", points: ["Junior Cycle four strands", "Classroom-Based Assessments", "Additional Assessment Components"] },
     { title: "Online Physics Grinds", icon: "rocket_launch", slug: "online-physics-tutor", cta: "View physics grinds", points: ["Mechanics, electricity & waves", "Modern physics and experiments", "Higher and Ordinary Level papers"] },
@@ -254,7 +254,7 @@ export default function CurriculumIE({ onNavigate }: CurriculumProps) {
             </p>
           </div>
           <button
-            onClick={() => router.push('/irish-curriculum/online-maths-tutor')}
+            onClick={() => router.push('/irish-curriculum/online-math-tutor')}
             className="text-primary font-bold flex items-center gap-2 hover:underline cursor-pointer"
           >
             Explore all subjects
@@ -416,7 +416,7 @@ export default function CurriculumIE({ onNavigate }: CurriculumProps) {
                 <span className="font-label-md font-medium">Every Session</span>
               </div>
               <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl aspect-square flex flex-col justify-center items-center text-center mt-12">
-                <span className="font-display-lg text-lime-green mb-2 font-bold">1st–6th</span>
+                <span className="font-display-lg text-lime-green mb-2 font-bold">1stâ€“6th</span>
                 <span className="font-label-md font-medium">Year Coverage</span>
               </div>
               <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl aspect-square flex flex-col justify-center items-center text-center -mt-12">
@@ -482,7 +482,7 @@ export default function CurriculumIE({ onNavigate }: CurriculumProps) {
                 Start Free Trial
               </button>
               <button
-                onClick={() => router.push('/irish-curriculum/online-maths-tutor')}
+                onClick={() => router.push('/irish-curriculum/online-math-tutor')}
                 className="text-royal-purple font-bold flex items-center gap-2 group cursor-pointer"
               >
                 <span className="w-10 h-10 rounded-full border border-royal-purple flex items-center justify-center group-hover:bg-royal-purple group-hover:text-white transition-all">

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 
@@ -13,7 +13,7 @@ interface CurriculumProps {
 }
 
 const SUBJECTS = [
-    { title: "Online Maths Tutors", icon: "functions", slug: "online-maths-tutor", cta: "View maths tutoring", points: ["Number, algebra and measurement", "NCEA Levels 1 to 3 achievement standards", "Level 3 Calculus and Statistics"] },
+    { title: "Online Maths Tutors", icon: "functions", slug: "online-math-tutor", cta: "View maths tutoring", points: ["Number, algebra and measurement", "NCEA Levels 1 to 3 achievement standards", "Level 3 Calculus and Statistics"] },
     { title: "Online English Tutors", icon: "menu_book", slug: "online-english-tutor", cta: "View English tutoring", points: ["Close reading and text analysis", "Formal and creative writing standards", "Externals and portfolio internals"] },
     { title: "Online Science Tutors", icon: "science", slug: "online-science-tutor", cta: "View science tutoring", points: ["Nature of Science strand", "Years 9\u201310 preparation for NCEA", "Practical investigations and reporting"] },
     { title: "Online Physics Tutors", icon: "rocket_launch", slug: "online-physics-tutor", cta: "View physics tutoring", points: ["Mechanics, waves and electricity", "Level 2 and 3 achievement standards", "The maths behind the physics"] },
@@ -126,7 +126,7 @@ export default function CurriculumNZ({ onNavigate }: CurriculumProps) {
                   />
                 </div>
               </div>
-              <span className="font-medium">Supporting ākonga from Kaitaia to Invercargill</span>
+              <span className="font-medium">Supporting Äkonga from Kaitaia to Invercargill</span>
             </div>
           </div>
 
@@ -254,7 +254,7 @@ export default function CurriculumNZ({ onNavigate }: CurriculumProps) {
             </p>
           </div>
           <button
-            onClick={() => router.push('/new-zealand-curriculum/online-maths-tutor')}
+            onClick={() => router.push('/new-zealand-curriculum/online-math-tutor')}
             className="text-primary font-bold flex items-center gap-2 hover:underline cursor-pointer"
           >
             Explore all subjects
@@ -416,11 +416,11 @@ export default function CurriculumNZ({ onNavigate }: CurriculumProps) {
                 <span className="font-label-md font-medium">Every Session</span>
               </div>
               <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl aspect-square flex flex-col justify-center items-center text-center mt-12">
-                <span className="font-display-lg text-lime-green mb-2 font-bold">1–13</span>
+                <span className="font-display-lg text-lime-green mb-2 font-bold">1â€“13</span>
                 <span className="font-label-md font-medium">Years Covered</span>
               </div>
               <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl aspect-square flex flex-col justify-center items-center text-center -mt-12">
-                <span className="font-display-lg text-lime-green mb-2 font-bold">1–3</span>
+                <span className="font-display-lg text-lime-green mb-2 font-bold">1â€“3</span>
                 <span className="font-label-md font-medium">NCEA Levels</span>
               </div>
               <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl aspect-square flex flex-col justify-center items-center text-center">
@@ -482,7 +482,7 @@ export default function CurriculumNZ({ onNavigate }: CurriculumProps) {
                 Start Free Trial
               </button>
               <button
-                onClick={() => router.push('/new-zealand-curriculum/online-maths-tutor')}
+                onClick={() => router.push('/new-zealand-curriculum/online-math-tutor')}
                 className="text-royal-purple font-bold flex items-center gap-2 group cursor-pointer"
               >
                 <span className="w-10 h-10 rounded-full border border-royal-purple flex items-center justify-center group-hover:bg-royal-purple group-hover:text-white transition-all">

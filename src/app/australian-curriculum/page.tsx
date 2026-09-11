@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 
@@ -13,7 +13,7 @@ interface CurriculumProps {
 }
 
 const SUBJECTS = [
-    { title: "Online Maths Tutors", icon: "functions", slug: "online-maths-tutor", cta: "View maths tutoring", points: ["F\u20136 number, measurement & geometry", "Years 7\u201310 algebra and probability", "Methods, Specialist and General Maths"] },
+    { title: "Online Maths Tutors", icon: "functions", slug: "online-math-tutor", cta: "View maths tutoring", points: ["F\u20136 number, measurement & geometry", "Years 7\u201310 algebra and probability", "Methods, Specialist and General Maths"] },
     { title: "Online English Tutors", icon: "menu_book", slug: "online-english-tutor", cta: "View English tutoring", points: ["Language, Literature and Literacy strands", "Text response and analytical writing", "Years 11\u201312 English and Literature"] },
     { title: "Online Science Tutors", icon: "science", slug: "online-science-tutor", cta: "View science tutoring", points: ["Science Understanding across four sub-strands", "Science Inquiry Skills", "Years 7\u201310 cells, atoms and energy"] },
     { title: "Online Physics Tutors", icon: "rocket_launch", slug: "online-physics-tutor", cta: "View physics tutoring", points: ["Motion, energy and electricity", "Units 1\u20134 senior physics", "The maths that underpins the physics"] },
@@ -145,7 +145,7 @@ export default function CurriculumAU({ onNavigate }: CurriculumProps) {
                   </div>
                   <div>
                     <p className="font-label-sm text-charcoal font-bold">Syllabus-Matched</p>
-                    <p className="text-[10px] text-on-surface-variant font-medium">ACARA F–10 plus VCE, HSC, QCE and WACE</p>
+                    <p className="text-[10px] text-on-surface-variant font-medium">ACARA Fâ€“10 plus VCE, HSC, QCE and WACE</p>
                   </div>
                 </div>
               </div>
@@ -254,7 +254,7 @@ export default function CurriculumAU({ onNavigate }: CurriculumProps) {
             </p>
           </div>
           <button
-            onClick={() => router.push('/australian-curriculum/online-maths-tutor')}
+            onClick={() => router.push('/australian-curriculum/online-math-tutor')}
             className="text-primary font-bold flex items-center gap-2 hover:underline cursor-pointer"
           >
             Explore all subjects
@@ -416,7 +416,7 @@ export default function CurriculumAU({ onNavigate }: CurriculumProps) {
                 <span className="font-label-md font-medium">Every Session</span>
               </div>
               <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl aspect-square flex flex-col justify-center items-center text-center mt-12">
-                <span className="font-display-lg text-lime-green mb-2 font-bold">F–12</span>
+                <span className="font-display-lg text-lime-green mb-2 font-bold">Fâ€“12</span>
                 <span className="font-label-md font-medium">Year Levels Covered</span>
               </div>
               <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl aspect-square flex flex-col justify-center items-center text-center -mt-12">

@@ -2,6 +2,14 @@ import { ActivePage } from './types';
 
 const COUNTRY_CODES = new Set(['AU', 'CA', 'IE', 'NZ', 'UK']);
 
+const CURRICULUM_PATHS: Record<string, string> = {
+  AU: '/australian-curriculum',
+  CA: '/canadian-curriculum',
+  IE: '/irish-curriculum',
+  NZ: '/new-zealand-curriculum',
+  UK: '/uk-curriculum',
+};
+
 /**
  * Maps the legacy hash-based `ActivePage` identifiers used throughout the
  * component tree onto real Next.js URL paths.
@@ -86,6 +94,33 @@ const US_SUBJECT_ROUTE_MAP: Record<string, string> = {
   Biology: '/us-curriculum/online-biology-tutor',
 };
 
+// Countries that spell it 'maths' (not 'math')
+const MATHS_COUNTRIES = new Set(['AU', 'NZ', 'UK', 'IE', 'CA']);
+
+// Subject slug → human-readable title (for pathToPage reverse lookup)
+const SUBJECT_SLUG_TO_TITLE: Record<string, string> = {
+  'online-math-tutor': 'Maths',
+  'online-maths-tutor': 'Maths',
+  'online-english-tutor': 'English',
+  'online-science-tutor': 'Science',
+  'online-physics-tutor': 'Physics',
+  'online-chemistry-tutor': 'Chemistry',
+  'online-biology-tutor': 'Biology',
+};
+
+function getSubjectSlug(subjectTitle: string, country?: string): string {
+  const key = subjectTitle.trim();
+  // For 'Maths'/'Math' use country-specific spelling
+  if (key === 'Maths' || key === 'Math' || key === 'Maths Tutor') {
+    return country && MATHS_COUNTRIES.has(country.toUpperCase())
+      ? 'online-maths-tutor'
+      : 'online-math-tutor';
+  }
+  const usRoute = US_SUBJECT_ROUTE_MAP[key];
+  if (usRoute) return usRoute.split('/').pop()!;
+  return encodeURIComponent(key);
+}
+
 export function pageToPath(page: ActivePage, subjectTitle?: string, country?: string): string {
   const prefix = country ? `/${country.toLowerCase()}` : '';
 
@@ -108,7 +143,7 @@ export function pageToPath(page: ActivePage, subjectTitle?: string, country?: st
     case 'a-levels':
       return prefix ? `${prefix}/test-preparation/a-levels` : '/a-levels';
     case 'curriculum':
-      return `${prefix}/us-curriculum`;
+      return `${prefix}${CURRICULUM_PATHS[country?.toUpperCase() ?? ''] ?? '/us-curriculum'}`;
     case 'resources-hub':
       return `${prefix}/resources-hub`;
     case 'mock-papers':
@@ -127,11 +162,9 @@ export function pageToPath(page: ActivePage, subjectTitle?: string, country?: st
       return `${prefix}/refund`;
     case 'subject': {
       const subjectKey = subjectTitle ?? 'Maths';
-      const mappedSubjectRoute = US_SUBJECT_ROUTE_MAP[subjectKey] ?? US_SUBJECT_ROUTE_MAP[subjectKey.trim()];
-      if (mappedSubjectRoute) {
-        return prefix ? `${prefix}${mappedSubjectRoute}` : mappedSubjectRoute;
-      }
-      return `${prefix}/subject/${encodeURIComponent(subjectKey)}`;
+      const subjectSlug = getSubjectSlug(subjectKey, country);
+      const curriculumPath = CURRICULUM_PATHS[country?.toUpperCase() ?? ''] ?? '/us-curriculum';
+      return `${prefix}${curriculumPath}/${subjectSlug}`;
     }
     case 'test-prep': {
       const defaultSlugs: Record<string, string> = {
@@ -187,7 +220,15 @@ export function pathToPage(pathname: string): ResolvedRoute {
     return { currentPage: 'predicted-papers' };
   }
 
-  if (first === 'us-curriculum') {
+  const curriculumPaths = new Set(['us-curriculum', 'australian-curriculum', 'canadian-curriculum', 'irish-curriculum', 'new-zealand-curriculum', 'uk-curriculum']);
+  if (curriculumPaths.has(first)) {
+    if (second && SUBJECT_SLUG_TO_TITLE[second]) {
+      // e.g. /au/australian-curriculum/online-english-tutor → subject page
+      return {
+        currentPage: 'subject',
+        currentSubject: SUBJECT_SLUG_TO_TITLE[second],
+      };
+    }
     return {
       currentPage: 'curriculum',
       currentSubject: second ? decodeURIComponent(second) : undefined,

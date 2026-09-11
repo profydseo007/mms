@@ -27,6 +27,16 @@ export const COUNTRY_FORM_IDS: Record<string, string> = {
   IE: 'qqq116RRiFIjQdOfHlRI',
 };
 
+export const COUNTRY_WHATSAPP_NUMBERS: Record<string, string> = {
+  US: '13474914870',
+  GB: '447400018383',
+  UK: '447400018383',
+  IE: '35315256806',
+  AU: '61480890005',
+  NZ: '6498703334',
+  CA: '16474925264',
+};
+
 function getClientIP(headers: Headers): string | null {
   const forwardedFor = headers.get('x-forwarded-for');
   if (forwardedFor) {
