@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
         destination: '/test-preparation/:type*',
         permanent: false,
       },
-      ...['au', 'ca', 'ie'].flatMap((country) => [
+      ...['au', 'ca', 'ie', 'uk', 'nz'].flatMap((country) => [
         {
           source: `/${country}/test-prepration`,
           destination: `/${country}/test-preparation`,
@@ -28,26 +28,6 @@ const nextConfig: NextConfig = {
           permanent: false,
         },
       ]),
-      {
-        source: '/uk/test-prepration',
-        destination: '/uk/test-preparation/gcse',
-        permanent: false,
-      },
-      {
-        source: '/uk/test-prepration/:type*',
-        destination: '/uk/test-preparation/:type*',
-        permanent: false,
-      },
-      {
-        source: '/nz/test-prepration',
-        destination: '/nz/test-preparation',
-        permanent: false,
-      },
-      {
-        source: '/nz/test-prepration/:type*',
-        destination: '/nz/test-preparation',
-        permanent: false,
-      },
     ];
   },
 };

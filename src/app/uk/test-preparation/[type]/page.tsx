@@ -9,6 +9,7 @@ import UKThirteenPlusPage from '@/app/uk/13-plus/page';
 import UKGcsePage from '@/app/uk/gcse/page';
 import UKIgcsePage from '@/app/uk/igcse/page';
 import UKALevelsPage from '@/app/uk/a-levels/page';
+import UKUniversityAdmissionsTestsPage from '../../university-admissions-tests/page';
 import SubjectPage from '@/components/SubjectPage';
 import { useAppNavigate } from '@/lib/useAppNavigate';
 import { TEST_PREP_SLUG_TO_TITLE } from '@/lib/navigation';
@@ -35,6 +36,7 @@ export default function UKTestPreparationPage({ params }: { params: Promise<{ ty
   if (type === 'gcse')    return <UKGcsePage />;
   if (type === 'igcse')   return <UKIgcsePage />;
   if (type === 'a-levels') return <UKALevelsPage />;
+  if (type === 'university-admissions-tests') return <UKUniversityAdmissionsTestsPage />;
 
   const title = UK_TEST_PREP_TYPES[type]?.title ?? TEST_PREP_SLUG_TO_TITLE[type] ?? decodeURIComponent(type);
   return <SubjectPage title={title || 'GCSE'} type="test-prep" onNavigate={navigateTo} />;

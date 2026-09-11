@@ -1,186 +1,175 @@
 'use client';
 
 import React, { useState } from 'react';
+import LigatureIcon from '@/components/LigatureIcon';
+import { BookOpen, Brain, CalendarDays, Calculator, CheckCircle2, ChevronDown, ClipboardCheck, FlaskConical, Map, School, SmilePlus } from 'lucide-react';
 import { useAppNavigate } from '@/lib/useAppNavigate';
-import {
-  BadgeCheck,
-  CheckCircle2,
-  Edit3,
-  Globe2,
-  Mail,
-  Rocket,
-  School,
-  Settings2,
-  Sparkles,
-  Phone,
-  TrendingUp,
-} from 'lucide-react';
 
-export default function UKIgcsePage() {
+const FAQS = [
+  {
+    q: "What's the actual difference between iGCSE and GCSE?",
+    a: "Both sit at the same level and are taken around age 14-16, but they're set by different bodies. Standard GCSEs are regulated by Ofqual for schools in England. The International GCSE (iGCSE) is set by Cambridge International or Pearson Edexcel International and used by UK independent schools and international schools worldwide. The biggest practical difference is assessment: most iGCSE subjects are marked almost entirely on final written exams, with little or none of the grade coming from coursework or controlled assessment.",
+  },
+  {
+    q: 'Is the iGCSE recognised by UK universities?',
+    a: "Yes. UK universities and UCAS treat iGCSE grades as equivalent to GCSE grades when assessing applications, and independent schools have been entering pupils for Cambridge and Edexcel International qualifications for decades. It's also recognised internationally, which matters if your family may relocate or your child is applying to schools or universities outside the UK.",
+  },
+  {
+    q: "Does my child's iGCSE use A*-G or 9-1 grades?",
+    a: 'It depends on the exam board, so it is worth checking your school\'s syllabus rather than assuming. Cambridge International IGCSEs are still reported on the traditional A*-G scale. Pearson Edexcel International GCSEs, on the other hand, have moved fully to the 9-1 numerical scale to mirror reformed UK GCSEs. Universities and schools treat both scales as directly comparable, and our tutors work with whichever grading system your child\'s specification uses.',
+  },
+  {
+    q: 'Why do UK independent schools choose iGCSE over standard GCSE?',
+    a: "Many independent schools moved to iGCSE because it sits outside the national curriculum and Ofqual's coursework rules, which gives schools more freedom over how subjects are taught and assessed. Historically this meant fewer controlled assessments (particularly valued in subjects like Maths and Sciences) and syllabuses schools felt prepared pupils more rigorously for A-Level study. Some schools use iGCSE across the board; others mix iGCSE and GCSE subject by subject.",
+  },
+  {
+    q: 'Is iGCSE Science still practical, or is it all written exams?',
+    a: "Practical skills are still part of the specification, but they're typically assessed differently to standard GCSE. Rather than a series of assessed coursework practicals throughout Year 10 and 11, most iGCSE Science routes examine practical technique through dedicated written papers - questions on method, data handling, and experimental design - alongside the theory papers. We make sure students have actually seen and understood the practicals the exam expects them to reason about, not just memorised the theory.",
+  },
+  {
+    q: 'Which exam board does Math Make Smart tutor for - Cambridge or Edexcel?',
+    a: "Both. Our tutors work across Cambridge International (CAIE) and Pearson Edexcel International specifications for Maths, English, and the Sciences, and can support OxfordAQA International GCSE syllabuses as well. Tell us which board your child's school follows and we'll build sessions around that exact specification, using the matching past papers and mark schemes.",
+  },
+  {
+    q: 'Can iGCSE tutoring help my child prepare for A-Levels afterwards?',
+    a: "Yes - it's one of the reasons independent schools favour iGCSE in the first place, as the exam-only format is closer in style to A-Level assessment than continuous coursework. We build study habits and exam technique during iGCSE prep that carry straight into sixth form, and we're happy to talk through progression planning for A-Levels once your child's iGCSE results are in.",
+  },
+];
+
+export default function UKiGCSEPage() {
   const { navigateTo } = useAppNavigate();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     phone: '',
     email: '',
     subject: 'Mathematics',
     message: ''
   });
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const toggleFaq = (idx: number) => setActiveFaq(activeFaq === idx ? null : idx);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.fullName && formData.email) {
+    if (formData.name && formData.email) {
       setFormSubmitted(true);
     }
   };
 
   return (
-    <div className="bg-surface text-on-surface selection:bg-lime-green/30 selection:text-royal-purple overflow-x-hidden">
+    <div className="bg-background text-on-surface font-body-md overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-surface px-5 md:px-20 py-24">
-        <div className="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
-          <div className="space-y-8">
-            <span className="inline-block bg-royal-purple/10 text-royal-purple px-4 py-1.5 rounded-full font-label-md text-label-md uppercase tracking-wider font-semibold">
-              UK IGCSE Experts
-            </span>
-            <h1 className="font-display-lg text-display-lg md:text-display-lg text-charcoal leading-tight font-bold">
-              IGCSE Test Preparation by <span className="text-royal-purple">Expert Tutors</span>
-            </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-              Global standards, personalized learning. Master the IGCSE curriculum and secure top grades for your future with our world-class educational framework.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button onClick={() => navigateTo('trial')} className="bg-royal-purple text-on-primary px-8 py-4 rounded-xl font-label-md text-label-md font-bold shadow-lg hover:shadow-xl transition-all active:scale-95 cursor-pointer">
-                Book a Free Trial
-              </button>
-              <button onClick={() => navigateTo('curriculum')} className="border-2 border-royal-purple text-royal-purple px-8 py-4 rounded-xl font-label-md text-label-md font-bold hover:bg-royal-purple/5 transition-all cursor-pointer">
-                Explore Subjects
-              </button>
+      <section className="relative py-24 overflow-hidden">
+        <div className="learning-lane px-margin-mobile md:px-0 max-w-max-width mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-royal-purple/10 text-royal-purple rounded-full">
+                <span className="material-symbols-outlined text-[18px]">verified</span>
+                <span className="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Specialists in Cambridge &amp; Edexcel International</span>
+              </div>
+              <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg text-charcoal leading-tight font-bold">
+                iGCSE Preparation Online for <span className="text-royal-purple">UK Independent School</span> Students
+              </h1>
+              <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                Our iGCSE preparation online is built for UK families whose children sit Cambridge International or Pearson Edexcel International exams instead of, or alongside, standard GCSE. Exam-only assessment rewards a different kind of preparation, and that's exactly what we specialise in.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <button
+                  onClick={() => navigateTo('trial')}
+                  className="bg-royal-purple text-white px-8 py-4 rounded-full font-medium text-lg text-center hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+                >
+                  Book a Free Trial Lesson
+                </button>
+                <a
+                  href="#subjects-section"
+                  className="border-2 border-royal-purple text-royal-purple px-8 py-4 rounded-full font-medium text-lg text-center hover:bg-royal-purple/5 transition-all cursor-pointer inline-block"
+                >
+                  Explore Subjects
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="relative group">
-            <div className="absolute -inset-4 bg-lime-green/20 rounded-[2rem] blur-2xl group-hover:bg-lime-green/30 transition-all"></div>
-            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3]">
-              <img
-                className="w-full h-full object-cover"
-                alt="A focused high school student studying with tablet"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIC2148RcAcfRXxnZOcCNJC2Yr32DtyHa7d1TOD82ZBuHm5-qZ-Hfyjuic-1MLI6po5tOU8XT7FUpGqvgdHGzRwEInHX72mGWsxX-9nVAlOqT4sbH-gqYAG5YfaLbivq9Je_ZI7ity8vsit3aPnhFxzYCZ7Vd3uaU5jtItj5k130NViqjkJsMWfhwBn54qZk6DOAoC1XqgTsCbUlAYR6O8_Q9eb3Xz1j99Ujc64cOxRy0f-IOnZz3fvw"
-              />
-            </div>
-            <div className="absolute -bottom-6 -left-6 bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/50 hidden lg:block">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-lime-green flex items-center justify-center">
-                  <TrendingUp size={20} className="text-charcoal" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="font-headline-md text-headline-md text-charcoal font-bold">98%</p>
-                  <p className="font-label-sm text-label-sm text-on-surface-variant font-medium">Success Rate</p>
-                </div>
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-lime-green/20 rounded-[2rem] blur-2xl group-hover:bg-lime-green/30 transition-all"></div>
+              <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white">
+                <img
+                  className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
+                  alt="A tutor helping a UK independent school student prepare for iGCSE exams"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3k0vu8Tg3YUMNFs4pRgue5UNIQWPgpMyoQYwplh0zysRdVH48wM9XHcQph5Zgva9c60ifDYUb87JsC_GUn1R7iw601Lwtr3zrjoqsYXcqZMVlfPt4ke1xUG3jboqxzHyoL7sfSBeK1SASSJ_j8LpLXEZFI61x-AKLxyCgik1K6p7ktNMrzBTamBcp-xQE0BIolbmoBejxeUqzsAVl980BvvDz816xje9HVyTobd2Z4ahPLUgSp9GBKA"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Understanding IGCSE */}
+      {/* What is iGCSE Section */}
       <section className="py-24 bg-soft-gray">
-        <div className="max-w-max-width mx-auto px-5 md:px-20 text-center">
+        <div className="learning-lane px-margin-mobile md:px-0 text-center max-w-max-width mx-auto">
           <div className="max-w-3xl mx-auto space-y-6">
-            <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">Understanding the IGCSE</h2>
-            <div className="h-1.5 w-20 bg-lime-green mx-auto rounded-full"></div>
-            <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-              International GCSEs (IGCSE) are a globally recognized alternative to the standard GCSE, offering a broader perspective and accepted by top universities worldwide. At Math Make Smart, we bridge the gap between curriculum requirements and student potential, fostering independent thought and global citizenship.
+            <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">Understanding the iGCSE Journey</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              The International GCSE sits at the same level as the UK GCSE but follows a different specification, set by Cambridge International or Pearson Edexcel International rather than Ofqual. Many UK independent schools and international schools choose it because it sits outside the national curriculum, giving them more flexibility over syllabus content and assessment style. At Math Make Smart, we tutor to the exact specification your child's school uses, not a generic revision guide.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Bento Grid */}
-      <section className="py-24 px-5 md:px-20">
-        <div className="max-w-max-width mx-auto">
-          <h2 className="font-headline-lg text-headline-lg text-charcoal mb-12 text-center font-bold">Why Choose IGCSE Tutoring?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter h-auto md:h-[500px]">
-            <div className="md:col-span-2 bg-white p-10 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between hover:translate-y-[-8px] transition-transform duration-300">
-              <div className="space-y-4">
-                <div className="w-14 h-14 bg-royal-purple/10 rounded-2xl flex items-center justify-center mb-6">
-                  <Globe2 size={30} className="text-royal-purple" aria-hidden="true" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
+              {[
+                { icon: CalendarDays, color: 'bg-royal-purple/10 text-royal-purple', title: 'Year 10-11', desc: 'A two-year cycle on the same UK school timeline, examined by an internationally benchmarked syllabus rather than the national curriculum.' },
+                { icon: School, color: 'bg-lime-green/20 text-secondary', title: 'Grading Varies by Board', desc: 'Cambridge International IGCSE still reports A*-G, while Edexcel International GCSE has moved to the 9-1 scale — we\'ll confirm which applies to your child.' },
+                { icon: ClipboardCheck, color: 'bg-royal-purple/10 text-royal-purple', title: 'Exam-Only Assessment', desc: 'Most subjects are graded almost entirely on final written papers, with little or no coursework contributing to the result.' },
+              ].map((item) => (
+                <div key={item.title} className="bg-white p-8 rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] text-center">
+                  <div className={`w-12 h-12 ${item.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <item.icon size={24} aria-hidden="true" />
+                  </div>
+                  <h3 className="font-headline-md text-headline-md mb-2 font-bold text-charcoal">{item.title}</h3>
+                  <p className="text-on-surface-variant">{item.desc}</p>
                 </div>
-                <h3 className="font-headline-md text-headline-md text-charcoal font-bold">Global Recognition</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant">Your gateway to the world&apos;s most prestigious universities. Our program is designed to meet and exceed international benchmarks.</p>
-              </div>
-              <img className="w-full h-32 object-contain mt-4 opacity-50" alt="Minimalist globe rendering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2qVzriiNJ84l-j3e_FP556ftEr1pJCaGs4U0MNflpiocZnbOMKrzy-0f2imqk_00EIDJoQKaNxYma2P5UMhYmKfDSeo55LtnJpWk8cb-AyDi0qJTqpyh32tCakkVRHLACdPwIDDW1rAr4QRrNAtb9vlmJFlzOLJGot-J-8B1G2TTRhM46ThHdWjMBM5-2vsHW6sJdG3XBy3Gipjk5ICHa2Gs--mjhBKAk-7zYkp4YUhjcNgqHwn1nEA" />
-            </div>
-            <div className="grid grid-rows-2 gap-gutter md:col-span-1">
-              <div className="bg-white p-8 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:translate-y-[-8px] transition-transform duration-300">
-                <div className="w-12 h-12 bg-lime-green/20 rounded-xl flex items-center justify-center mb-4">
-                  <BadgeCheck size={22} className="text-secondary" aria-hidden="true" />
-                </div>
-                <h3 className="font-label-md text-label-md text-charcoal font-bold mb-2 uppercase">Rigorous Standards</h3>
-                <p className="font-label-sm text-label-sm text-on-surface-variant">High-stakes preparation for high-stakes results.</p>
-              </div>
-              <div className="bg-white p-8 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:translate-y-[-8px] transition-transform duration-300 border-2 border-transparent hover:border-royal-purple/20">
-                <div className="w-12 h-12 bg-royal-purple/10 rounded-xl flex items-center justify-center mb-4">
-                  <Settings2 size={22} className="text-royal-purple" aria-hidden="true" />
-                </div>
-                <h3 className="font-label-md text-label-md text-charcoal font-bold mb-2 uppercase">Flexible Choice</h3>
-                <p className="font-label-sm text-label-sm text-on-surface-variant">Choose the subjects that align with your future career path.</p>
-              </div>
-            </div>
-            <div className="md:col-span-1 bg-royal-purple p-8 rounded-[2rem] shadow-xl flex flex-col justify-center items-center text-center text-on-primary">
-              <Sparkles size={60} className="mb-6 opacity-80" aria-hidden="true" />
-              <h3 className="font-headline-md text-headline-md mb-4 font-bold">Focused Academic Support</h3>
-              <p className="font-body-md text-body-md opacity-90">1-on-1 sessions tailored to your unique learning style.</p>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core IGCSE Subjects */}
-      <section className="py-24 bg-surface-container-low overflow-hidden md:px-20">
-        <div className="max-w-max-width mx-auto px-5 md:px-20">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div className="max-w-2xl">
-              <h2 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">Core IGCSE Subjects</h2>
-              <p className="font-body-lg text-body-lg text-on-surface-variant">We don&apos;t just teach the syllabus; we build the foundational skills required for future academic mastery.</p>
-            </div>
+      {/* Core Subjects */}
+      <section className="py-24" id="subjects-section">
+        <div className="learning-lane px-margin-mobile md:px-0 max-w-max-width mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">Core Subjects We Master</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant">Our online tutors for iGCSE preparation focus on the three subjects UK independent schools most commonly sit under Cambridge and Edexcel International.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBmN2ZzbsB5k_IDPqf9BxKEcTHwC_Ytov44L9DxrleBETTwCNat-XdJRIJoUV0qaslGRYbHi-aC30Z7YpFefRbfx0KdTx318LEF9xG99ax84A_MIn5ZQNX8V0v33pPakK0rfM2ZMFwaqpWdoYBMjHuIfyqir1u4B7Mdx1m0rNAy0kAxFbcDhU5Ld_sGvNzbT_XPgvKUz7LVCvH1-COgmVGsklhg-gsR2xLrL5vQy6MXdVR-ySA72DfvhA',
-                alt: 'Mathematical equations', label: 'Mathematics',
-                desc: 'Focus on advanced problem-solving, algebraic manipulation, and logical proofing essential for STEM pathways.',
-                items: ['Structured Logic Training', 'Calculus Fundamentals'],
+                icon: Calculator, title: 'Mathematics',
+                items: ['Cambridge & Edexcel International specifications', 'Non-calculator and calculator paper technique', 'Exam-only structure — no coursework safety net'],
+                nav: () => navigateTo('subject', 'Maths'),
               },
               {
-                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDg73zwQFdIPKX3zMqP5Tu5DOYpQ-78yPiXkgpYTodKMU7OAWmakgkjGDx7wC5q13ruNQ9qCC2SNRHbSu9tg_55j_4PCZwOnaC6uw5Jtk98NlYK11RZ7EECwl2I2ZIur1_22t_WOpcVC77XwxxRcJ_SGazAORtoArF0r9C1JxhWzy5ASHfowOiQonJOd5LO1ErDnrOECUIEG7k9Nrh42uzqXVreEyBApxJcGv4SannOvAdqs-hIlryKfA',
-                alt: 'Classic literature books', label: 'English Language',
-                desc: 'Developing analytical writing and critical appreciation for English literature and persuasive communication.',
-                items: ['Critical Text Analysis', 'Narrative Development'],
+                icon: BookOpen, title: 'English',
+                items: ['First Language / English Language International syllabuses', 'Extended writing and composition practice', 'Comprehension and unseen text analysis by board'],
+                nav: () => navigateTo('subject', 'English'),
               },
               {
-                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAwee4rDEHE9trl5lsH6eFvBgnaZJsffSb06RDGdZ2u3hToewRWuvnE0XxXhlv-GaNLCCUMKrmrAuufn5XRpY086OP6YXFbBUnk0v1biWzKj5K1fjiKI8Shd6rDCOlvj4bj9o1is66MyIYEotbSVOGWxFxO8rGJlQWA7YHrIoaKci3aPlHvCyOUIs2KBWty70HJMZhhhyyBB1SLZWdLOmYjZq-UBT8BDTxR2Ndex7qW6Gng17fBrjuXvA',
-                alt: 'Modern science lab', label: 'The Sciences',
-                desc: 'From experimental investigation techniques to complex theory in Biology, Chemistry, and Physics.',
-                items: ['Investigative Methodology', 'Triple Science Depth'],
+                icon: FlaskConical, title: 'Science',
+                items: ['Combined or Triple Science International routes', 'Practical technique for written practical-skills papers', 'Biology, Chemistry & Physics core content drilling'],
+                nav: () => navigateTo('subject', 'Science'),
               },
             ].map((subject) => (
-              <div key={subject.label} className="bg-white rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500">
-                <div className="h-48 relative overflow-hidden">
-                  <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={subject.alt} src={subject.img} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent"></div>
-                  <span className="absolute bottom-4 left-6 text-white font-headline-md text-headline-md font-bold">{subject.label}</span>
+              <div key={subject.title} className="group bg-white p-10 rounded-[2rem] shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-transparent hover:border-royal-purple/20 transition-all duration-300">
+                <div className="w-16 h-16 bg-royal-purple text-white rounded-2xl flex items-center justify-center mb-8 transform group-hover:rotate-6 transition-transform">
+                  <subject.icon size={30} aria-hidden="true" />
                 </div>
-                <div className="p-8 space-y-4">
-                  <p className="font-body-md text-body-md text-on-surface-variant">{subject.desc}</p>
-                  <ul className="space-y-2">
-                    {subject.items.map((item) => (
-                      <li key={item} className="flex items-center gap-3 text-label-md font-label-md text-charcoal">
-                        <CheckCircle2 size={18} className="text-lime-green" aria-hidden="true" /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <h3 className="font-headline-md text-headline-md mb-4 text-charcoal font-bold">{subject.title}</h3>
+                <ul className="space-y-4 mb-8">
+                  {subject.items.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <CheckCircle2 size={20} className="text-lime-green" aria-hidden="true" />
+                      <span className="text-on-surface-variant">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button onClick={subject.nav} className="text-royal-purple font-bold flex items-center gap-2 group-hover:translate-x-1 transition-transform cursor-pointer">
+                  Learn more <LigatureIcon name="arrow_forward" className="text-sm" />
+                </button>
               </div>
             ))}
           </div>
@@ -188,118 +177,123 @@ export default function UKIgcsePage() {
       </section>
 
       {/* Exam Board Expertise */}
-      <section className="py-24 px-5 md:px-20 relative bg-surface overflow-hidden">
-        <div className="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div className="order-2 md:order-1">
-            <img className="rounded-[2.5rem] shadow-2xl w-full" alt="Tutoring session between educator and student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4HGgsHjfHllECK6wrbPrHiAArDKkmsMqHWSs0bdvjNVq4jXexgK1BH_77hneqqaHzUkbBgyOp5flU8-IZoizdehAQFvO7h2QcOizrH5E_ZI7I2ygDJ7RUaKIIm0nO4qipHWsPqLfjsJBlR2ZR_6WrMm-06qi43yMDuq7IfA5jrUypFQCHWyK1FEh3rWb1YQTlPitVxbbBhZX9aLqOarwu0eNF-PpIXiznXRTIfUyXf-eXKMKC0TaXGw" />
+      <section className="py-24 bg-royal-purple text-white">
+        <div className="learning-lane px-margin-mobile md:px-0 max-w-max-width mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="md:w-1/2">
+            <h2 className="font-headline-lg text-headline-lg mb-6 font-bold">Expertise Across Every iGCSE Board</h2>
+            <p className="font-body-lg text-body-lg opacity-90 leading-relaxed">
+              iGCSE isn't one single qualification — it's a family of specifications set by different boards, each with its own paper structure and grading scale. Our tutors work fluently across Cambridge International and Edexcel International syllabuses, so your child revises past papers and mark schemes that match exactly what they'll sit, rather than a generic international curriculum overview.
+            </p>
           </div>
-          <div className="order-1 md:order-2 space-y-8">
-            <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">Mastering CIE and Pearson Edexcel</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant">Our tutors are experts in the specific marking schemes of International Boards. We don&apos;t just teach content; we teach how to demonstrate knowledge for maximum credit.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="p-6 bg-white rounded-2xl border-l-4 border-royal-purple shadow-sm">
-                <h4 className="font-label-md text-label-md font-bold text-charcoal mb-2 uppercase">Marking Mastery</h4>
-                <p className="font-label-sm text-label-sm text-on-surface-variant">Analysis of past papers and mark schemes to perfect student responses.</p>
+          <div className="grid grid-cols-3 gap-3 sm:gap-6 md:w-1/2 w-full">
+            {['CAMBRIDGE INTERNATIONAL', 'EDEXCEL INTERNATIONAL', 'OXFORDAQA'].map((board) => (
+              <div key={board} className="bg-white/10 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-white/20 flex items-center justify-center min-h-[80px]">
+                <span className="font-bold text-sm sm:text-lg lg:text-xl text-white tracking-wider uppercase text-center">{board}</span>
               </div>
-              <div className="p-6 bg-white rounded-2xl border-l-4 border-lime-green shadow-sm">
-                <h4 className="font-label-md text-label-md font-bold text-charcoal mb-2 uppercase">Board-Specific Strategies</h4>
-                <p className="font-label-sm text-label-sm text-on-surface-variant">Tailored tactics for the unique phrasing of CIE and Edexcel exams.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Trust Section */}
-      <section className="py-24 bg-charcoal text-on-primary md:px-20">
-        <div className="max-w-max-width mx-auto px-5 md:px-20 text-center mb-16">
-          <h2 className="font-headline-lg text-headline-lg mb-6 font-bold">Why Families Trust Math Make Smart</h2>
-          <div className="h-1 w-24 bg-lime-green mx-auto mb-8"></div>
-        </div>
-        <div className="max-w-max-width mx-auto px-5 md:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
-          {[
-            { icon: School, title: 'Expert Tutors', desc: 'Top 5% educators from elite global institutions.' },
-            { icon: Edit3, title: 'Tailored Plans', desc: 'Curriculums adapted to your specific strengths.' },
-            { icon: CheckCircle2, title: 'Mock Mastery', desc: 'Intensive exam simulations for real-world readiness.' },
-            { icon: Rocket, title: 'Confidence Building', desc: 'Fostering a growth mindset for long-term success.' },
-          ].map((item) => (
-            <div key={item.title} className="text-center group">
-              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-lime-green group-hover:text-charcoal transition-all">
-                <item.icon size={30} aria-hidden="true" />
+      {/* Why Families Trust Us */}
+      <section className="py-24">
+        <div className="learning-lane px-margin-mobile md:px-0 max-w-max-width mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">Why Families Choose Online Tutors for iGCSE Preparation</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant">The pillars of our patient and professional approach to iGCSE preparation online.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: Brain, color: 'bg-lime-green/20 text-secondary', title: 'Exam-Only Technique', desc: 'With no coursework to fall back on, every mark comes from the final paper, so we drill the answering habits examiners actually reward.' },
+              { icon: Map, color: 'bg-royal-purple/10 text-royal-purple', title: 'Board-Specific Practice', desc: 'Past papers and mark schemes matched to your child\'s exact Cambridge or Edexcel International specification.' },
+              { icon: ClipboardCheck, color: 'bg-lime-green/20 text-secondary', title: 'Mock Mastery', desc: 'Timed, board-accurate mock exams that build the stamina a fully exam-based qualification demands.' },
+              { icon: SmilePlus, color: 'bg-royal-purple/10 text-royal-purple', title: 'Confidence for What Comes Next', desc: 'Preparation aimed at your child\'s UK independent school benchmarks, with an eye on the step up to A-Levels.' },
+            ].map((item) => (
+              <div key={item.title} className="text-center p-6 space-y-4">
+                <div className={`w-20 h-20 ${item.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
+                  <item.icon size={30} aria-hidden="true" />
+                </div>
+                <h4 className="font-headline-md text-headline-md text-charcoal font-bold">{item.title}</h4>
+                <p className="text-on-surface-variant font-body-md">{item.desc}</p>
               </div>
-              <h3 className="font-headline-md text-headline-md mb-2 font-bold">{item.title}</h3>
-              <p className="font-body-md text-body-md opacity-70">{item.desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <p className="text-on-surface-variant font-body-md">
+              Already looking further ahead? Read how we support the step up to{' '}
+              <button
+                onClick={() => navigateTo('test-prep', 'A-Levels')}
+                className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer"
+              >
+                A-Level study
+              </button>{' '}
+              once iGCSE results are in.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Conversion Form */}
-      <section className="py-24 px-5 md:px-20 bg-surface">
-        <div className="max-w-max-width mx-auto flex flex-col lg:flex-row bg-white rounded-[2.5rem] shadow-2xl overflow-hidden">
-          <div className="lg:w-2/5 bg-royal-purple p-12 lg:p-20 text-on-primary flex flex-col justify-between">
-            <div className="space-y-6">
-              <h2 className="font-display-lg text-display-lg-mobile md:text-headline-lg leading-tight font-bold">Secure Your Free Trial Lesson</h2>
-              <p className="font-body-lg text-body-lg opacity-80">Join the elite community of Math Make Smart students today and transform your academic trajectory.</p>
-            </div>
-            <div className="mt-12 space-y-4">
-              <div className="flex items-center gap-4">
-                <Phone size={20} aria-hidden="true" />
-                <span className="font-label-md text-label-md">+44 (0) 20 7946 0958</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <Mail size={20} aria-hidden="true" />
-                <span className="font-label-md text-label-md">admissions@mathmakesmart.com</span>
-              </div>
-            </div>
+      {/* FAQ Section */}
+      <section className="py-24 bg-soft-gray" id="faq-section">
+        <div className="learning-lane px-margin-mobile md:px-0 max-w-max-width mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">iGCSE-Specific FAQs</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Answers UK families ask us most often about Cambridge and Edexcel International iGCSE preparation.</p>
           </div>
-          <div className="lg:w-3/5 p-12 lg:p-20">
-            {formSubmitted ? (
-              <div className="text-center py-12 space-y-4">
-                <CheckCircle2 size={60} className="text-lime-green mx-auto" aria-hidden="true" />
-                <h3 className="font-headline-md text-charcoal font-bold">Free Session Requested!</h3>
-                <p className="text-on-surface-variant">Thank you <strong>{formData.fullName}</strong>. We have received your IGCSE trial request and will contact you within 2 business hours.</p>
-                <button onClick={() => setFormSubmitted(false)} className="bg-royal-purple text-on-primary px-6 py-2.5 rounded-xl font-medium hover:bg-primary transition-all cursor-pointer mt-4">
-                  Submit Another Request
-                </button>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {FAQS.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`bg-white rounded-2xl border transition-all cursor-pointer ${
+                  activeFaq === idx ? 'border-royal-purple shadow-lg' : 'border-transparent shadow-[0px_4px_20px_rgba(0,0,0,0.05)]'
+                }`}
+                onClick={() => toggleFaq(idx)}
+              >
+                <div className="flex justify-between items-center p-6 gap-4">
+                  <h3 className="text-body-lg font-bold text-charcoal">{faq.q}</h3>
+                  <ChevronDown
+                    size={22}
+                    className={`shrink-0 transition-transform duration-200 ${activeFaq === idx ? 'rotate-180 text-royal-purple' : 'text-charcoal'}`}
+                  />
+                </div>
+                {activeFaq === idx && (
+                  <div className="px-6 pb-6 text-on-surface-variant text-body-md">{faq.a}</div>
+                )}
               </div>
-            ) : (
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="font-label-md text-label-md text-charcoal font-medium">Full Name</label>
-                    <input required value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} className="w-full px-4 py-4 rounded-xl bg-soft-gray border-transparent focus:border-royal-purple focus:ring-0 transition-all outline-none" placeholder="John Doe" type="text" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="font-label-md text-label-md text-charcoal font-medium">Phone Number</label>
-                    <input required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-4 rounded-xl bg-soft-gray border-transparent focus:border-royal-purple focus:ring-0 transition-all outline-none" placeholder="+44 7000 000 000" type="tel" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="font-label-md text-label-md text-charcoal font-medium">Email Address</label>
-                    <input required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full px-4 py-4 rounded-xl bg-soft-gray border-transparent focus:border-royal-purple focus:ring-0 transition-all outline-none" placeholder="john@example.com" type="email" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="font-label-md text-label-md text-charcoal font-medium">Primary Subject</label>
-                    <select value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} className="w-full px-4 py-4 rounded-xl bg-soft-gray border-transparent focus:border-royal-purple focus:ring-0 transition-all outline-none appearance-none">
-                      <option value="Mathematics">Mathematics</option>
-                      <option value="English Language">English Language</option>
-                      <option value="The Sciences">The Sciences</option>
-                      <option value="Humanities">Humanities</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="font-label-md text-label-md text-charcoal font-medium">Your Message</label>
-                  <textarea value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full px-4 py-4 rounded-xl bg-soft-gray border-transparent focus:border-royal-purple focus:ring-0 transition-all outline-none resize-none" placeholder="Tell us about your learning goals..." rows={4} />
-                </div>
-                <button className="w-full bg-royal-purple text-on-primary py-5 rounded-xl font-headline-md text-headline-md font-bold shadow-lg hover:shadow-xl transition-all cursor-pointer" type="submit">
-                  Request My Free Session
-                </button>
-                <p className="text-center font-label-sm text-label-sm text-on-surface-variant">We typically respond within 2 business hours.</p>
-              </form>
-            )}
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Book a Free Trial */}
+      <section className="py-24 bg-soft-gray overflow-hidden relative" id="book-trial">
+        <div className="learning-lane px-margin-mobile md:px-0 max-w-max-width mx-auto">
+          <div className="bg-white rounded-[3rem] shadow-xl overflow-hidden flex flex-col lg:flex-row">
+            <div className="lg:w-1/2 p-12 lg:p-20 space-y-8">
+              <div>
+                <h2 className="font-headline-lg text-headline-lg text-charcoal mb-4 font-bold">Secure Your Free iGCSE Trial Lesson</h2>
+                <p className="text-on-surface-variant text-body-lg">No obligations. Just a chance for your child to experience board-specific iGCSE preparation the Math Make Smart way.</p>
+              </div>
+
+           <div id="ghl-form-wrap" >
+              <iframe className="w-full h-[700px] border-none rounded-xl"
+                id="ghl-dynamic-form"
+                src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
+
+                data-layout="{'id':'INLINE'}"
+                data-form-name="Contact Us"
+                data-height="543"
+                data-layout-iframe-id="ghl-dynamic-form"
+                data-form-id="KoegIzV5zV9qvxp4I6O7"
+                title="Contact Us">
+              </iframe>
+            </div>
+
+            </div>
+            <div className="hidden lg:block lg:w-1/2 relative">
+              <img className="absolute inset-0 w-full h-full object-cover" alt="A focused female student in a UK independent school studying for her iGCSE exams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYCUJcXhUtMGJ8kHDhchbqDVkwOw6byBigwop3E66ulr1f-GizLPnqPgDBUlgq5LtL6FMF8Vu8kqiEy67WDdI-B31rpVERMrPmDwc8BTfVYXie5y7H_HJbPdV6xbwHrSk3Gkr1AefBybqpzAgrjyZnOcn2XtSTLIBizH1If_FNb_vLbusmYDVxTejk_GazgmYPFcMw6507M0U5A-_2dJdRhpGEwxQsxsaTKrCIUQiu9f8XxmPSUuI54g" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent"></div>
+            </div>
           </div>
         </div>
       </section>
