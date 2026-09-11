@@ -59,6 +59,7 @@ const TEST_PREP_SLUGS: Record<string, string> = {
   IGCSE: 'igcse',
   'A Levels': 'a-levels',
   'A-Levels': 'a-levels',
+  'University Admissions Tests': 'university-admissions-tests',
   // CA
   'Provincial Curricula': 'provincial-curricula',
   EQAO: 'eqao',

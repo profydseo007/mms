@@ -31,7 +31,7 @@ export default function HeaderUK({ currentPage, currentSubject, onNavigate }: He
   const [testPrepOpen, setTestPrepOpen] = useState(false);
 
   const subjects = ['Maths', 'English', 'Science', 'Physics', 'Chemistry', 'Biology'];
-  const testPreps = ['11 Plus', '13 Plus', 'GCSE', 'IGCSE', 'A Levels'];
+  const testPreps = ['11 Plus', '13 Plus', 'GCSE', 'IGCSE', 'A Levels', 'University Admission'];
 
   const handleSubjectClick = (sub: string) => {
     onNavigate('subject', sub);
@@ -275,7 +275,7 @@ export default function HeaderUK({ currentPage, currentSubject, onNavigate }: He
                 {/* Mobile Test Prep Nested Collapse */}
                 <div className="space-y-1">
                   <button 
-                    onClick={handleTestPreparationClick}
+                    onClick={() => setTestPrepOpen(!testPrepOpen)}
                     className="flex justify-between items-center w-full font-label-md text-charcoal hover:text-primary py-1 cursor-pointer text-sm"
                   >
                     <span>Test Preparation</span>
