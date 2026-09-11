@@ -71,6 +71,7 @@ export default function HeaderNZ({ currentPage, currentSubject, onNavigate }: He
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex gap-6 xl:gap-8 items-center">
           {/* Find a Tutor Dropdown */}
+          {/* Find a Tutor Dropdown */}
           <div className="relative group">
             <button 
               className={`font-label-md text-label-md flex items-center gap-1 transition-colors duration-200 cursor-pointer ${
@@ -81,53 +82,53 @@ export default function HeaderNZ({ currentPage, currentSubject, onNavigate }: He
               <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
             </button>
 
-            <div className="absolute left-0 mt-2 w-52 bg-white rounded-lg shadow-dropdown border border-surface-container opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
-              {/* Curriculum */}
-              <button
-                onClick={() => onNavigate('curriculum')}
-                className="block w-full text-left px-4 py-2.5 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer"
-              >
-                Curriculum
-              </button>
+           <div className="absolute left-0 mt-2 w-max min-w-[9rem] bg-white rounded-lg shadow-dropdown border border-surface-container opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2">
+  {/* Curriculum */}
+  <button
+    onClick={() => onNavigate('curriculum')}
+    className="block w-full text-left px-3.5 py-2.5 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer whitespace-nowrap"
+  >
+    Curriculum
+  </button>
 
-              {/* Subjects with Submenu */}
-              <div className="relative group/sub">
-                <div className="flex items-center justify-between w-full px-4 py-2.5 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer">
-                  <span>Subjects</span>
-                  <ChevronRight className="w-4 h-4 text-on-surface-variant group-hover/sub:text-primary" />
-                </div>
-                <div className="absolute left-full top-0 ml-1 w-48 bg-white rounded-lg shadow-dropdown border border-surface-container opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 z-50 py-2">
-                  {subjects.map((sub) => (
-                    <button
-                      key={sub}
-                      onClick={() => handleSubjectClick(sub)}
-                      className="block w-full text-left px-4 py-2 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer"
-                    >
-                      {sub}
-                    </button>
-                  ))}
-                </div>
-              </div>
+  {/* Subjects with Submenu */}
+  <div className="relative group/sub">
+    <div className="flex items-center justify-between w-full px-3.5 py-2.5 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer whitespace-nowrap">
+      <span>Subjects</span>
+      <ChevronRight className="w-4 h-4 text-on-surface-variant group-hover/sub:text-primary ml-3" />
+    </div>
+    <div className="absolute left-full top-0 ml-1 w-max min-w-[9rem] bg-white rounded-lg shadow-dropdown border border-surface-container opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 z-50 py-2">
+      {subjects.map((sub) => (
+        <button
+          key={sub}
+          onClick={() => handleSubjectClick(sub)}
+          className="block w-full text-left px-3.5 py-2 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer whitespace-nowrap"
+        >
+          {sub}
+        </button>
+      ))}
+    </div>
+  </div>
 
-              {/* Test Preparation with Submenu */}
-              <div className="relative group/test">
-                <div className="flex items-center justify-between w-full px-4 py-2.5 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer">
-                  <span>Test Preparation</span>
-                  <ChevronRight className="w-4 h-4 text-on-surface-variant group-hover/test:text-primary" />
-                </div>
-                <div className="absolute left-full top-0 ml-1 w-48 bg-white rounded-lg shadow-dropdown border border-surface-container opacity-0 invisible group-hover/test:opacity-100 group-hover/test:visible transition-all duration-200 z-50 py-2">
-                  {testPreps.map((prep) => (
-                    <button
-                      key={prep}
-                      onClick={() => handleTestPrepClick(prep)}
-                      className="block w-full text-left px-4 py-2 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer"
-                    >
-                      {prep}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+  {/* Test Preparation with Submenu */}
+  <div className="relative group/test">
+    <div className="flex items-center justify-between w-full px-3.5 py-2.5 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer whitespace-nowrap">
+      <span>Test Preparation</span>
+      <ChevronRight className="w-4 h-4 text-on-surface-variant group-hover/test:text-primary ml-3" />
+    </div>
+    <div className="absolute left-full top-0 ml-1 w-max min-w-[9rem] bg-white rounded-lg shadow-dropdown border border-surface-container opacity-0 invisible group-hover/test:opacity-100 group-hover/test:visible transition-all duration-200 z-50 py-2">
+      {testPreps.map((prep) => (
+        <button
+          key={prep}
+          onClick={() => handleTestPrepClick(prep)}
+          className="block w-full text-left px-3.5 py-2 text-sm text-charcoal hover:bg-soft-gray hover:text-primary transition-colors cursor-pointer whitespace-nowrap"
+        >
+          {prep}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
           </div>
 
           {/* Resources Hub Dropdown */}
