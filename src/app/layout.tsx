@@ -4,9 +4,17 @@ import AppShell from '@/components/AppShell';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 
 export const metadata: Metadata = {
-  title: 'Math Make Smart',
+  title: {
+    default: 'Math Make Smart | Online Tutoring',
+    template: '%s | Math Make Smart',
+  },
   description:
-    'Professional mathematics tutoring for a global generation. Patient, structured, and effective.',
+    'One-to-one online tutoring in maths, English and science. Patient, structured and effective support for every learner.',
+  applicationName: 'Math Make Smart',
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

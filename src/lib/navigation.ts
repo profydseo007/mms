@@ -136,7 +136,7 @@ export function pageToPath(page: ActivePage, subjectTitle?: string, country?: st
     case 'home':
       return prefix ? prefix : '/';
     case 'about':
-      return `${prefix}/about`;
+      return '/about';
     case 'trial':
       return `/free-trial`;
     case 'login':
