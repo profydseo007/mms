@@ -161,6 +161,8 @@ export function pageToPath(page: ActivePage, subjectTitle?: string, country?: st
       return `${prefix}/privacy`;
     case 'refund':
       return `${prefix}/refund`;
+    case 'contact-us':
+      return `${prefix}/contact-us`;
     case 'subject': {
       const subjectKey = subjectTitle ?? 'Maths';
       const subjectSlug = getSubjectSlug(subjectKey, country);
@@ -269,6 +271,7 @@ export function pathToPage(pathname: string): ResolvedRoute {
     blog: 'blogs',
     privacy: 'privacy',
     refund: 'refund',
+    'contact-us': 'contact-us',
   };
 
   if (simplePages[first]) {

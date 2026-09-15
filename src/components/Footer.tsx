@@ -72,6 +72,11 @@ export default function Footer({ onNavigate }: FooterProps) {
               </button>
             </li>
             <li>
+              <button onClick={() => onNavigate('contact-us')} className="hover:text-primary transition-colors cursor-pointer text-left">
+                Contact Us
+              </button>
+            </li>
+            <li>
               <button onClick={() => onNavigate('a-levels')} className="hover:text-primary transition-colors cursor-pointer text-left">
                 Test Preparation
               </button>
