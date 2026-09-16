@@ -1,20 +1,9 @@
 'use client';
 
-import { FormEvent } from 'react';
-import { Mail, MessageCircle, Phone, Send } from 'lucide-react';
+import { Mail, MessageCircle, Phone } from 'lucide-react';
+import { FreeTrialForm } from './FreeTrial';
 
 export default function ContactUs() {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const name = String(form.get('name') ?? '');
-    const email = String(form.get('email') ?? '');
-    const message = String(form.get('message') ?? '');
-    const subject = encodeURIComponent(`Math Make Smart enquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    window.location.href = `mailto:info@mathmakesmart.com?subject=${subject}&body=${body}`;
-  };
-
   return (
     <div className="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24">
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
@@ -41,16 +30,13 @@ export default function ContactUs() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-surface-container-lowest rounded-xl p-8 md:p-10 border border-outline-variant/30 shadow-ambient space-y-6">
+        <div className="space-y-6">
           <div>
-            <h2 className="font-headline-lg text-headline-lg text-charcoal font-semibold mb-2">Send a message</h2>
-            <p className="text-on-surface-variant text-sm">Tell us a little about how we can help.</p>
+            <h2 className="font-headline-lg text-headline-lg text-charcoal font-semibold mb-2">Book a free trial lesson</h2>
+            <p className="text-on-surface-variant text-sm">Complete the form and our team will help you get started.</p>
           </div>
-          <label className="block"><span className="block text-sm font-semibold text-charcoal mb-2">Name</span><input required name="name" type="text" autoComplete="name" className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3 outline-none focus:border-primary" /></label>
-          <label className="block"><span className="block text-sm font-semibold text-charcoal mb-2">Email</span><input required name="email" type="email" autoComplete="email" className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3 outline-none focus:border-primary" /></label>
-          <label className="block"><span className="block text-sm font-semibold text-charcoal mb-2">Message</span><textarea required name="message" rows={6} className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3 outline-none focus:border-primary resize-y" /></label>
-          <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-white hover:opacity-90 transition-opacity"><Send className="w-4 h-4" /> Send message</button>
-        </form>
+          <FreeTrialForm />
+        </div>
       </section>
     </div>
   );

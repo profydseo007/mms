@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivePage } from '@/lib/types';
 import { COUNTRY_FORM_IDS, getClientCountryDetection } from '@/lib/country';
 import { Star, ShieldAlert, Award, FileText, CheckCircle, GraduationCap, Calendar, Phone, Mail, Sparkles } from 'lucide-react';
@@ -17,7 +17,11 @@ interface FreeTrialProps {
   onNavigate: (page: ActivePage, subjectTitle?: string) => void;
 }
 
-export default function FreeTrial({ onNavigate }: FreeTrialProps) {
+interface FreeTrialFormProps {
+  className?: string;
+}
+
+export function FreeTrialForm({ className = '' }: FreeTrialFormProps) {
   const [selectedRegion, setSelectedRegion] = useState('US');
   const [formId, setFormId] = useState(COUNTRY_FORM_IDS.US);
 
@@ -62,6 +66,25 @@ export default function FreeTrial({ onNavigate }: FreeTrialProps) {
   }, []);
 
   return (
+    <div className={`bg-white p-6 md:p-8 rounded-[28px] shadow-[0_18px_45px_rgba(15,23,42,0.08)] border border-slate-200 w-full max-w-[520px] ml-auto ${className}`}>
+      <iframe
+        key={formId}
+        id="ghl-dynamic-form"
+        src={`https://api.leadconnectorhq.com/widget/form/${formId}?notrack=true`}
+        style={{ width: '100%', height: '543px', border: 'none', borderRadius: '8px' }}
+        data-layout="{'id':'INLINE'}"
+        data-form-name="Free Trial"
+        data-height="543"
+        data-layout-iframe-id="ghl-dynamic-form"
+        data-form-id={formId}
+        title="Free Trial"
+      />
+    </div>
+  );
+}
+
+export default function FreeTrial({ onNavigate }: FreeTrialProps) {
+  return (
     <div>
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center pt-12 pb-24 overflow-hidden bg-white">
@@ -88,20 +111,7 @@ export default function FreeTrial({ onNavigate }: FreeTrialProps) {
           </div>
 
           {/* GHL Free Trial Form (country-aware) */}
-          <div className="bg-white p-6 md:p-8 rounded-[28px] shadow-[0_18px_45px_rgba(15,23,42,0.08)] border border-slate-200 w-full max-w-[520px] ml-auto">
-            <iframe
-              key={formId}
-              id="ghl-dynamic-form"
-              src={`https://api.leadconnectorhq.com/widget/form/${formId}?notrack=true`}
-              style={{ width: '100%', height: '543px', border: 'none', borderRadius: '8px' }}
-              data-layout="{'id':'INLINE'}"
-              data-form-name="Free Trial"
-              data-height="543"
-              data-layout-iframe-id="ghl-dynamic-form"
-              data-form-id={formId}
-              title="Free Trial"
-            />
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 
