@@ -13,8 +13,8 @@ const SUBJECTS = {
   'online-biology-tutor': BiologySubject,
   'online-chemistry-tutor': ChemistrySubject,
   'online-english-tutor': EnglishSubject,
-  'online-math-tutor': MathSubject,
-  'online-maths-tutor': MathSubject,  // NZ/AU/UK/IE spelling alias
+  'online-maths-tutor': MathSubject,
+  'online-math-tutor': MathSubject,  // NZ/AU/UK/IE spelling alias
   'online-physics-tutor': PhysicsSubject,
   'online-science-tutor': ScienceSubject,
 };
