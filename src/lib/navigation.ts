@@ -161,6 +161,8 @@ export function pageToPath(page: ActivePage, subjectTitle?: string, country?: st
       return `${prefix}/privacy`;
     case 'refund':
       return `${prefix}/refund`;
+    case 'terms-and-conditions':
+      return `${prefix}/terms-and-conditions`;
     case 'contact-us':
       return `${prefix}/contact-us`;
     case 'subject': {
@@ -271,6 +273,7 @@ export function pathToPage(pathname: string): ResolvedRoute {
     blog: 'blogs',
     privacy: 'privacy',
     refund: 'refund',
+    'terms-and-conditions': 'terms-and-conditions',
     'contact-us': 'contact-us',
   };
 

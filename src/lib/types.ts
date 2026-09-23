@@ -32,6 +32,7 @@ export type ActivePage =
   | 'alevel-biology-predicted'
   | 'privacy'
   | 'refund'
+  | 'terms-and-conditions'
   | 'contact-us'
   | 'subject'
   | 'test-prep';

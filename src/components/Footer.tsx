@@ -103,7 +103,12 @@ export default function Footer({ onNavigate }: FooterProps) {
                 Refund Policy
               </button>
             </li>
-            <li>
+             <li>
+              <button onClick={() => onNavigate('terms-and-conditions' as ActivePage)} className="hover:text-primary transition-colors cursor-pointer text-left">
+                terms and conditions
+              </button>
+            </li>
+            {/* <li>
               <a href="#" className="hover:text-primary transition-colors block text-left">
                 Terms of Service
               </a>
@@ -112,7 +117,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               <a href="#" className="hover:text-primary transition-colors block text-left">
                 Cookie Policy
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
 
