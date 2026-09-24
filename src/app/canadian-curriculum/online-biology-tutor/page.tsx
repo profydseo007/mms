@@ -1,8 +1,8 @@
 'use client';
 
 import type { ActivePage } from '@/lib/types';
-import GradeLessonPlans from '@/components/subjects/Gradimport { FreeTrialForm } from '@/components/FreeTrial';
-eLessonPlans';
+import GradeLessonPlans from '@/components/subjects/GradeLessonPlans';
+import { FreeTrialForm } from '@/components/FreeTrial';
 import {
   Check,
   CheckCircle2,
