@@ -1,13 +1,18 @@
 'use client';
 
+import React, { useState } from 'react';
 import type { ActivePage } from '@/lib/types';
+import GradeLessonPlans from '@/components/subjects/GradeLessonPlans';
 import LigatureIcon from '@/components/LigatureIcon';
+import { ChevronDown } from 'lucide-react';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 interface SubjectComponentProps {
   onNavigate: (page: ActivePage, subjectTitle?: string) => void;
 }
 
 export default function CAMathTutorContent({ onNavigate }: SubjectComponentProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -212,48 +217,84 @@ export default function CAMathTutorContent({ onNavigate }: SubjectComponentProps
         </div>
       </section>
 
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="Math"
+        description="Explore Canada math lesson plans aligned with local year groups, courses and exams."
+        plans={[
+          { grade: 'Grades 1–8', band: 'Elementary' },
+          { grade: 'Grades 9–10 Mathematics', band: 'Secondary' },
+          { grade: 'MHF4U Advanced Functions', band: 'Ontario Grade 12' },
+          { grade: 'MCV4U Calculus & Vectors', band: 'Ontario Grade 12' },
+          { grade: 'Math 30-1', band: 'Alberta Grade 12' },
+        ]}
+      />
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">Frequently Asked Questions</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Do you teach the Ontario curriculum specifically, or a generic Canadian one?</h4>
-              <p className="text-on-surface-variant text-sm">Province-specific, always. There is no national curriculum in Canada, so we ask which province and school board your child attends before the first lesson. At the senior level we match to the exact course code, because MCV4U covers a defined set of expectations and differs from a general calculus course.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">What is the difference between MHF4U and MCV4U?</h4>
-              <p className="text-on-surface-variant text-sm">Advanced Functions (MHF4U) covers polynomial, rational, logarithmic and trigonometric functions, and is normally the prerequisite for Calculus and Vectors (MCV4U), which introduces rates of change, derivatives and vector geometry. Most Ontario engineering and science programs expect both, and students frequently take them in the same year.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">How much does the Alberta Diploma Exam count toward my child&rsquo;s final mark?</h4>
-              <p className="text-on-surface-variant text-sm">The final course mark blends the school-awarded grade with the diploma examination result, weighted toward coursework, and a combined mark of at least 50 per cent is required to pass. A strong year in class provides a cushion but not immunity, which is why timed practice under exam conditions matters more in Alberta than almost anywhere else in Canada.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Can my child fail EQAO?</h4>
-              <p className="text-on-surface-variant text-sm">Not at Grades 3, 6 or 9. Those assessments report achievement against provincial standards and inform school planning, with no pass mark for the individual student. The Grade 10 literacy test is different, because meeting the literacy requirement is a condition of graduating in Ontario.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">We are moving provinces mid-year. What should we expect?</h4>
-              <p className="text-on-surface-variant text-sm">More disruption than most families anticipate, and rarely where they expect it. The content overlaps heavily between provinces but the sequencing does not, so a student can arrive having covered a topic their new class finished last term while missing something it completed two years earlier. The first thing we do is map that gap rather than assume it.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Is the free trial lesson genuinely free?</h4>
-              <p className="text-on-surface-variant text-sm">There are no card details required and no follow-up call trying to lock you into a package. It is a full lesson with a math tutor, used to establish where your child actually stands against their provincial grade expectations before anyone commits to anything.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">My child needs help with the math inside physics and chemistry too. Can you help with both?</h4>
-              <p className="text-on-surface-variant text-sm">
-                Very often the difficulty in senior sciences is mathematical rather than scientific. Students struggling with kinematics or stoichiometry are usually struggling with rearranging equations and ratios, so we look at both together and can pair math support with{' '}
-                <button
-                  onClick={() => onNavigate('subject', 'Physics')}
-                  className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer"
-                >
-                  physics tutoring
-                </button>
-                {' '}or chemistry so the same underlying gap is not addressed twice in isolation.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {([
+              {
+                q: 'Do you teach the Ontario curriculum specifically, or a generic Canadian one?',
+                a: 'Province-specific, always. There is no national curriculum in Canada, so we ask which province and school board your child attends before the first lesson. At the senior level we match to the exact course code, because MCV4U covers a defined set of expectations and differs from a general calculus course.',
+              },
+              {
+                q: 'What is the difference between MHF4U and MCV4U?',
+                a: 'Advanced Functions (MHF4U) covers polynomial, rational, logarithmic and trigonometric functions, and is normally the prerequisite for Calculus and Vectors (MCV4U), which introduces rates of change, derivatives and vector geometry. Most Ontario engineering and science programs expect both, and students frequently take them in the same year.',
+              },
+              {
+                q: 'How much does the Alberta Diploma Exam count toward my child\u2019s final mark?',
+                a: 'The final course mark blends the school-awarded grade with the diploma examination result, weighted toward coursework, and a combined mark of at least 50 per cent is required to pass. A strong year in class provides a cushion but not immunity, which is why timed practice under exam conditions matters more in Alberta than almost anywhere else in Canada.',
+              },
+              {
+                q: 'Can my child fail EQAO?',
+                a: 'Not at Grades 3, 6 or 9. Those assessments report achievement against provincial standards and inform school planning, with no pass mark for the individual student. The Grade 10 literacy test is different, because meeting the literacy requirement is a condition of graduating in Ontario.',
+              },
+              {
+                q: 'We are moving provinces mid-year. What should we expect?',
+                a: 'More disruption than most families anticipate, and rarely where they expect it. The content overlaps heavily between provinces but the sequencing does not, so a student can arrive having covered a topic their new class finished last term while missing something it completed two years earlier. The first thing we do is map that gap rather than assume it.',
+              },
+              {
+                q: 'Is the free trial lesson genuinely free?',
+                a: 'There are no card details required and no follow-up call trying to lock you into a package. It is a full lesson with a math tutor, used to establish where your child actually stands against their provincial grade expectations before anyone commits to anything.',
+              },
+              {
+                q: 'My child needs help with the math inside physics and chemistry too. Can you help with both?',
+                a: (
+                  <>
+                    Very often the difficulty in senior sciences is mathematical rather than scientific. Students struggling with kinematics or stoichiometry are usually struggling with rearranging equations and ratios, so we look at both together and can pair math support with{' '}
+                    <button onClick={() => onNavigate('subject', 'Physics')} className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer">physics tutoring</button>
+                    {' '}or chemistry so the same underlying gap is not addressed twice in isolation.
+                  </>
+                ),
+              },
+            ] as { q: string; a: React.ReactNode }[]).map((faq, idx) => (
+              <div
+                key={idx}
+                className={`bg-soft-gray rounded-2xl border transition-all cursor-pointer ${
+                  openFaq === idx ? 'border-royal-purple shadow-ambient' : 'border-outline-variant/30'
+                }`}
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+              >
+                <div className="flex justify-between items-center p-6 gap-4">
+                  <h3 className="text-body-lg font-bold text-charcoal">{faq.q}</h3>
+                  <ChevronDown
+                    size={22}
+                    aria-hidden="true"
+                    className={`shrink-0 transition-transform duration-300 ${
+                      openFaq === idx ? 'rotate-180 text-royal-purple' : 'text-charcoal'
+                    }`}
+                  />
+                </div>
+                {openFaq === idx && (
+                  <div className="px-6 pb-6 text-on-surface-variant text-body-md border-t border-outline-variant/20 pt-4">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -297,18 +338,7 @@ export default function CAMathTutorContent({ onNavigate }: SubjectComponentProps
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s grade, province and the course they are taking, and we will match them with a math tutor for a free first lesson. No payment details needed.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

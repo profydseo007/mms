@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { ActivePage } from '@/lib/types';
-import { Check, CheckCircle2, Clock3, DollarSign, Star } from 'lucide-react';
+import Link from 'next/link';
+import { BookOpen, Check, CheckCircle2, ChevronDown, Clock3, DollarSign, Star } from 'lucide-react';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 type LigatureIconName = 'Clock' | 'DollarSign' | 'Star' | 'CheckCircle' | 'Check';
 
@@ -28,6 +30,7 @@ interface SubjectComponentProps {
 }
 
 export default function AUScienceTutorContent({ onNavigate }: SubjectComponentProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -232,48 +235,118 @@ export default function AUScienceTutorContent({ onNavigate }: SubjectComponentPr
         </div>
       </section>
 
+       <section className="py-20 md:py-24 bg-surface">
+  <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+      <div className="space-y-4">
+        <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">
+          Science Lesson Plans For Each Year
+        </h2>
+        <p className="text-on-surface-variant max-w-xl">
+          Explore Australian science lesson plans aligned with the topics students study at each year level.
+        </p>
+      </div>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      {[
+        { grade: 'Year 1', band: 'Primary' },
+        { grade: 'Year 2', band: 'Primary' },
+        { grade: 'Year 3', band: 'Primary' },
+        { grade: 'Year 4', band: 'Primary' },
+        { grade: 'Year 5', band: 'Primary' },
+        { grade: 'Year 6', band: 'Primary' },
+        { grade: 'Year 7', band: 'Secondary' },
+        { grade: 'Year 8', band: 'Secondary' },
+        { grade: 'Year 9', band: 'Secondary' },
+        { grade: 'Year 10', band: 'Secondary' },
+        { grade: 'Year 11', band: 'Senior Secondary' },
+        { grade: 'Year 12', band: 'Senior Secondary' },
+      ].map((item) => {
+        const year = Number(item.grade.replace('Year ', ''));
+        const yearWords = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+        const href = `/au/australian-curriculum/online-science-tutor/lesson-plan-for-year-${yearWords[year]}`;
+        return (
+          <Link
+            key={item.grade}
+            href={href}
+            className="group block cursor-pointer text-center bg-white p-8 rounded-3xl border border-royal-purple/30 hover:border-royal-purple hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+          >
+            <BookOpen size={22} className="text-royal-purple mx-auto mb-3 opacity-100 transition-opacity" />
+            <span className="block text-sm font-semibold text-charcoal mb-1">Science Lesson Plan For</span>
+            <span className="block font-headline-md text-headline-md text-royal-purple mb-2 font-bold">{item.grade}</span>
+            <span className="text-body-md text-on-surface-variant">{item.band}</span>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">Frequently Asked Questions</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">When does science split into biology, chemistry and physics in Australia?</h4>
-              <p className="text-on-surface-variant text-sm">In Year 11, when students move into their state certificate. Until then they study an integrated science course covering biological, chemical, physical and Earth sciences together, which is why a student can look strong in science overall and still find one senior subject unexpectedly difficult.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">What are Science Inquiry Skills and why do they matter?</h4>
-              <p className="text-on-surface-variant text-sm">They are a strand of the Australian Curriculum assessed alongside content: questioning and predicting, planning and conducting investigations, processing and analysing data, evaluating and communicating. Students who know the content but have never been taught to interpret an unfamiliar graph or justify a conclusion lose marks that have nothing to do with their knowledge.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">My child revises hard but still loses marks in science tests. Why?</h4>
-              <p className="text-on-surface-variant text-sm">Usually on the extended response and data questions rather than the recall ones. Australian science assessment asks students to explain a process, interpret unfamiliar results or evaluate a method, and a memorised definition answers none of those. That reasoning is teachable and typically improves faster than content knowledge does.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">How important are Years 9 and 10 science really?</h4>
-              <p className="text-on-surface-variant text-sm">They are the most consequential years in the whole science pathway and the easiest to coast through. Students arrive in Year 11 chemistry or physics with gaps in the particle model, chemical equations or motion that nobody spotted, and the resulting difficulty is often mistaken for a lack of aptitude when it is simply missing groundwork.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Can you help with practical investigations and reports?</h4>
-              <p className="text-on-surface-variant text-sm">Yes, and it is worth asking for. Practical work carries real weight in senior assessment, and students commonly lose marks in the analysis and evaluation rather than in the experiment itself. We work through variables, method, data handling, sources of error and writing conclusions that argue from the evidence.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Does science appear in NAPLAN?</h4>
-              <p className="text-on-surface-variant text-sm">No. NAPLAN assesses reading, writing, language conventions and numeracy only, in Years 3, 5, 7 and 9. Science is assessed through school-based work rather than nationally, which means a science difficulty can go unnoticed for years because no external report ever flags it.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">My child wants to take chemistry in Year 11. What should we do now?</h4>
-              <p className="text-on-surface-variant text-sm">
-                Focus on the chemical sciences sub-strand and the maths underneath it. The particle model, writing equations and proportional reasoning all carry directly into senior chemistry, so building those in Year 10 makes the transition into{' '}
-                <button
-                  onClick={() => onNavigate('subject', 'Chemistry')}
-                  className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer"
-                >
-                  chemistry tutoring
-                </button>
-                {' '}considerably smoother than trying to catch up once assessment has already started counting.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {([
+              {
+                q: 'When does science split into biology, chemistry and physics in Australia?',
+                a: 'In Year 11, when students move into their state certificate. Until then they study an integrated science course covering biological, chemical, physical and Earth sciences together, which is why a student can look strong in science overall and still find one senior subject unexpectedly difficult.',
+              },
+              {
+                q: 'What are Science Inquiry Skills and why do they matter?',
+                a: 'They are a strand of the Australian Curriculum assessed alongside content: questioning and predicting, planning and conducting investigations, processing and analysing data, evaluating and communicating. Students who know the content but have never been taught to interpret an unfamiliar graph or justify a conclusion lose marks that have nothing to do with their knowledge.',
+              },
+              {
+                q: 'My child revises hard but still loses marks in science tests. Why?',
+                a: 'Usually on the extended response and data questions rather than the recall ones. Australian science assessment asks students to explain a process, interpret unfamiliar results or evaluate a method, and a memorised definition answers none of those. That reasoning is teachable and typically improves faster than content knowledge does.',
+              },
+              {
+                q: 'How important are Years 9 and 10 science really?',
+                a: 'They are the most consequential years in the whole science pathway and the easiest to coast through. Students arrive in Year 11 chemistry or physics with gaps in the particle model, chemical equations or motion that nobody spotted, and the resulting difficulty is often mistaken for a lack of aptitude when it is simply missing groundwork.',
+              },
+              {
+                q: 'Can you help with practical investigations and reports?',
+                a: 'Yes, and it is worth asking for. Practical work carries real weight in senior assessment, and students commonly lose marks in the analysis and evaluation rather than in the experiment itself. We work through variables, method, data handling, sources of error and writing conclusions that argue from the evidence.',
+              },
+              {
+                q: 'Does science appear in NAPLAN?',
+                a: 'No. NAPLAN assesses reading, writing, language conventions and numeracy only, in Years 3, 5, 7 and 9. Science is assessed through school-based work rather than nationally, which means a science difficulty can go unnoticed for years because no external report ever flags it.',
+              },
+              {
+                q: 'My child wants to take chemistry in Year 11. What should we do now?',
+                a: (
+                  <>
+                    Focus on the chemical sciences sub-strand and the maths underneath it. The particle model, writing equations and proportional reasoning all carry directly into senior chemistry, so building those in Year 10 makes the transition into{' '}
+                    <button onClick={() => onNavigate('subject', 'Chemistry')} className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer">chemistry tutoring</button>
+                    {' '}considerably smoother than trying to catch up once assessment has already started counting.
+                  </>
+                ),
+              },
+            ] as { q: string; a: React.ReactNode }[]).map((faq, idx) => (
+              <div
+                key={idx}
+                className={`bg-soft-gray rounded-2xl border transition-all cursor-pointer ${
+                  openFaq === idx ? 'border-royal-purple shadow-ambient' : 'border-outline-variant/30'
+                }`}
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+              >
+                <div className="flex justify-between items-center p-6 gap-4">
+                  <h3 className="text-body-lg font-bold text-charcoal">{faq.q}</h3>
+                  <ChevronDown
+                    size={22}
+                    aria-hidden="true"
+                    className={`shrink-0 transition-transform duration-300 ${
+                      openFaq === idx ? 'rotate-180 text-royal-purple' : 'text-charcoal'
+                    }`}
+                  />
+                </div>
+                {openFaq === idx && (
+                  <div className="px-6 pb-6 text-on-surface-variant text-body-md border-t border-outline-variant/20 pt-4">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -317,18 +390,7 @@ export default function AUScienceTutorContent({ onNavigate }: SubjectComponentPr
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s year level and state, and we will pair them with a science tutor for a free first lesson. No payment details required.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

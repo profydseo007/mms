@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { ActivePage } from '@/lib/types';
-import { Check, CheckCircle2, Clock3, DollarSign, Star } from 'lucide-react';
+import Link from 'next/link';
+import { BookOpen, Check, CheckCircle2, ChevronDown, Clock3, DollarSign, Star } from 'lucide-react';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 type LigatureIconName = 'Clock' | 'DollarSign' | 'Star' | 'CheckCircle' | 'Check';
 
@@ -28,6 +30,7 @@ interface SubjectComponentProps {
 }
 
 export default function AUEnglishTutorContent({ onNavigate }: SubjectComponentProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -232,48 +235,118 @@ export default function AUEnglishTutorContent({ onNavigate }: SubjectComponentPr
         </div>
       </section>
 
+       <section className="py-20 md:py-24 bg-surface">
+  <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+      <div className="space-y-4">
+        <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">
+          English Lesson Plans For Each Year
+        </h2>
+        <p className="text-on-surface-variant max-w-xl">
+          Explore Australian English lesson plans aligned with the topics students study at each year level.
+        </p>
+      </div>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      {[
+        { grade: 'Year 1', band: 'Primary' },
+        { grade: 'Year 2', band: 'Primary' },
+        { grade: 'Year 3', band: 'Primary' },
+        { grade: 'Year 4', band: 'Primary' },
+        { grade: 'Year 5', band: 'Primary' },
+        { grade: 'Year 6', band: 'Primary' },
+        { grade: 'Year 7', band: 'Secondary' },
+        { grade: 'Year 8', band: 'Secondary' },
+        { grade: 'Year 9', band: 'Secondary' },
+        { grade: 'Year 10', band: 'Secondary' },
+        { grade: 'Year 11', band: 'Senior Secondary' },
+        { grade: 'Year 12', band: 'Senior Secondary' },
+      ].map((item) => {
+        const year = Number(item.grade.replace('Year ', ''));
+        const yearWords = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+        const href = `/au/australian-curriculum/online-english-tutor/lesson-plan-for-year-${yearWords[year]}`;
+        return (
+          <Link
+            key={item.grade}
+            href={href}
+            className="group block cursor-pointer text-center bg-white p-8 rounded-3xl border border-royal-purple/30 hover:border-royal-purple hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+          >
+            <BookOpen size={22} className="text-royal-purple mx-auto mb-3 opacity-100 transition-opacity" />
+            <span className="block text-sm font-semibold text-charcoal mb-1">English Lesson Plan For</span>
+            <span className="block font-headline-md text-headline-md text-royal-purple mb-2 font-bold">{item.grade}</span>
+            <span className="text-body-md text-on-surface-variant">{item.band}</span>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">Frequently Asked Questions</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Is English compulsory for the ATAR?</h4>
-              <p className="text-on-surface-variant text-sm">In most states an English subject is required to receive an ATAR, and English is compulsory within every senior certificate in some form. That makes it unusual: a student can drop maths or science, but not English. It also means a weak English result affects an ATAR in a way that a weak result in an optional subject does not.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">What is the difference between text response and language analysis?</h4>
-              <p className="text-on-surface-variant text-sm">Text response asks students to argue an interpretation of a studied text using evidence from it. Language analysis asks them to examine how a writer or speaker positions an audience through argument and persuasive technique. They are genuinely different skills, and students often perform well in one while struggling in the other, which is worth diagnosing rather than assuming general weakness.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">How do you actually improve essay marks?</h4>
-              <p className="text-on-surface-variant text-sm">By fixing structure and argument before style. Most marks are lost not through weak vocabulary but through essays that summarise rather than analyse, or that never directly answer the question set. We mark against the criteria your child&rsquo;s teacher is using, so feedback maps onto how the work is genuinely scored.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">My child reads well but writes poorly. Is that common?</h4>
-              <p className="text-on-surface-variant text-sm">Extremely, and the two are separate skills. Strong readers absorb ideas but may never have been taught to plan an argument, build a paragraph around a single point, or integrate quotations smoothly. That is explicit, teachable technique, and it usually improves faster than reading comprehension.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Should we prepare for the NAPLAN writing task?</h4>
-              <p className="text-on-surface-variant text-sm">A little familiarity helps, since the task is timed and students write to either a narrative or persuasive prompt. Beyond knowing the format and practising planning quickly, extended drilling adds little. NAPLAN reports against proficiency levels rather than a pass mark and carries no consequence for the individual student.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Do you support students in Years 11 and 12 across different states?</h4>
-              <p className="text-on-surface-variant text-sm">Yes. VCE, HSC, QCE, WACE, SACE, TCE and the NTCET are all covered, with tutors matched to the specific certificate. Senior English differs substantially between states in both set texts and assessment structure, so a tutor who knows VCE text response is not automatically suited to an HSC Common Module essay.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Is slow reading holding back results in subjects other than English?</h4>
-              <p className="text-on-surface-variant text-sm">
-                Frequently, and it often goes unnoticed. Word problems in maths, extended response questions in science and source analysis in humanities all depend on reading comprehension, so a slow reader underperforms across the board. Where we see that we look at English alongside{' '}
-                <button
-                  onClick={() => onNavigate('subject', 'Maths')}
-                  className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer"
-                >
-                  maths tutoring
-                </button>
-                {' '}because the same comprehension gap is usually showing up in both places at once.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {([
+              {
+                q: 'Is English compulsory for the ATAR?',
+                a: 'In most states an English subject is required to receive an ATAR, and English is compulsory within every senior certificate in some form. That makes it unusual: a student can drop maths or science, but not English. It also means a weak English result affects an ATAR in a way that a weak result in an optional subject does not.',
+              },
+              {
+                q: 'What is the difference between text response and language analysis?',
+                a: 'Text response asks students to argue an interpretation of a studied text using evidence from it. Language analysis asks them to examine how a writer or speaker positions an audience through argument and persuasive technique. They are genuinely different skills, and students often perform well in one while struggling in the other, which is worth diagnosing rather than assuming general weakness.',
+              },
+              {
+                q: 'How do you actually improve essay marks?',
+                a: 'By fixing structure and argument before style. Most marks are lost not through weak vocabulary but through essays that summarise rather than analyse, or that never directly answer the question set. We mark against the criteria your child\u2019s teacher is using, so feedback maps onto how the work is genuinely scored.',
+              },
+              {
+                q: 'My child reads well but writes poorly. Is that common?',
+                a: 'Extremely, and the two are separate skills. Strong readers absorb ideas but may never have been taught to plan an argument, build a paragraph around a single point, or integrate quotations smoothly. That is explicit, teachable technique, and it usually improves faster than reading comprehension.',
+              },
+              {
+                q: 'Should we prepare for the NAPLAN writing task?',
+                a: 'A little familiarity helps, since the task is timed and students write to either a narrative or persuasive prompt. Beyond knowing the format and practising planning quickly, extended drilling adds little. NAPLAN reports against proficiency levels rather than a pass mark and carries no consequence for the individual student.',
+              },
+              {
+                q: 'Do you support students in Years 11 and 12 across different states?',
+                a: 'Yes. VCE, HSC, QCE, WACE, SACE, TCE and the NTCET are all covered, with tutors matched to the specific certificate. Senior English differs substantially between states in both set texts and assessment structure, so a tutor who knows VCE text response is not automatically suited to an HSC Common Module essay.',
+              },
+              {
+                q: 'Is slow reading holding back results in subjects other than English?',
+                a: (
+                  <>
+                    Frequently, and it often goes unnoticed. Word problems in maths, extended response questions in science and source analysis in humanities all depend on reading comprehension, so a slow reader underperforms across the board. Where we see that we look at English alongside{' '}
+                    <button onClick={() => onNavigate('subject', 'Maths')} className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer">maths tutoring</button>
+                    {' '}because the same comprehension gap is usually showing up in both places at once.
+                  </>
+                ),
+              },
+            ] as { q: string; a: React.ReactNode }[]).map((faq, idx) => (
+              <div
+                key={idx}
+                className={`bg-soft-gray rounded-2xl border transition-all cursor-pointer ${
+                  openFaq === idx ? 'border-royal-purple shadow-ambient' : 'border-outline-variant/30'
+                }`}
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+              >
+                <div className="flex justify-between items-center p-6 gap-4">
+                  <h3 className="text-body-lg font-bold text-charcoal">{faq.q}</h3>
+                  <ChevronDown
+                    size={22}
+                    aria-hidden="true"
+                    className={`shrink-0 transition-transform duration-300 ${
+                      openFaq === idx ? 'rotate-180 text-royal-purple' : 'text-charcoal'
+                    }`}
+                  />
+                </div>
+                {openFaq === idx && (
+                  <div className="px-6 pb-6 text-on-surface-variant text-body-md border-t border-outline-variant/20 pt-4">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -317,18 +390,7 @@ export default function AUEnglishTutorContent({ onNavigate }: SubjectComponentPr
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s year level, state and the English subject they are taking, and we will match them with a tutor for a free first lesson. No payment details needed.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

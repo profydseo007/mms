@@ -2,7 +2,9 @@
 
 import React from 'react';
 import type { ActivePage } from '@/lib/types';
+import GradeLessonPlans from '@/components/subjects/GradeLessonPlans';
 import { Check, CheckCircle2, Clock3, DollarSign, Star } from 'lucide-react';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 interface SubjectComponentProps {
   onNavigate: (page: ActivePage, subjectTitle?: string) => void;
@@ -175,6 +177,18 @@ export default function UKBiologyTutorContent({ onNavigate }: SubjectComponentPr
         </div>
       </section>
 
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="Biology"
+        description="Explore UK biology lesson plans aligned with local year groups, courses and exams."
+        plans={[
+          { grade: 'Years 7–9', band: 'Key Stage 3' },
+          { grade: 'GCSE Biology', band: 'GCSE' },
+          { grade: 'A-level Biology', band: 'A-level' },
+          { grade: 'A-level Practical Skills', band: 'A-level' },
+        ]}
+      />
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
@@ -217,18 +231,7 @@ export default function UKBiologyTutorContent({ onNavigate }: SubjectComponentPr
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-4 text-center">Book Your Free Trial Lesson</h2>
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">Fill in a few details below and we&apos;ll match your child with the right biology tutor for their key stage, tier, and exam board.</p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

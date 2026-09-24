@@ -4,6 +4,7 @@ import React from 'react';
 import LigatureIcon from '../LigatureIcon';
 import { ActivePage } from '@/lib/types';
 import { Clock, DollarSign, CheckCircle2, Star, GraduationCap, BookOpen, Monitor, ArrowUpRight, Check, Shield } from 'lucide-react';
+import GradeLessonPlans from './GradeLessonPlans';
 
 interface SubjectComponentProps {
   onNavigate: (page: ActivePage, subjectTitle?: string) => void;
@@ -349,6 +350,17 @@ export default function ChemistrySubject({ onNavigate }: SubjectComponentProps) 
           </div>
         </div>
       </section>
+
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="Chemistry"
+        description="Progress from high school chemistry foundations through advanced topics and AP Chemistry exam preparation."
+        plans={[
+          { grade: 'Grade 9', band: 'High School' }, { grade: 'Grade 10', band: 'High School' },
+          { grade: 'Grade 11', band: 'High School' }, { grade: 'Grade 12', band: 'High School' },
+          { grade: 'Honors Chemistry', band: 'Advanced' }, { grade: 'AP Chemistry', band: 'College Prep' },
+        ]}
+      />
 
       {/* FAQs Section */}
       <section className="py-20 md:py-24 bg-white">

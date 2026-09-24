@@ -2,6 +2,8 @@
 
 import React from 'react';
 import type { ActivePage } from '@/lib/types';
+import GradeLessonPlans from '@/components/subjects/Gradimport { FreeTrialForm } from '@/components/FreeTrial';
+eLessonPlans';
 
 interface LigatureIconProps {
   name: string;
@@ -225,6 +227,18 @@ export default function NZPhysicsTutorContent({ onNavigate }: SubjectComponentPr
         </div>
       </section>
 
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="Physics"
+        description="Explore New Zealand physics lesson plans aligned with local year groups, courses and exams."
+        plans={[
+          { grade: 'Years 9–10 Science', band: 'Junior Secondary' },
+          { grade: 'NCEA Level 1 Science', band: 'NCEA' },
+          { grade: 'NCEA Level 2 Physics', band: 'NCEA' },
+          { grade: 'NCEA Level 3 Physics', band: 'NCEA' },
+        ]}
+      />
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
@@ -310,18 +324,7 @@ export default function NZPhysicsTutorContent({ onNavigate }: SubjectComponentPr
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s year level and the physics standards they are entered for, and we will match them with a specialist tutor for a free first lesson.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

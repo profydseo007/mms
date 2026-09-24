@@ -1,377 +1,185 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { BadgeCheck, Brain, Check, CheckCircle2, FileText, FlaskConical, MailCheck, PenTool, PlayCircle } from 'lucide-react';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
-export default function Grade1ScienceLessonPlanAU() {
-  const [activeTerm, setActiveTerm] = useState('autumn');
+type LessonPlanSubject = 'Science';
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const checkInput = (form.elements.namedItem('mathCheck') as HTMLInputElement).value;
-    
-    if (parseInt(checkInput) !== 15) {
-      alert('Please solve the verification math check correctly (13 + 2 = 15).');
-      return;
-    }
+interface CurriculumLessonPlanProps {
+  region: string;
+  subject: LessonPlanSubject;
+  year: number;
+}
 
-    const btn = document.getElementById('submit-btn');
-    const msg = document.getElementById('form-msg');
-    
-    if (btn && msg) {
-      (btn as HTMLButtonElement).disabled = true;
-      btn.innerHTML = 'Submitting Request...';
-      
-      setTimeout(() => {
-        btn.classList.add('hidden');
-        msg.classList.remove('hidden');
-      }, 600);
-    }
-  };
+const AU_TERM_NAMES = ['Term 1 · Feb–Apr', 'Term 2 · Apr–Jun', 'Term 3 · Jul–Sep', 'Term 4 · Oct–Dec'];
+const US_TERM_NAMES = ['Autumn · Sep–Nov', 'Winter · Dec–Feb', 'Spring · Mar–May', 'Summer · Jun–Aug'];
+const TOPICS: Record<LessonPlanSubject, Record<'primary' | 'middle' | 'secondary' | 'senior', string[]>> = {
+  Science: {
+    primary: ['Living things and their needs', 'Weather and seasonal patterns', 'Materials and their properties', 'Forces, light and sound'],
+    middle: ['Cells and body systems', 'Earth and space sciences', 'Particles, mixtures and reactions', 'Energy, forces and ecosystems'],
+    secondary: ['Biological systems and ecology', 'Atomic structure and chemical change', 'Motion, energy and waves', 'Scientific data and investigation'],
+    senior: ['Biology course foundations', 'Chemistry course foundations', 'Physics course foundations', 'Research, practicals and exam skills'],
+  },
+  Biology: {
+    primary: ['Living things and their needs', 'Plant and animal life cycles', 'Habitats and survival features', 'Local biodiversity and caring for life'],
+    middle: ['Cells and classification', 'Body systems and health', 'Reproduction and inheritance', 'Ecosystems and interdependence'],
+    secondary: ['Cellular processes and systems', 'Genetics and inheritance', 'Evolution and population change', 'Ecology, evidence and data'],
+    senior: ['Cells, organisms and ecosystems', 'Gene expression and heredity', 'Evolution and contemporary biology', 'Practical investigations and exam responses'],
+  },
+  Chemistry: {
+    primary: ['Materials in everyday life', 'Solids, liquids and gases', 'Changes to materials', 'Safe observation and fair testing'],
+    middle: ['Particles and states of matter', 'Elements, compounds and mixtures', 'Chemical reactions and conservation', 'Acids, bases and material properties'],
+    secondary: ['Atomic structure and periodic patterns', 'Bonding and chemical formulae', 'Moles, equations and stoichiometry', 'Reaction rates, acids and equilibrium'],
+    senior: ['Structure, properties and reactions', 'Quantitative chemistry and solutions', 'Equilibrium, acids and redox', 'Organic chemistry and practical analysis'],
+  },
+  Physics: {
+    primary: ['Pushes, pulls and movement', 'Light, shadows and vision', 'Sound and vibration', 'Heat, electricity and simple circuits'],
+    middle: ['Motion, speed and forces', 'Energy transfer and efficiency', 'Waves, light and sound', 'Electricity and magnetism'],
+    secondary: ['Kinematics and Newton’s laws', 'Work, energy and momentum', 'Waves, optics and circuits', 'Fields, data and practical modelling'],
+    senior: ['Mechanics and energy', 'Electricity and fields', 'Waves and modern physics', 'Practical investigations and exam problems'],
+  },
+  Maths: {
+    primary: ['Number sense and place value', 'Addition, subtraction and multiplication', 'Measurement, shape and space', 'Patterns, data and problem solving'],
+    middle: ['Fractions, decimals and percentages', 'Ratios, rates and proportional thinking', 'Algebra, equations and graphs', 'Geometry, measurement and statistics'],
+    secondary: ['Functions, algebra and modelling', 'Geometry, measurement and trigonometry', 'Statistics and probability', 'Exam problems and mathematical reasoning'],
+    senior: ['Functions, calculus and rates of change', 'Probability, statistics and data', 'Methods, Specialist and General pathways', 'Applied modelling and exam technique'],
+  },
+  English: {
+    primary: ['Reading fluency and comprehension', 'Vocabulary, grammar and sentence craft', 'Narrative and imaginative writing', 'Speaking, listening and response'],
+    middle: ['Close reading and inference', 'Text structures and language choices', 'Persuasive and analytical writing', 'Discussion, evidence and editing'],
+    secondary: ['Analysing texts and contexts', 'Argument, interpretation and evidence', 'Creative and persuasive composition', 'Timed responses and revision'],
+    senior: ['State certificate text study', 'Analytical essays and evidence', 'Language, audience and context', 'Exam planning, drafting and refinement'],
+  },
+};
+
+function getBand(year: number): 'primary' | 'middle' | 'secondary' | 'senior' {
+  if (year <= 6) return 'primary';
+  if (year <= 8) return 'middle';
+  if (year <= 10) return 'secondary';
+  return 'senior';
+}
+
+function CurriculumLessonPlan({ region, subject, year }: CurriculumLessonPlanProps) {
+  const [activeTerm, setActiveTerm] = useState(0);
+  const termNames = region === 'United States' ? US_TERM_NAMES : AU_TERM_NAMES;
+  const band = getBand(year);
+  const topics = TOPICS[subject][band];
+  const units = Array.from({ length: 3 }, (_, unitIndex) => {
+    const topic = topics[(activeTerm + unitIndex) % topics.length];
+    return {
+      title: `${['Foundations', 'Investigation', 'Application'][unitIndex]}: ${topic}`,
+      rows: Array.from({ length: 4 }, (_, weekIndex) => {
+        const week = weekIndex + 1;
+        const focus = week === 1 ? topic : [
+          `Key ideas: ${topic}`,
+          `Guided practice: ${topic}`,
+          `Review and apply: ${topic}`,
+        ][weekIndex - 1];
+        return {
+          week: `Week ${week}`,
+          one: focus,
+          two: `${focus}\nWorked example and vocabulary` ,
+          three: `${focus}\nGuided activity\nCheck for understanding`,
+          five: `${focus}\nInvestigation or worked examples\nPractice set\nReview quiz`,
+        };
+      }),
+    };
+  });
+
 
   return (
-    <>
-      {/* Hero Section */}
-      <section className="w-full py-16 lg:py-24 bg-surface">
-        <div className="max-w-max-width mx-auto px-margin-mobile lg:px-margin-desktop">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-            {/* Left Column */}
-            <div className="lg:col-span-7 flex flex-col gap-6">
-              <div className="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-secondary-container/30 text-secondary font-label-sm text-label-sm">
-                <span className="material-symbols-outlined text-[16px] text-secondary">verified</span>
-                <span>Australian Curriculum • NGSS Aligned</span>
-              </div>
-              <h1 className="font-display-lg text-display-lg-mobile lg:text-display-lg text-charcoal tracking-tight">
-                Grade 1 Science Lesson Plan & Curriculum Map
-              </h1>
-              <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-                Structured, inquiry-based science roadmap for Grade 1 young learners. Covering Life Science, Earth Systems, and Physical Sciences with flexible 1 to 5 day weekly pacing designed for lifelong mastery.
-              </p>
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <button 
-                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-label-md text-label-md bg-royal-purple text-on-primary shadow-sm hover:bg-primary transition-colors" 
-                  onClick={() => document.getElementById('curriculum-table')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  Explore Lesson Maps
-                </button>
-                <button 
-                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-label-md text-label-md text-royal-purple bg-surface-container hover:bg-surface-container-high transition-colors" 
-                  onClick={() => document.getElementById('book-trial')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  Book Free Trial
-                </button>
-              </div>
-              {/* Key Metrics */}
-              <div className="grid grid-cols-3 gap-4 pt-6 mt-4">
-                <div className="flex flex-col gap-1 p-4 rounded-xl bg-surface-container-low shadow-sm">
-                  <span className="font-headline-md text-headline-md text-royal-purple">100%</span>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant">NGSS Aligned Standards</span>
-                </div>
-                <div className="flex flex-col gap-1 p-4 rounded-xl bg-surface-container-low shadow-sm">
-                  <span className="font-headline-md text-headline-md text-royal-purple">36</span>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant">Weeks Covered In Depth</span>
-                </div>
-                <div className="flex flex-col gap-1 p-4 rounded-xl bg-surface-container-low shadow-sm">
-                  <span className="font-headline-md text-headline-md text-royal-purple">1-on-1</span>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant">Certified STEM Specialists</span>
-                </div>
-              </div>
+    <main className="w-full bg-surface font-body-md text-on-surface">
+      <section className="py-16 lg:py-24">
+        <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7 space-y-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-semibold">
+              <BadgeCheck size={18} /> {region} Curriculum · Year {year} {subject}
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold text-charcoal">Year {year} {subject} Lesson Plan &amp; Curriculum Map</h1>
+            <p className="text-lg text-on-surface-variant max-w-2xl">
+              A flexible learning roadmap for Year {year}, with clear topic progression, one-to-one lesson pacing and practical ways to check understanding. {year >= 11 ? 'Senior course details can vary by state and territory.' : 'Activities build from core ideas to investigation and confident application.'}
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a href="#curriculum-map" className="rounded-full px-7 py-3.5 bg-royal-purple text-white font-semibold hover:opacity-90">Explore lesson map</a>
+              <a href="#book-trial" className="rounded-full px-7 py-3.5 text-royal-purple bg-white font-semibold hover:bg-soft-gray">Book a free trial</a>
             </div>
-            {/* Right Column: Preview Card */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl bg-surface-container-lowest p-8 shadow-xl flex flex-col gap-6">
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <span className="font-label-sm text-label-sm uppercase tracking-wider text-royal-purple bg-primary-fixed px-3 py-1 rounded-full">Early STEM Engine</span>
-                  <span className="flex items-center gap-1 font-label-sm text-label-sm text-secondary font-semibold">
-                    <span className="w-2.5 h-2.5 rounded-full bg-lime-green inline-block animate-pulse"></span>
-                    Active Intake
-                  </span>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h2 className="font-headline-md text-headline-md text-charcoal">Grade 1 Science Exploration</h2>
-                  <p className="font-body-md text-body-md text-on-surface-variant">Systematic scaffold from observational inquiry to foundational physics and biological systems.</p>
-                </div>
-                {/* Focus Modules */}
-                <div className="flex flex-col gap-3">
-                  {[
-                    { icon: 'potted_plant', bg: 'bg-royal-purple', title: 'Life Science & Organisms', desc: 'Plant needs, animal structures, habitats' },
-                    { icon: 'wb_sunny', bg: 'bg-secondary', title: 'Earth & Sky Patterns', desc: 'Weather, sunlight energy, 4 seasons' },
-                    { icon: 'science', bg: 'bg-charcoal', title: 'Matter & Motion', desc: 'Solids, liquids, gases, push & pull forces' }
-                  ].map((module, idx) => (
-                    <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low">
-                      <div className={`w-10 h-10 rounded-lg ${module.bg} text-on-primary flex items-center justify-center shrink-0`}>
-                        <span className="material-symbols-outlined text-[20px]">{module.icon}</span>
-                      </div>
-                      <div className="flex flex-col min-w-0">
-                        <span className="font-label-md text-label-md text-charcoal truncate">{module.title}</span>
-                        <span className="font-label-sm text-label-sm text-on-surface-variant">{module.desc}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                {/* Retention Indicator */}
-                <div className="p-4 rounded-xl bg-soft-gray flex flex-col gap-2">
-                  <div className="flex items-center justify-between font-label-md text-label-md">
-                    <span className="text-charcoal font-semibold">Retention Probability</span>
-                    <span className="text-secondary font-bold">96.4%</span>
-                  </div>
-                  <div className="w-full bg-surface-container-highest h-2.5 rounded-full overflow-hidden">
-                    <div className="bg-secondary h-full rounded-full" style={{width: '96.4%'}}></div>
-                  </div>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant">Based on interactive retrieval quizzes & weekly pacing checkpoints.</span>
-                </div>
-              </div>
+            <div className="grid grid-cols-3 gap-3 pt-3">
+              {[['4', 'Terms'], ['12', 'Weekly checkpoints'], ['1-on-1', 'Tutor support']].map(([value, label]) => (
+                <div key={label} className="bg-white p-4 rounded-xl"><strong className="block text-royal-purple text-xl">{value}</strong><span className="text-sm text-on-surface-variant">{label}</span></div>
+              ))}
             </div>
           </div>
+          <aside className="lg:col-span-5 rounded-3xl bg-white p-8 shadow-sm border border-outline-variant/30">
+            <p className="text-sm uppercase tracking-wide text-royal-purple font-bold mb-3">Year {year} learning focus</p>
+            <h2 className="text-2xl font-bold text-charcoal mb-5">{topics[0]}</h2>
+            <ul className="space-y-4">
+              {topics.slice(1).map((topic) => <li key={topic} className="flex gap-3 text-on-surface-variant"><CheckCircle2 size={20} className="text-royal-purple shrink-0" />{topic}</li>)}
+            </ul>
+          </aside>
         </div>
       </section>
 
-      {/* Term Selector */}
-      <section className="w-full py-12 bg-surface-container-low" id="curriculum-table">
-        <div className="max-w-max-width mx-auto px-margin-mobile lg:px-margin-desktop flex flex-col items-center gap-6">
-          <div className="text-center max-w-2xl flex flex-col gap-2">
-            <span className="font-label-sm text-label-sm text-royal-purple uppercase tracking-wider font-semibold">Interactive Syllabus Browser</span>
-            <h2 className="font-headline-lg text-headline-lg text-charcoal">Comprehensive Weekly Curriculum Map</h2>
-            <p className="font-body-md text-body-md text-on-surface-variant">
-              Explore weekly topic progressions calibrated precisely for 1st grade cognitive development.
-            </p>
+      <section className="py-12 bg-surface-container-low" id="curriculum-map">
+        <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop flex flex-col items-center gap-7">
+          <div className="text-center max-w-2xl"><span className="text-sm uppercase tracking-wide text-royal-purple font-bold">Interactive curriculum browser</span><h2 className="text-3xl font-bold text-charcoal mt-2">Year {year} {subject} learning map</h2><p className="text-on-surface-variant mt-3">Choose a school term, then compare a lighter weekly plan with a more intensive schedule.</p></div>
+          <div className="flex flex-wrap justify-center gap-2 p-1.5 rounded-full bg-white">
+            {termNames.map((term, index) => <button key={term} type="button" onClick={() => setActiveTerm(index)} className={`px-5 py-2.5 rounded-full font-semibold transition-colors ${activeTerm === index ? 'bg-royal-purple text-white' : 'text-on-surface-variant hover:bg-soft-gray'}`}>{term}</button>)}
           </div>
-          {/* Term Tabs */}
-          <div className="inline-flex p-1.5 rounded-full bg-surface-container-high shadow-inner gap-1 flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center gap-2 text-sm text-on-surface-variant"><span className="px-3 py-1 rounded-full bg-white">1 day/week · steady pace</span><span className="px-3 py-1 rounded-full bg-white">2–3 days/week · guided practice</span><span className="px-3 py-1 rounded-full bg-white">5 days/week · intensive mastery</span></div>
+        </div>
+      </section>
+
+      <section className="py-12" aria-label={`${termNames[activeTerm]} weekly curriculum`}>
+        <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop space-y-8">
+          {units.map((unit, unitIndex) => (
+            <article key={unit.title} className="bg-white rounded-2xl p-5 md:p-8 shadow-sm border border-outline-variant/30">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5"><div><span className="text-sm text-royal-purple font-bold">Unit {unitIndex + 1} · {termNames[activeTerm]}</span><h3 className="text-xl md:text-2xl font-bold text-charcoal mt-1">{unit.title}</h3></div><span className="text-sm px-3 py-1 rounded-full bg-soft-gray text-on-surface-variant">{subject} strand</span></div>
+              <div className="overflow-x-auto"><table className="w-full min-w-[760px] text-left"><thead><tr className="bg-surface-container-low text-charcoal"><th className="py-3 px-4 rounded-l-lg">Week</th><th className="py-3 px-4">1 day / wk</th><th className="py-3 px-4">2 days / wk</th><th className="py-3 px-4">3 days / wk</th><th className="py-3 px-4 rounded-r-lg">5 days / wk</th></tr></thead><tbody className="divide-y divide-outline-variant/30 text-sm text-on-surface-variant">{unit.rows.map((row) => <tr key={row.week}><td className="py-4 px-4 font-semibold text-charcoal">{row.week}</td><td className="py-4 px-4">{row.one}</td><td className="py-4 px-4 whitespace-pre-line">{row.two}</td><td className="py-4 px-4 whitespace-pre-line">{row.three}</td><td className="py-4 px-4 whitespace-pre-line">{row.five}</td></tr>)}</tbody></table></div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20 bg-surface-container-low">
+        <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+          <div className="text-center max-w-2xl mx-auto mb-10"><span className="text-sm uppercase tracking-wide text-royal-purple font-bold">The learning framework</span><h2 className="text-3xl font-bold text-charcoal mt-2">Anatomy of a focused lesson</h2><p className="text-on-surface-variant mt-3">Each session moves from a clear question to guided exploration and a check for understanding.</p></div>
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { id: 'autumn', label: 'Autumn (Sep – Nov)' },
-              { id: 'spring', label: 'Spring (Dec, Apr, May)' },
-              { id: 'summer', label: 'Summer (Jun – Aug)' }
-            ].map(term => (
-              <button
-                key={term.id}
-                className={`px-6 py-2.5 rounded-full font-label-md text-label-md transition-all duration-200 ${
-                  activeTerm === term.id 
-                    ? 'bg-royal-purple text-on-primary shadow-sm' 
-                    : 'text-on-surface-variant hover:text-charcoal'
-                }`}
-                onClick={() => setActiveTerm(term.id)}
-              >
-                {term.label}
-              </button>
-            ))}
-          </div>
-          {/* Pacing Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-3 text-center px-4 py-2 rounded-full bg-surface-container-lowest shadow-sm">
-            <span className="font-label-sm text-label-sm text-charcoal font-semibold">Available Tracks:</span>
-            <span className="px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-surface-container text-on-surface-variant">1 Day/Wk (Core)</span>
-            <span className="px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-surface-container text-on-surface-variant">2 Days/Wk (Reinforced)</span>
-            <span className="px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-surface-container text-on-surface-variant">3 Days/Wk (Advanced)</span>
-            <span className="px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-secondary-container/40 text-secondary font-bold">5 Days/Wk (Daily Mastery)</span>
+              { icon: Brain, time: '10 minutes', title: 'Wonder and question', text: `Start with a real-world ${subject.toLowerCase()} question and connect it to what the student already knows.` },
+              { icon: PenTool, time: '25 minutes', title: 'Explore together', text: 'Work through examples, diagrams, investigations or writing with tutor guidance and student participation.' },
+              { icon: BadgeCheck, time: '10 minutes', title: 'Check for mastery', text: 'Use a short practice task to identify what is secure and what should come next.' },
+            ].map(({ icon: Icon, time, title, text }) => <article key={title} className="bg-white rounded-2xl p-7 shadow-sm"><Icon className="text-royal-purple mb-4" size={28} /><p className="text-sm text-secondary font-bold">{time}</p><h3 className="text-xl font-bold text-charcoal mt-2 mb-3">{title}</h3><p className="text-on-surface-variant">{text}</p></article>)}
           </div>
         </div>
       </section>
 
-      {/* Curriculum Tables - See continuation in comment for full implementation */}
-      <section className="w-full py-12 bg-surface">
-        <div className="max-w-max-width mx-auto px-margin-mobile lg:px-margin-desktop">
-          <div className="bg-surface-container-lowest rounded-2xl p-6 lg:p-8 shadow-sm">
-            <p className="font-body-lg text-body-lg text-on-surface-variant text-center py-12">
-              Complete curriculum tables for {activeTerm} term with September, October, and November detailed lesson plans coming soon...
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Lesson Anatomy */}
-      <section className="w-full py-16 lg:py-24 bg-surface-container-low">
-        <div className="max-w-max-width mx-auto px-margin-mobile lg:px-margin-desktop flex flex-col gap-12">
-          <div className="text-center max-w-2xl mx-auto flex flex-col gap-2">
-            <span className="font-label-sm text-label-sm text-royal-purple uppercase tracking-wider font-semibold">The Cognitive Clarity Framework</span>
-            <h2 className="font-headline-lg text-headline-lg text-charcoal">Anatomy of a 45-Minute Science Lesson</h2>
-            <p className="font-body-md text-body-md text-on-surface-variant">
-              Engineered specifically for short Grade 1 attention spans. Each session balances wonder, systematic exploration, and celebratory mastery.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="py-16">
+        <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+          <div className="text-center max-w-2xl mx-auto mb-10"><span className="text-sm uppercase tracking-wide text-royal-purple font-bold">Student learning toolkit</span><h2 className="text-3xl font-bold text-charcoal mt-2">Resources for Year {year} {subject}</h2></div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { num: '1', color: 'bg-royal-purple', time: '10 Minutes • Curiosity Ignition', title: 'Wonder & Question', desc: 'Tutor presents a real-world scientific phenomenon. Sparks inquiry through guided, open-ended questions.', icon: 'psychology', iconColor: 'text-royal-purple', footer: 'Pre-activates prior knowledge' },
-              { num: '2', color: 'bg-royal-purple', time: '25 Minutes • Deep Understanding', title: 'Guided Interactive Exploration', desc: 'Digital whiteboard collaboration, drag-and-drop classification activities, and live digital simulations.', icon: 'draw', iconColor: 'text-royal-purple', footer: 'Interactive digital whiteboard' },
-              { num: '3', color: 'bg-secondary', time: '10 Minutes • Proof of Learning', title: 'Mastery & Fun Check', desc: 'A 3-question visual quiz, celebratory confidence check, and automated parent dispatch.', icon: 'verified', iconColor: 'text-secondary', footer: 'Instant parent report dispatch' }
-            ].map((step, idx) => (
-              <div key={idx} className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm flex flex-col gap-4">
-                <div className={`w-12 h-12 rounded-xl ${step.color} text-on-primary flex items-center justify-center font-headline-md text-headline-md`}>
-                  {step.num}
-                </div>
-                <span className={`font-label-sm text-label-sm font-semibold ${step.color === 'bg-secondary' ? 'text-secondary' : 'text-royal-purple'}`}>{step.time}</span>
-                <h3 className="font-headline-md text-headline-md text-charcoal">{step.title}</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant">{step.desc}</p>
-                <div className="mt-auto pt-4 flex items-center gap-2 text-charcoal font-label-sm text-label-sm">
-                  <span className={`material-symbols-outlined text-[18px] ${step.iconColor}`}>{step.icon}</span>
-                  <span>{step.footer}</span>
-                </div>
-              </div>
-            ))}
+              { icon: PlayCircle, title: 'Concept lessons', text: `Short explanations of key Year ${year} ${subject.toLowerCase()} ideas.` },
+              { icon: FileText, title: 'Practice materials', text: 'Guided questions and independent practice matched to the weekly focus.' },
+              { icon: FlaskConical, title: 'Applied activities', text: 'Hands-on tasks, worked examples or text analysis to make learning stick.' },
+              { icon: MailCheck, title: 'Progress notes', text: 'A clear record of strengths, next steps and topics to revisit.' },
+            ].map(({ icon: Icon, title, text }) => <article key={title} className="bg-white p-5 md:p-6 rounded-xl border border-outline-variant/30"><Icon className="text-royal-purple mb-4" size={26} /><h3 className="font-bold text-charcoal mb-2">{title}</h3><p className="text-sm text-on-surface-variant">{text}</p></article>)}
           </div>
         </div>
       </section>
 
-      {/* Resources */}
-      <section className="w-full py-16 bg-surface">
-        <div className="max-w-max-width mx-auto px-margin-mobile lg:px-margin-desktop flex flex-col gap-12">
-          <div className="text-center max-w-2xl mx-auto flex flex-col gap-2">
-            <span className="font-label-sm text-label-sm text-royal-purple uppercase tracking-wider font-semibold">Student Learning Toolkit</span>
-            <h2 className="font-headline-lg text-headline-lg text-charcoal">Curated Grade 1 Learning Materials</h2>
-            <p className="font-body-md text-body-md text-on-surface-variant">
-              Every MathMakeSmart learner receives continuous access to our suite of interactive science resources.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
-            {[
-              { icon: 'play_circle', title: 'Concept Videos', desc: 'Illustrated animated shorts breaking down complex terms.' },
-              { icon: 'description', title: 'Printable Worksheets', desc: 'Vocabulary matching and diagram labeling sheets.' },
-              { icon: 'science', title: 'Hands-On Mini Labs', desc: 'Safe, kitchen-friendly scientific experiments.' },
-              { icon: 'mark_email_read', title: 'Parent Weekly Dispatch', desc: 'Weekly metric updates and conversation prompts.' }
-            ].map((resource, idx) => (
-              <div key={idx} className="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col gap-3">
-                <div className="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-royal-purple">
-                  <span className="material-symbols-outlined text-[26px]">{resource.icon}</span>
-                </div>
-                <h3 className="font-headline-md text-label-md text-charcoal font-semibold">{resource.title}</h3>
-                <p className="font-body-md text-label-sm text-on-surface-variant">{resource.desc}</p>
-              </div>
-            ))}
+      <section className="py-16 lg:py-20 bg-surface-container-low" id="book-trial">
+        <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+          <div className="bg-white rounded-3xl p-7 md:p-12 shadow-sm grid lg:grid-cols-2 gap-10">
+            <div><span className="inline-flex items-center gap-2 text-secondary font-semibold"><Check size={18} /> Free first lesson</span><h2 className="text-3xl md:text-4xl font-bold text-charcoal mt-4 mb-4">Build a plan for Year {year} {subject}</h2><p className="text-on-surface-variant mb-6">Tell us where the student is up to and we’ll shape the first session around their goals, schoolwork and preferred pace.</p><ul className="space-y-3 text-on-surface-variant"><li className="flex gap-2"><CheckCircle2 className="text-secondary shrink-0" size={20} />No credit card required</li><li className="flex gap-2"><CheckCircle2 className="text-secondary shrink-0" size={20} />A one-to-one session with a subject tutor</li><li className="flex gap-2"><CheckCircle2 className="text-secondary shrink-0" size={20} />A recommended next-step study plan</li></ul></div>
+            <FreeTrialForm />
           </div>
         </div>
       </section>
-
-      {/* CTA & Booking */}
-      <section className="w-full py-16 lg:py-24 bg-surface-container-low" id="book-trial">
-        <div className="max-w-max-width mx-auto px-margin-mobile lg:px-margin-desktop">
-          <div className="bg-surface-container-lowest rounded-3xl p-8 lg:p-14 shadow-xl">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Left Column */}
-              <div className="lg:col-span-6 flex flex-col gap-6">
-                <div className="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-secondary-container/30 text-secondary font-label-sm text-label-sm">
-                  <span className="material-symbols-outlined text-[16px]">check_circle</span>
-                  <span>Zero Risk Trial Class</span>
-                </div>
-                <h2 className="font-display-lg text-headline-lg lg:text-display-lg text-charcoal tracking-tight">
-                  Ready to Experience a Tailored Grade 1 Science Plan?
-                </h2>
-                <p className="font-body-lg text-body-lg text-on-surface-variant">
-                  Free trial lessons let you test our specialist tutor's rapport and teaching style firsthand.
-                </p>
-                <div className="flex flex-col gap-3 pt-2">
-                  {[
-                    'No credit card or commitment required',
-                    'Includes 1-on-1 complimentary science cognitive diagnostic',
-                    'Tailored 1 to 5 day/week pacing schedule tailored to your child'
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-secondary text-[20px]">done</span>
-                      <span className="font-body-md text-body-md text-charcoal">{item}</span>
-                    </div>
-                  ))}
-                </div>
-                {/* Contact Numbers */}
-                <div className="pt-6 border-t border-surface-container flex flex-col gap-2">
-                  <span className="font-label-md text-label-md text-charcoal font-semibold">Immediate Assistance Lines:</span>
-                  <div className="grid grid-cols-2 gap-2 font-label-sm text-label-sm text-on-surface-variant">
-                    <span>USA: +1 347 491 4870</span>
-                    <span>UK: +44 740 001 8383</span>
-                    <span>CA: +1 647 492 5264</span>
-                    <span>AUS: +61 48 089 0005</span>
-                  </div>
-                </div>
-              </div>
-              {/* Right Column: Form */}
-              <div className="lg:col-span-6 bg-surface-container-low p-8 rounded-2xl shadow-sm flex flex-col gap-6">
-                <div>
-                  <h3 className="font-headline-md text-headline-md text-charcoal">Book Your Free Trial Lesson</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant">Select availability • Takes 60 seconds</p>
-                </div>
-                <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-                  <div>
-                    <label className="block font-label-md text-label-md text-charcoal mb-1" htmlFor="student-name">Student Full Name</label>
-                    <input 
-                      className="w-full px-4 py-3 rounded-xl bg-surface-container-lowest text-charcoal font-body-md text-body-md outline-none focus:ring-2 focus:ring-royal-purple transition-all placeholder:text-outline-variant" 
-                      id="student-name" 
-                      name="studentName"
-                      placeholder="e.g., Emma Johnson" 
-                      required 
-                      type="text"
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block font-label-md text-label-md text-charcoal mb-1" htmlFor="student-grade">Target Grade</label>
-                      <select 
-                        className="w-full px-4 py-3 rounded-xl bg-surface-container-lowest text-charcoal font-body-md text-body-md outline-none focus:ring-2 focus:ring-royal-purple transition-all" 
-                        id="student-grade"
-                        name="studentGrade"
-                      >
-                        <option value="Grade 1">Grade 1 (Age 6-7)</option>
-                        <option value="Kindergarten">Kindergarten</option>
-                        <option value="Grade 2">Grade 2</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block font-label-md text-label-md text-charcoal mb-1" htmlFor="subject-field">Subject Focus</label>
-                      <input 
-                        className="w-full px-4 py-3 rounded-xl bg-surface-container text-on-surface-variant font-body-md text-body-md outline-none cursor-not-allowed" 
-                        id="subject-field" 
-                        readOnly 
-                        type="text" 
-                        value="Grade 1 Science (NGSS)"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block font-label-md text-label-md text-charcoal mb-1" htmlFor="parent-email">Parent Email Address</label>
-                    <input 
-                      className="w-full px-4 py-3 rounded-xl bg-surface-container-lowest text-charcoal font-body-md text-body-md outline-none focus:ring-2 focus:ring-royal-purple transition-all placeholder:text-outline-variant" 
-                      id="parent-email" 
-                      name="parentEmail"
-                      placeholder="parent@example.com" 
-                      required 
-                      type="email"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-label-md text-label-md text-charcoal mb-1" htmlFor="phone-number">Phone Number (with country code)</label>
-                    <input 
-                      className="w-full px-4 py-3 rounded-xl bg-surface-container-lowest text-charcoal font-body-md text-body-md outline-none focus:ring-2 focus:ring-royal-purple transition-all placeholder:text-outline-variant" 
-                      id="phone-number" 
-                      name="phoneNumber"
-                      placeholder="+61 555-019-2834" 
-                      type="tel"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-label-md text-label-md text-charcoal mb-1" htmlFor="math-check">Quick Verification: 13 + 2 = ?</label>
-                    <input 
-                      className="w-full px-4 py-3 rounded-xl bg-surface-container-lowest text-charcoal font-body-md text-body-md outline-none focus:ring-2 focus:ring-royal-purple transition-all placeholder:text-outline-variant" 
-                      id="math-check" 
-                      name="mathCheck"
-                      placeholder="15" 
-                      required 
-                      type="number"
-                    />
-                  </div>
-                  <button 
-                    className="w-full mt-2 py-4 rounded-full font-label-md text-label-md bg-royal-purple text-on-primary font-semibold hover:bg-primary transition-colors shadow-md flex items-center justify-center gap-2" 
-                    id="submit-btn" 
-                    type="submit"
-                  >
-                    <span>Book Free Trial Now</span>
-                    <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-                  </button>
-                  <p className="hidden text-center font-label-sm text-label-sm text-secondary font-medium" id="form-msg">
-                    Thank you! Your trial request has been submitted. A student advisor will confirm your timeslot via email within 2 hours.
-                  </p>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+    </main>
   );
+}
+
+export default function Grade1ScienceLessonPlanAU() {
+  return <CurriculumLessonPlan region="United States" subject="Science" year={1} />;
 }

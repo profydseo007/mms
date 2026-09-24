@@ -25,6 +25,7 @@ import {
   BookOpen,
   HelpCircle,
 } from 'lucide-react';
+import GradeLessonPlans from './GradeLessonPlans';
 
 interface SubjectComponentProps {
   onNavigate: (page: ActivePage, subjectTitle?: string) => void;
@@ -372,6 +373,20 @@ export default function USAPhysicsSubject({ onNavigate }: SubjectComponentProps)
           </div>
         </div>
       </section>
+
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="Physics"
+        description="Coverage from middle school physical science through high school physics, honors courses and AP Physics."
+        plans={[
+          { grade: 'Grade 6', band: 'Middle School' }, { grade: 'Grade 7', band: 'Middle School' },
+          { grade: 'Grade 8', band: 'Middle School' }, { grade: 'Grade 9', band: 'High School' },
+          { grade: 'Grade 10', band: 'High School' }, { grade: 'Grade 11', band: 'High School' },
+          { grade: 'Grade 12', band: 'High School' }, { grade: 'Honors Physics', band: 'Advanced' },
+          { grade: 'AP Physics 1', band: 'College Prep' }, { grade: 'AP Physics 2', band: 'College Prep' },
+          { grade: 'AP Physics C: Mechanics', band: 'College Prep' }, { grade: 'AP Physics C: E&M', band: 'College Prep' },
+        ]}
+      />
 
       {/* Frequently Asked Questions (FAQ) Section */}
       <section className="bg-soft-gray py-20 md:py-24 border-t border-outline-variant">

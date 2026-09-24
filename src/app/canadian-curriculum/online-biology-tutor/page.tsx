@@ -1,6 +1,8 @@
 'use client';
 
 import type { ActivePage } from '@/lib/types';
+import GradeLessonPlans from '@/components/subjects/Gradimport { FreeTrialForm } from '@/components/FreeTrial';
+eLessonPlans';
 import {
   Check,
   CheckCircle2,
@@ -219,6 +221,19 @@ export default function CABiologyTutorContent({ onNavigate }: SubjectComponentPr
         </div>
       </section>
 
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="Biology"
+        description="Explore Canada biology lesson plans aligned with local year groups, courses and exams."
+        plans={[
+          { grade: 'Grades 7–8 Science', band: 'Middle School' },
+          { grade: 'Grades 9–10 Science', band: 'Secondary' },
+          { grade: 'SBI3U Biology', band: 'Ontario Grade 11' },
+          { grade: 'SBI4U Biology', band: 'Ontario Grade 12' },
+          { grade: 'Biology 30', band: 'Alberta Grade 12' },
+        ]}
+      />
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
@@ -304,18 +319,7 @@ export default function CABiologyTutorContent({ onNavigate }: SubjectComponentPr
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s grade, province and biology course, and we will match them with a specialist tutor for a free first lesson. No payment details needed.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

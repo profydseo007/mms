@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { ActivePage } from '@/lib/types';
-import { Check, CheckCircle2, Clock3, DollarSign, Star } from 'lucide-react';
+import Link from 'next/link';
+import { BookOpen, Check, CheckCircle2, ChevronDown, Clock3, DollarSign, Star } from 'lucide-react';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 type LigatureIconName = 'Clock' | 'DollarSign' | 'Star' | 'CheckCircle' | 'Check';
 
@@ -28,6 +30,7 @@ interface SubjectComponentProps {
 }
 
 export default function AUChemistryTutorContent({ onNavigate }: SubjectComponentProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -232,48 +235,118 @@ export default function AUChemistryTutorContent({ onNavigate }: SubjectComponent
         </div>
       </section>
 
+       <section className="py-20 md:py-24 bg-surface">
+  <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+      <div className="space-y-4">
+        <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">
+          Chemistry Lesson Plans For Each Year
+        </h2>
+        <p className="text-on-surface-variant max-w-xl">
+          Explore Australian chemistry lesson plans aligned with the topics students study at each year level.
+        </p>
+      </div>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      {[
+        { grade: 'Year 1', band: 'Primary' },
+        { grade: 'Year 2', band: 'Primary' },
+        { grade: 'Year 3', band: 'Primary' },
+        { grade: 'Year 4', band: 'Primary' },
+        { grade: 'Year 5', band: 'Primary' },
+        { grade: 'Year 6', band: 'Primary' },
+        { grade: 'Year 7', band: 'Secondary' },
+        { grade: 'Year 8', band: 'Secondary' },
+        { grade: 'Year 9', band: 'Secondary' },
+        { grade: 'Year 10', band: 'Secondary' },
+        { grade: 'Year 11', band: 'Senior Secondary' },
+        { grade: 'Year 12', band: 'Senior Secondary' },
+      ].map((item) => {
+        const year = Number(item.grade.replace('Year ', ''));
+        const yearWords = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+        const href = `/au/australian-curriculum/online-chemistry-tutor/lesson-plan-for-year-${yearWords[year]}`;
+        return (
+          <Link
+            key={item.grade}
+            href={href}
+            className="group block cursor-pointer text-center bg-white p-8 rounded-3xl border border-royal-purple/30 hover:border-royal-purple hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+          >
+            <BookOpen size={22} className="text-royal-purple mx-auto mb-3 opacity-100 transition-opacity" />
+            <span className="block text-sm font-semibold text-charcoal mb-1">Chemistry Lesson Plan For</span>
+            <span className="block font-headline-md text-headline-md text-royal-purple mb-2 font-bold">{item.grade}</span>
+            <span className="text-body-md text-on-surface-variant">{item.band}</span>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">Frequently Asked Questions</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Why is stoichiometry so difficult for so many students?</h4>
-              <p className="text-on-surface-variant text-sm">Because it is not really a chemistry problem. Stoichiometry asks students to move confidently between ratios, units and proportional relationships, and anyone whose proportional reasoning was never fully secured in Years 7 and 8 hits a wall the moment mole calculations begin. Fixing the ratios usually fixes the chemistry.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Does my child need Units 1 and 2 before Units 3 and 4?</h4>
-              <p className="text-on-surface-variant text-sm">Yes, and the dependency is stronger here than in almost any other subject. Year 12 chemistry assumes complete fluency with the mole concept, balancing equations and solution calculations. A student who scraped through Year 11 without securing quantitative chemistry will struggle across the whole of Year 12, not in one unit.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">My child understands it in class but loses marks on arithmetic in tests. Is that fixable?</h4>
-              <p className="text-on-surface-variant text-sm">Yes, and faster than most families expect. Most lost marks come from unit errors, dropped significant figures or steps skipped mentally under time pressure rather than from misunderstanding. A consistent layout cuts slips dramatically, and markers award working even where the final number is wrong.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Which degrees require senior chemistry?</h4>
-              <p className="text-on-surface-variant text-sm">Medicine, pharmacy, nursing, veterinary science, chemical and materials engineering and most biomedical and general science degrees expect it, frequently alongside biology or maths. Requirements vary by university and course, so confirm with the institutions being considered, but students on a health pathway should plan on taking it.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Is organic chemistry as hard as students say?</h4>
-              <p className="text-on-surface-variant text-sm">It is different rather than harder. Where earlier units rewarded careful arithmetic, organic chemistry rewards spotting that two unfamiliar molecules behave the same way. Learn it reaction by reaction and it becomes unmanageable. Learn the families and mechanisms behind it and most students find it kinder than equilibrium.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">How is senior chemistry assessed in my state?</h4>
-              <p className="text-on-surface-variant text-sm">It differs meaningfully. Victoria uses School-Assessed Coursework alongside an end-of-year examination. Queensland combines internal assessment across Units 3 and 4 with an external assessment that carries greater weight in science subjects. New South Wales moderates school assessment against the cohort&rsquo;s HSC performance. We confirm which model applies before planning anything.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">My child takes both chemistry and biology. Do they overlap?</h4>
-              <p className="text-on-surface-variant text-sm">
-                Considerably in Year 12. Molecular biology and metabolism both assume a student can already picture how bonds form and break, which is why those units punish weak chemistry so heavily. Taking chemistry together with{' '}
-                <button
-                  onClick={() => onNavigate('subject', 'Biology')}
-                  className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer"
-                >
-                  biology tutoring
-                </button>
-                {' '}is the usual pairing for anyone aiming at medicine, nursing or biomedical science.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {([
+              {
+                q: 'Why is stoichiometry so difficult for so many students?',
+                a: 'Because it is not really a chemistry problem. Stoichiometry asks students to move confidently between ratios, units and proportional relationships, and anyone whose proportional reasoning was never fully secured in Years 7 and 8 hits a wall the moment mole calculations begin. Fixing the ratios usually fixes the chemistry.',
+              },
+              {
+                q: 'Does my child need Units 1 and 2 before Units 3 and 4?',
+                a: 'Yes, and the dependency is stronger here than in almost any other subject. Year 12 chemistry assumes complete fluency with the mole concept, balancing equations and solution calculations. A student who scraped through Year 11 without securing quantitative chemistry will struggle across the whole of Year 12, not in one unit.',
+              },
+              {
+                q: 'My child understands it in class but loses marks on arithmetic in tests. Is that fixable?',
+                a: 'Yes, and faster than most families expect. Most lost marks come from unit errors, dropped significant figures or steps skipped mentally under time pressure rather than from misunderstanding. A consistent layout cuts slips dramatically, and markers award working even where the final number is wrong.',
+              },
+              {
+                q: 'Which degrees require senior chemistry?',
+                a: 'Medicine, pharmacy, nursing, veterinary science, chemical and materials engineering and most biomedical and general science degrees expect it, frequently alongside biology or maths. Requirements vary by university and course, so confirm with the institutions being considered, but students on a health pathway should plan on taking it.',
+              },
+              {
+                q: 'Is organic chemistry as hard as students say?',
+                a: 'It is different rather than harder. Where earlier units rewarded careful arithmetic, organic chemistry rewards spotting that two unfamiliar molecules behave the same way. Learn it reaction by reaction and it becomes unmanageable. Learn the families and mechanisms behind it and most students find it kinder than equilibrium.',
+              },
+              {
+                q: 'How is senior chemistry assessed in my state?',
+                a: 'It differs meaningfully. Victoria uses School-Assessed Coursework alongside an end-of-year examination. Queensland combines internal assessment across Units 3 and 4 with an external assessment that carries greater weight in science subjects. New South Wales moderates school assessment against the cohort\u2019s HSC performance. We confirm which model applies before planning anything.',
+              },
+              {
+                q: 'My child takes both chemistry and biology. Do they overlap?',
+                a: (
+                  <>
+                    Considerably in Year 12. Molecular biology and metabolism both assume a student can already picture how bonds form and break, which is why those units punish weak chemistry so heavily. Taking chemistry together with{' '}
+                    <button onClick={() => onNavigate('subject', 'Biology')} className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer">biology tutoring</button>
+                    {' '}is the usual pairing for anyone aiming at medicine, nursing or biomedical science.
+                  </>
+                ),
+              },
+            ] as { q: string; a: React.ReactNode }[]).map((faq, idx) => (
+              <div
+                key={idx}
+                className={`bg-soft-gray rounded-2xl border transition-all cursor-pointer ${
+                  openFaq === idx ? 'border-royal-purple shadow-ambient' : 'border-outline-variant/30'
+                }`}
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+              >
+                <div className="flex justify-between items-center p-6 gap-4">
+                  <h3 className="text-body-lg font-bold text-charcoal">{faq.q}</h3>
+                  <ChevronDown
+                    size={22}
+                    aria-hidden="true"
+                    className={`shrink-0 transition-transform duration-300 ${
+                      openFaq === idx ? 'rotate-180 text-royal-purple' : 'text-charcoal'
+                    }`}
+                  />
+                </div>
+                {openFaq === idx && (
+                  <div className="px-6 pb-6 text-on-surface-variant text-body-md border-t border-outline-variant/20 pt-4">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -317,18 +390,7 @@ export default function AUChemistryTutorContent({ onNavigate }: SubjectComponent
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s year level, state and chemistry units, and we will match them with a specialist tutor for a free first lesson.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

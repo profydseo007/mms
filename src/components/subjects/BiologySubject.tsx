@@ -4,6 +4,7 @@ import React from 'react';
 import LigatureIcon from '../LigatureIcon';
 import { ActivePage } from '@/lib/types';
 import { CheckCircle2, Clock, DollarSign, Star, Check, GraduationCap } from 'lucide-react';
+import GradeLessonPlans from './GradeLessonPlans';
 
 interface SubjectComponentProps {
   onNavigate: (page: ActivePage, subjectTitle?: string) => void;
@@ -285,6 +286,17 @@ export default function BiologySubjectUSA({ onNavigate }: SubjectComponentProps)
           </div>
         </div>
       </section>
+
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="Biology"
+        description="Explore high school biology lesson plans covering core life science, honors coursework and AP Biology."
+        plans={[
+          { grade: 'Grade 9', band: 'High School' }, { grade: 'Grade 10', band: 'High School' },
+          { grade: 'Grade 11', band: 'High School' }, { grade: 'Grade 12', band: 'High School' },
+          { grade: 'Honors Biology', band: 'Advanced' }, { grade: 'AP Biology', band: 'College Prep' },
+        ]}
+      />
 
       {/* FAQs Section */}
       <section className="py-20 md:py-24 bg-soft-gray">

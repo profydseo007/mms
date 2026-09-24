@@ -2,6 +2,8 @@
 
 import React from 'react';
 import type { ActivePage } from '@/lib/types';
+import GradeLessonPlans from '@/components/subjects/Gradimport { FreeTrialForm } from '@/components/FreeTrial';
+eLessonPlans';
 
 interface LigatureIconProps {
   name: string;
@@ -225,6 +227,19 @@ export default function NZEnglishTutorContent({ onNavigate }: SubjectComponentPr
         </div>
       </section>
 
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="English"
+        description="Explore New Zealand english lesson plans aligned with local year groups, courses and exams."
+        plans={[
+          { grade: 'Years 1–8', band: 'Primary' },
+          { grade: 'Years 9–10', band: 'Junior Secondary' },
+          { grade: 'NCEA Level 1 English', band: 'NCEA' },
+          { grade: 'NCEA Level 2 English', band: 'NCEA' },
+          { grade: 'NCEA Level 3 English', band: 'NCEA' },
+        ]}
+      />
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
@@ -310,18 +325,7 @@ export default function NZEnglishTutorContent({ onNavigate }: SubjectComponentPr
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s year level and the standards they are working towards, and we will match them with an English tutor for a free first lesson. No payment details needed.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

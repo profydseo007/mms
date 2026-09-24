@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import LigatureIcon from '../LigatureIcon';
 import { ActivePage } from '@/lib/types';
 import { CheckCircle2, Clock, DollarSign, Star, Zap, Check, Timer, GraduationCap } from 'lucide-react';
+import GradeLessonPlans from './GradeLessonPlans';
 
 interface SubjectComponentProps {
   onNavigate: (page: ActivePage, subjectTitle?: string) => void;
@@ -402,6 +403,20 @@ export default function MathSubjectUS({ onNavigate }: SubjectComponentProps) {
           </div>
         </div>
       </section>
+
+      <GradeLessonPlans
+        onNavigate={onNavigate}
+        subject="Math"
+        description="Explore math lesson plans from elementary number sense through middle school foundations, high school courses and AP Calculus."
+        plans={[
+          { grade: 'Grade 1', band: 'Elementary' }, { grade: 'Grade 2', band: 'Elementary' },
+          { grade: 'Grade 3', band: 'Elementary' }, { grade: 'Grade 4', band: 'Elementary' },
+          { grade: 'Grade 5', band: 'Elementary' }, { grade: 'Grade 6', band: 'Middle School' },
+          { grade: 'Grade 7', band: 'Middle School' }, { grade: 'Grade 8', band: 'Middle School' },
+          { grade: 'Algebra 1', band: 'High School' }, { grade: 'Geometry', band: 'High School' },
+          { grade: 'Algebra 2', band: 'High School' }, { grade: 'Precalculus & Calculus', band: 'High School' },
+        ]}
+      />
 
       {/* FAQ */}
       <section className="py-24 bg-white border-t border-surface-container">

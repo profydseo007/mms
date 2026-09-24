@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { ActivePage } from '@/lib/types';
-import { Check, CheckCircle2, Clock3, DollarSign, Star } from 'lucide-react';
+import Link from 'next/link';
+import { BookOpen, Check, CheckCircle2, ChevronDown, Clock3, DollarSign, Star } from 'lucide-react';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 type LigatureIconName = 'Clock' | 'DollarSign' | 'Star' | 'CheckCircle' | 'Check';
 
@@ -28,6 +30,7 @@ interface SubjectComponentProps {
 }
 
 export default function AUMathTutorContent({ onNavigate }: SubjectComponentProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -232,48 +235,118 @@ export default function AUMathTutorContent({ onNavigate }: SubjectComponentProps
         </div>
       </section>
 
+       <section className="py-20 md:py-24 bg-surface">
+  <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+      <div className="space-y-4">
+        <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">
+          Maths Lesson Plans For Each Year
+        </h2>
+        <p className="text-on-surface-variant max-w-xl">
+          Explore Australian maths lesson plans aligned with the topics students study at each year level.
+        </p>
+      </div>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      {[
+        { grade: 'Year 1', band: 'Primary' },
+        { grade: 'Year 2', band: 'Primary' },
+        { grade: 'Year 3', band: 'Primary' },
+        { grade: 'Year 4', band: 'Primary' },
+        { grade: 'Year 5', band: 'Primary' },
+        { grade: 'Year 6', band: 'Primary' },
+        { grade: 'Year 7', band: 'Secondary' },
+        { grade: 'Year 8', band: 'Secondary' },
+        { grade: 'Year 9', band: 'Secondary' },
+        { grade: 'Year 10', band: 'Secondary' },
+        { grade: 'Year 11', band: 'Senior Secondary' },
+        { grade: 'Year 12', band: 'Senior Secondary' },
+      ].map((item) => {
+        const year = Number(item.grade.replace('Year ', ''));
+        const yearWords = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+        const href = `/au/australian-curriculum/online-math-tutor/lesson-plan-for-year-${yearWords[year]}`;
+        return (
+          <Link
+            key={item.grade}
+            href={href}
+            className="group block cursor-pointer text-center bg-white p-8 rounded-3xl border border-royal-purple/30 hover:border-royal-purple hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+          >
+            <BookOpen size={22} className="text-royal-purple mx-auto mb-3 opacity-100 transition-opacity" />
+            <span className="block text-sm font-semibold text-charcoal mb-1">Maths Lesson Plan For</span>
+            <span className="block font-headline-md text-headline-md text-royal-purple mb-2 font-bold">{item.grade}</span>
+            <span className="text-body-md text-on-surface-variant">{item.band}</span>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">Frequently Asked Questions</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Should my child choose Methods, Specialist or General Maths?</h4>
-              <p className="text-on-surface-variant text-sm">It depends entirely on what they want to study after school, and the decision matters more than most families realise because reversing it is difficult. Methods is a prerequisite or assumed knowledge for most engineering, science, commerce and computing degrees, and Specialist sits on top of it for the most mathematical pathways. General keeps an ATAR pathway open but closes some university doors. Decide on the degree, not on which subject looks easier in Year 10.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Do you follow the Australian Curriculum or my state&rsquo;s syllabus?</h4>
-              <p className="text-on-surface-variant text-sm">Both, because they are not the same thing. ACARA sets the national framework to Year 10, but each state delivers it through its own authority, and Victoria teaches the Victorian Curriculum rather than the national document directly. From Year 11 the state certificate takes over entirely. We match tutors to whichever syllabus your child&rsquo;s school actually names.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Is it worth preparing for NAPLAN numeracy?</h4>
-              <p className="text-on-surface-variant text-sm">Lightly, and mostly by removing surprise. NAPLAN runs in March for Years 3, 5, 7 and 9 and reports against four proficiency levels rather than a pass mark, so it carries no consequence for the individual student. Familiarity with the online adaptive format helps; extended drilling does not, and for anxious children it usually makes the day worse.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">How does scaling affect my child&rsquo;s ATAR?</h4>
-              <p className="text-on-surface-variant text-sm">Subject results are scaled before contributing to the ATAR, which adjusts for the fact that different subjects attract different cohorts. It is why choosing an easier subject to protect a rank usually backfires, and why improving across several subjects moves an ATAR further than a large gain in one. In practice, the weakest subject is often the best place to start.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">My child is in Year 9 and coping. Is tutoring worth it now?</h4>
-              <p className="text-on-surface-variant text-sm">Years 9 and 10 are the most valuable window in the whole system, precisely because the pressure has not arrived yet. This is where readiness for Methods is decided, and fixing algebra fluency now is straightforward. Fixing it in Year 11, while new content is arriving weekly, is considerably harder and more expensive.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Is the free trial lesson genuinely free?</h4>
-              <p className="text-on-surface-variant text-sm">Nothing is charged, no card is taken, and nobody rings afterwards to sell you a term of lessons. It is a full lesson with a maths tutor, used to establish where your child actually sits against their year level and the senior subjects they are heading towards.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">My child is struggling with physics too. Are the two connected?</h4>
-              <p className="text-on-surface-variant text-sm">
-                Very often, and the root is usually mathematical rather than conceptual. Kinematics depends on rearranging equations and trigonometry, so students finding senior physics hard are frequently hitting a maths gap. Where that pattern shows we look at maths alongside{' '}
-                <button
-                  onClick={() => onNavigate('subject', 'Physics')}
-                  className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer"
-                >
-                  physics tutoring
-                </button>
-                {' '}instead of treating the same weakness twice in two different subjects.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {([
+              {
+                q: 'Should my child choose Methods, Specialist or General Maths?',
+                a: 'It depends entirely on what they want to study after school, and the decision matters more than most families realise because reversing it is difficult. Methods is a prerequisite or assumed knowledge for most engineering, science, commerce and computing degrees, and Specialist sits on top of it for the most mathematical pathways. General keeps an ATAR pathway open but closes some university doors. Decide on the degree, not on which subject looks easier in Year 10.',
+              },
+              {
+                q: 'Do you follow the Australian Curriculum or my state\u2019s syllabus?',
+                a: 'Both, because they are not the same thing. ACARA sets the national framework to Year 10, but each state delivers it through its own authority, and Victoria teaches the Victorian Curriculum rather than the national document directly. From Year 11 the state certificate takes over entirely. We match tutors to whichever syllabus your child\u2019s school actually names.',
+              },
+              {
+                q: 'Is it worth preparing for NAPLAN numeracy?',
+                a: 'Lightly, and mostly by removing surprise. NAPLAN runs in March for Years 3, 5, 7 and 9 and reports against four proficiency levels rather than a pass mark, so it carries no consequence for the individual student. Familiarity with the online adaptive format helps; extended drilling does not, and for anxious children it usually makes the day worse.',
+              },
+              {
+                q: 'How does scaling affect my child\u2019s ATAR?',
+                a: 'Subject results are scaled before contributing to the ATAR, which adjusts for the fact that different subjects attract different cohorts. It is why choosing an easier subject to protect a rank usually backfires, and why improving across several subjects moves an ATAR further than a large gain in one. In practice, the weakest subject is often the best place to start.',
+              },
+              {
+                q: 'My child is in Year 9 and coping. Is tutoring worth it now?',
+                a: 'Years 9 and 10 are the most valuable window in the whole system, precisely because the pressure has not arrived yet. This is where readiness for Methods is decided, and fixing algebra fluency now is straightforward. Fixing it in Year 11, while new content is arriving weekly, is considerably harder and more expensive.',
+              },
+              {
+                q: 'Is the free trial lesson genuinely free?',
+                a: 'Nothing is charged, no card is taken, and nobody rings afterwards to sell you a term of lessons. It is a full lesson with a maths tutor, used to establish where your child actually sits against their year level and the senior subjects they are heading towards.',
+              },
+              {
+                q: 'My child is struggling with physics too. Are the two connected?',
+                a: (
+                  <>
+                    Very often, and the root is usually mathematical rather than conceptual. Kinematics depends on rearranging equations and trigonometry, so students finding senior physics hard are frequently hitting a maths gap. Where that pattern shows we look at maths alongside{' '}
+                    <button onClick={() => onNavigate('subject', 'Physics')} className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer">physics tutoring</button>
+                    {' '}instead of treating the same weakness twice in two different subjects.
+                  </>
+                ),
+              },
+            ] as { q: string; a: React.ReactNode }[]).map((faq, idx) => (
+              <div
+                key={idx}
+                className={`bg-soft-gray rounded-2xl border transition-all cursor-pointer ${
+                  openFaq === idx ? 'border-royal-purple shadow-ambient' : 'border-outline-variant/30'
+                }`}
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+              >
+                <div className="flex justify-between items-center p-6 gap-4">
+                  <h3 className="text-body-lg font-bold text-charcoal">{faq.q}</h3>
+                  <ChevronDown
+                    size={22}
+                    aria-hidden="true"
+                    className={`shrink-0 transition-transform duration-300 ${
+                      openFaq === idx ? 'rotate-180 text-royal-purple' : 'text-charcoal'
+                    }`}
+                  />
+                </div>
+                {openFaq === idx && (
+                  <div className="px-6 pb-6 text-on-surface-variant text-body-md border-t border-outline-variant/20 pt-4">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -317,18 +390,7 @@ export default function AUMathTutorContent({ onNavigate }: SubjectComponentProps
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s year level, state and the maths subject they are taking, and we will match them with a tutor for a free first lesson. No payment details needed.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

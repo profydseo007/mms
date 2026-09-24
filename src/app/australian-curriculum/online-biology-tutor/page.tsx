@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import Link from 'next/link';
 import type { ActivePage } from '@/lib/types';
-import { Check, CheckCircle2, Clock3, DollarSign, Star } from 'lucide-react';
+import { BookOpen, Check, CheckCircle2, ChevronDown, Clock3, DollarSign, Star } from 'lucide-react';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 type LigatureIconName = 'Clock' | 'DollarSign' | 'Star' | 'CheckCircle' | 'Check';
 
@@ -28,6 +30,7 @@ interface SubjectComponentProps {
 }
 
 export default function AUBiologyTutorContent({ onNavigate }: SubjectComponentProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -232,48 +235,124 @@ export default function AUBiologyTutorContent({ onNavigate }: SubjectComponentPr
         </div>
       </section>
 
+
+    <section className="py-20 md:py-24 bg-surface">
+  <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+      <div className="space-y-4">
+        <h2 className="font-headline-lg text-headline-lg text-charcoal font-bold">
+          Biology Lesson Plans For Each Year
+        </h2>
+        <p className="text-on-surface-variant max-w-xl">
+          Explore Australian biology lesson plans aligned with the topics students study at each year level.
+        </p>
+      </div>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      {[
+        { grade: 'Year 1', band: 'Primary' },
+        { grade: 'Year 2', band: 'Primary' },
+        { grade: 'Year 3', band: 'Primary' },
+        { grade: 'Year 4', band: 'Primary' },
+        { grade: 'Year 5', band: 'Primary' },
+        { grade: 'Year 6', band: 'Primary' },
+        { grade: 'Year 7', band: 'Secondary' },
+        { grade: 'Year 8', band: 'Secondary' },
+        { grade: 'Year 9', band: 'Secondary' },
+        { grade: 'Year 10', band: 'Secondary' },
+        { grade: 'Year 11', band: 'Senior Secondary' },
+        { grade: 'Year 12', band: 'Senior Secondary' },
+      ].map((item) => {
+        const year = Number(item.grade.replace('Year ', ''));
+        const yearWords = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+        const href = `/au/australian-curriculum/online-biology-tutor/lesson-plan-for-year-${yearWords[year]}`;
+        const card = (
+          <>
+            <BookOpen size={22} className="text-royal-purple mx-auto mb-3 opacity-100 transition-opacity" />
+            <span className="block text-sm font-semibold text-charcoal mb-1">Lesson Plan For</span>
+            <span className="block font-headline-md text-headline-md text-royal-purple mb-2 font-bold">{item.grade}</span>
+          </>
+        );
+        const className = "group block cursor-pointer text-center bg-white p-8 rounded-3xl border border-royal-purple/30 hover:border-royal-purple hover:shadow-lg hover:scale-[1.02] transition-all duration-300";
+
+        return (
+          <Link
+            key={item.grade}
+            href={href}
+            className={className}
+          >
+            {card}
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</section>
       {/* FAQs */}
       <section className="py-16 md:py-20">
         <div className="learning-lane max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
           <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-12 text-center">Frequently Asked Questions</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Why did my child do well in Year 11 biology but struggle in Year 12?</h4>
-              <p className="text-on-surface-variant text-sm">Because the two years reward different things. Year 11 is largely descriptive and rewards careful recall, while Year 12 asks students to explain mechanisms, link processes and justify conclusions from data. The memorisation that worked all through Year 11 simply stops paying, and from the outside it looks like a student has got worse when in fact the question type has changed.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">What separates a top biology answer from an average one?</h4>
-              <p className="text-on-surface-variant text-sm">Rarely more content. An average answer describes a process correctly; a strong one explains how and why it happens and links it to the specific context in the question. Students frequently know enough for full marks and write at a lower level simply because nobody has shown them what the higher criteria are asking for.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Does Year 12 biology require chemistry?</h4>
-              <p className="text-on-surface-variant text-sm">Not usually as a stated prerequisite, though the students who have it are noticeably better off. Molecular biology and biochemistry assume some comfort with bonding, molecules and reactions, and students taking senior biology without chemistry often find those topics the hardest part of the course. Most health science pathways expect both regardless.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Does my child actually need biology for nursing or allied health?</h4>
-              <p className="text-on-surface-variant text-sm">It is usually expected, alongside chemistry, for nursing, health sciences, physiotherapy, biomedical science and most allied health pathways. Requirements differ between universities and states, so confirm with the institutions being considered, but students on a health pathway should treat senior biology as essential rather than optional.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Can you help with practical investigations and fieldwork?</h4>
-              <p className="text-on-surface-variant text-sm">Yes. Internally assessed investigations carry real weight, and students commonly lose marks on the analysis and discussion rather than on collecting the data. We work through method, controlling variables, presenting results and writing a discussion that links findings back to biological principles.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">How is senior biology assessed in my state?</h4>
-              <p className="text-on-surface-variant text-sm">It varies. Victoria combines School-Assessed Coursework with an end-of-year examination. Queensland combines internal assessment across Units 3 and 4 with an external assessment. New South Wales moderates internal assessment against the cohort&rsquo;s HSC results. Knowing which model applies changes how a student should distribute their effort across the year.</p>
-            </div>
-            <div className="border border-outline-variant rounded-xl p-6">
-              <h4 className="font-bold text-charcoal mb-2">Should my child take chemistry alongside biology?</h4>
-              <p className="text-on-surface-variant text-sm">
-                If medicine, nursing or biomedical science is the goal, then yes. Year 12 biology leans on chemistry for molecular and biochemical processes, and most nursing and health courses expect both, so many families pair biology with{' '}
-                <button
-                  onClick={() => onNavigate('subject', 'Chemistry')}
-                  className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer"
-                >
-                  chemistry tutoring
-                </button>
-                {' '}rather than discovering the dependency partway through Year 12.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {([
+              {
+                q: 'Why did my child do well in Year 11 biology but struggle in Year 12?',
+                a: 'Because the two years reward different things. Year 11 is largely descriptive and rewards careful recall, while Year 12 asks students to explain mechanisms, link processes and justify conclusions from data. The memorisation that worked all through Year 11 simply stops paying, and from the outside it looks like a student has got worse when in fact the question type has changed.',
+              },
+              {
+                q: 'What separates a top biology answer from an average one?',
+                a: 'Rarely more content. An average answer describes a process correctly; a strong one explains how and why it happens and links it to the specific context in the question. Students frequently know enough for full marks and write at a lower level simply because nobody has shown them what the higher criteria are asking for.',
+              },
+              {
+                q: 'Does Year 12 biology require chemistry?',
+                a: 'Not usually as a stated prerequisite, though the students who have it are noticeably better off. Molecular biology and biochemistry assume some comfort with bonding, molecules and reactions, and students taking senior biology without chemistry often find those topics the hardest part of the course. Most health science pathways expect both regardless.',
+              },
+              {
+                q: 'Does my child actually need biology for nursing or allied health?',
+                a: 'It is usually expected, alongside chemistry, for nursing, health sciences, physiotherapy, biomedical science and most allied health pathways. Requirements differ between universities and states, so confirm with the institutions being considered, but students on a health pathway should treat senior biology as essential rather than optional.',
+              },
+              {
+                q: 'Can you help with practical investigations and fieldwork?',
+                a: 'Yes. Internally assessed investigations carry real weight, and students commonly lose marks on the analysis and discussion rather than on collecting the data. We work through method, controlling variables, presenting results and writing a discussion that links findings back to biological principles.',
+              },
+              {
+                q: 'How is senior biology assessed in my state?',
+                a: 'It varies. Victoria combines School-Assessed Coursework with an end-of-year examination. Queensland combines internal assessment across Units 3 and 4 with an external assessment. New South Wales moderates internal assessment against the cohort\u2019s HSC results. Knowing which model applies changes how a student should distribute their effort across the year.',
+              },
+              {
+                q: 'Should my child take chemistry alongside biology?',
+                a: (
+                  <>
+                    If medicine, nursing or biomedical science is the goal, then yes. Year 12 biology leans on chemistry for molecular and biochemical processes, and most nursing and health courses expect both, so many families pair biology with{' '}
+                    <button onClick={() => onNavigate('subject', 'Chemistry')} className="text-royal-purple font-bold underline underline-offset-2 cursor-pointer">chemistry tutoring</button>
+                    {' '}rather than discovering the dependency partway through Year 12.
+                  </>
+                ),
+              },
+            ] as { q: string; a: React.ReactNode }[]).map((faq, idx) => (
+              <div
+                key={idx}
+                className={`bg-soft-gray rounded-2xl border transition-all cursor-pointer ${
+                  openFaq === idx ? 'border-royal-purple shadow-ambient' : 'border-outline-variant/30'
+                }`}
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+              >
+                <div className="flex justify-between items-center p-6 gap-4">
+                  <h3 className="text-body-lg font-bold text-charcoal">{faq.q}</h3>
+                  <ChevronDown
+                    size={22}
+                    aria-hidden="true"
+                    className={`shrink-0 transition-transform duration-300 ${
+                      openFaq === idx ? 'rotate-180 text-royal-purple' : 'text-charcoal'
+                    }`}
+                  />
+                </div>
+                {openFaq === idx && (
+                  <div className="px-6 pb-6 text-on-surface-variant text-body-md border-t border-outline-variant/20 pt-4">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -317,18 +396,7 @@ export default function AUBiologyTutorContent({ onNavigate }: SubjectComponentPr
           <p className="text-on-surface-variant text-center max-w-2xl mx-auto mb-10">
             Tell us your child&rsquo;s year level, state and biology units, and we will match them with a specialist tutor for a free first lesson.
           </p>
-          <div id="ghl-form-wrap" >
-            <iframe className="w-full h-[700px] border-none rounded-xl"
-                    id="ghl-dynamic-form"
-                    src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-                    data-layout="{'id':'INLINE'}"
-                    data-form-name="Contact Us"
-                    data-height="543"
-                    data-layout-iframe-id="ghl-dynamic-form"
-                    data-form-id="KoegIzV5zV9qvxp4I6O7"
-                    title="Contact Us">
-            </iframe>
-          </div>
+          <FreeTrialForm />
         </div>
       </section>
 

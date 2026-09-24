@@ -66,7 +66,7 @@ export function FreeTrialForm({ className = '' }: FreeTrialFormProps) {
   }, []);
 
   return (
-    <div className={`bg-white p-6 md:p-8 rounded-[28px] shadow-[0_18px_45px_rgba(15,23,42,0.08)] border border-slate-200 w-full max-w-[520px] ml-auto ${className}`}>
+    <div className={`bg-white p-6 md:p-8 rounded-[28px] shadow-[0_18px_45px_rgba(15,23,42,0.08)] border border-slate-200 w-full max-w-[520px] mx-auto ${className}`}>
       <iframe
         key={formId}
         id="ghl-dynamic-form"

@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAppNavigate } from '@/lib/useAppNavigate';
+import { useAppNavigate } from '@/lib/usimport { FreeTrialForm } from '@/components/FreeTrial';
+eAppNavigate';
 import {
   CheckCircle2,
   ChevronDown,
@@ -420,19 +421,7 @@ export default function UKTestPrepHub() {
                 </p>
               </div>
 
-           <div id="ghl-form-wrap" >
-              <iframe className="w-full h-[700px] border-none rounded-xl"
-                id="ghl-dynamic-form"
-                src="https://api.leadconnectorhq.com/widget/form/KoegIzV5zV9qvxp4I6O7?notrack=true"
-
-                data-layout="{'id':'INLINE'}"
-                data-form-name="Contact Us"
-                data-height="543"
-                data-layout-iframe-id="ghl-dynamic-form"
-                data-form-id="KoegIzV5zV9qvxp4I6O7"
-                title="Contact Us">
-              </iframe>
-            </div>
+           <FreeTrialForm />
 
             </div>
             <div className="hidden lg:block lg:w-1/2 relative">
