@@ -2,8 +2,8 @@
 
 import type { ActivePage } from '@/lib/types';
 import GradeLessonPlans from '@/components/subjects/GradeLessonPlans';
-import LigatureIcon from '@/components/import { FreeTrialForm } from '@/components/FreeTrial';
-LigatureIcon';
+import LigatureIcon from '@/components/LigatureIcon';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 interface SubjectComponentProps {
   onNavigate: (page: ActivePage, subjectTitle?: string) => void;

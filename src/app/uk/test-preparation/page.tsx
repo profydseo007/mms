@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAppNavigate } from '@/lib/usimport { FreeTrialForm } from '@/components/FreeTrial';
-eAppNavigate';
+import { useAppNavigate } from '@/lib/useAppNavigate';
+import { FreeTrialForm } from '@/components/FreeTrial';
 import {
   CheckCircle2,
   ChevronDown,

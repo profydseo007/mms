@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import LigatureIcon from '@/components/LigatureIcon';
 import { Brain, Calculator, CalendarDays, CheckCircle2, ChevronDown, ClipboardCheck, FlaskConical, HeartPulse, Landmark, Map, Scale, SmilePlus } from 'lucide-react';
-import { useAppNavigate } from '@/lib/usimport { FreeTrialForm } from '@/components/FreeTrial';
-eAppNavigate';
+import { useAppNavigate } from '@/lib/useAppNavigate';
+import { FreeTrialForm } from '@/components/FreeTrial';
 
 const FAQS = [
   {
